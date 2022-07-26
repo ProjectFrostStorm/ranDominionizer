@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>randDominionizer</title>
+
+        <link rel="stylesheet" type="text/css" href="main.css"> <!-- CSS Sheet -->
+    </head>
+
+    <body onload="setup()">
+        <h1>randDominionizer</h1>
+
+        <div id="tabs" class="container">
+            <button type="button" onclick="generate()">Generate Set</button>
+            <button type="button" onclick="toggleSettings()">Toggle Settings</button>
+            <button type="button" onclick="toggleSort()" disabled>Toggle Sort</button>
+        </div>
+
+        <div id="resultArea">
+        </div>
+
+        <div id="settings" class="container">
+            <div>
+                <div class="header">Sets/Expansions</div>
+                <ul>
+                    <li>
+                        <span>
+                            <input id="base" type="checkbox" onclick="updateButtons()">
+                            <label for="base">Base Game</label>
+                        </span>
+                        <span>
+                            <input id="base1st" type="radio" name="base" onclick="updateButtons()" disabled>
+                            <label for="base1st">Base 1st Edition</label>
+                            <input id="base2nd" type="radio" name="base" onclick="updateButtons()">
+                            <label for="base2nd">Base 2nd Edition</label>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
+
+        <div id="preload" hidden="hidden"></div>
+
+        <!-- Game Scripts -->
+        <script type="text/javascript" src="src/cardList.js"></script>
+        <script type="text/javascript" src="src/randomizer.js"></script>
+        
+        <script type="text/javascript" src="index.js"></script> 
+    </body>
+</html>

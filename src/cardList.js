@@ -30,6 +30,10 @@ let tags =
     "topDecker",
     "extraTurn",
     "altvp",
+    "choice",
+    "inspector",
+    "gainFromTrash",
+    "trashFromSupply",
 
     //Exchange
     "discardForBenefit",
@@ -99,12 +103,31 @@ let cards =
     Vassal:         {cost: 3,   set: "base2nd",     types: ["action"],              tags: ["conditionalTerminal", "virtualCoin", "discarder"]},
     Poacher:        {cost: 4,   set: "base2nd",     types: ["action"],              tags: ["cantrip", "virtualCoin", "peddler", "discarder"]},
     Bandit:         {cost: 5,   set: "base2nd",     types: ["action", "attack"],    tags: ["terminal", "gainer", "trashingAttack"]},
-    Sentry:         {cost: 5,   set: "base2nd",     types: ["action"],              tags: ["cantrip", "trasher", "sifter", "discarder"]},
+    Sentry:         {cost: 5,   set: "base2nd",     types: ["action"],              tags: ["cantrip", "trasher", "sifter", "discarder", "inspector"]},
     Artisan:        {cost: 6,   set: "base2nd",     types: ["action"],              tags: ["terminal", "workshop", "gainer", "topDecker"]},
 
     /*** 
      * INTRIGUE (BASE)
      ***/
+    Courtyard:      {cost: 2,   set: "intrigueBase", types: ["action"],             tags: ["terminal", "drawer", "topDecker"]},
+    Pawn:           {cost: 2,   set: "intrigueBase", types: ["action"],             tags: ["conditionalTerminal", "plusBuy", "virtualCoin", "choice"]},
+    Masquerade:     {cost: 3,   set: "intrigueBase", types: ["action"],             tags: ["terminal", "drawer", "trasher", "nonAttackerAttack"]},
+    ShantyTown:     {cost: 3,   set: "intrigueBase", types: ["action"],             tags: ["village"]},
+    Steward:        {cost: 3,   set: "intrigueBase", types: ["action"],             tags: ["terminal", "drawer", "virtualCoin", "trasher", "choice"]},
+    Swindler:       {cost: 3,   set: "intrigueBase", types: ["action", "attack"],   tags: ["terminal", "virtualCoin", "trashingAttack", "curserAttack", "otherJunkerAttack"]},
+    WishingWell:    {cost: 3,   set: "intrigueBase", types: ["action"],             tags: ["cantrip", "drawer", "inspector"]},
+    Baron:          {cost: 4,   set: "intrigueBase", types: ["action"],             tags: ["terminal", "plusBuy", "gainer", "discardForBenefit", "virtualCoin"]},
+    Bridge:         {cost: 4,   set: "intrigueBase", types: ["action"],             tags: ["terminal", "plusBuy", "virtualCoin", "bridge"]},
+    Conspirator:    {cost: 4,   set: "intrigueBase", types: ["action"],             tags: ["conditionalTerminal", "virtualCoin"]},
+    Ironworks:      {cost: 4,   set: "intrigueBase", types: ["action"],             tags: ["conditionalTerminal", "workshop", "gainer", "virtualCoin"]},
+    MiningVillage:  {cost: 4,   set: "intrigueBase", types: ["action"],             tags: ["cantrip", "village", "virtualCoin", "oneshot"]},
+    Duke:           {cost: 5,   set: "intrigueBase", types: ["victory"],            tags: ["altvp"]},
+    Minion:         {cost: 5,   set: "intrigueBase", types: ["action", "attack"],   tags: ["virtualCoin", "sifter", "handSizeAttack", "choice"]},
+    Torturer:       {cost: 5,   set: "intrigueBase", types: ["action", "attack"],   tags: ["terminal", "drawer", "curserAttack", "handSizeAttack", "choice"]},
+    TradingPost:    {cost: 5,   set: "intrigueBase", types: ["action"],             tags: ["terminal", "trasher", "trashForBenefit", "gainer"]},
+    Upgrade:        {cost: 5,   set: "intrigueBase", types: ["action"],             tags: ["cantrip", "remodel", "trasher", "trashForBenefit"]},
+    Harem:          {cost: 6,   set: "intrigueBase", types: ["treasure", "victory"], tags: []},
+    Nobles:         {cost: 6,   set: "intrigueBase", types: ["action", "victory"],  tags: ["conditionalTerminal", "village", "drawer", "choice"]},
 
     /*** 
      * INTRIGUE (1ST EDITION)
@@ -113,6 +136,13 @@ let cards =
     /*** 
      * INTRIGUE (2ND EDITION)
      ***/
+    Lurker:         {cost: 2,   set: "intrigue2nd", types: ["action"],              tags: ["trashFromSupply", "gainFromTrash", "gainer", "choice"]},
+    Diplomat:       {cost: 4,   set: "intrigue2nd", types: ["action", "reaction"],  tags: ["conditionalTerminal", "drawer", "village", "sifter", "defender"]},
+    Mill:           {cost: 4,   set: "intrigue2nd", types: ["action", "victory"],   tags: ["cantrip", "discardForBenefit", "virtualCoin", "discarder"]},
+    SecretPassage:  {cost: 4,   set: "intrigue2nd", types: ["action"],              tags: ["cantrip", "sifter", "warehouse", "inspector", "topDecker"]},
+    Courtier:       {cost: 5,   set: "intrigue2nd", types: ["action"],              tags: ["conditionalTerminal", "plusBuy", "virtualCoin", "gainer", "choice"]},
+    Patrol:         {cost: 5,   set: "intrigue2nd", types: ["action"],              tags: ["terminal", "drawer", "inspector"]},
+    Replace:        {cost: 5,   set: "intrigue2nd", types: ["action", "attack"],    tags: ["terminal", "remodel", "trasher", "trashForBenefit", "topDecker", "curserAttack"]},
 
     /*** 
      * SEASIDE (BASE)

@@ -1,11 +1,26 @@
 
 const sets = 
 [
-    "base"
+    "base",
+    "intrigue"
 ];
 const baseKeyword = "Base";
 const firstKeyword = "1st";
 const secondKeyword = "2nd";
+
+let settings = 
+{
+    expansions: {baseBase: true, base2nd: true, intrigueBase: true, intrigue2nd: true},
+    cardExclusions: {}, //None of these cards should be included
+    cardInclusions: {}, //These cards are added to the pool (even when their expansion is not selected)
+    cardGuarantee: {}, //These cards will be included in the pool
+    tagExclusions: {}, //No cards of this tag should be included
+    tagGuarantee: {}, //At least one card of this tag will be included
+    special: {} //Special options (such as "always include a defense with an attack" or "include a village given more than 5 terminals")
+};
+
+let sortBySet = false;
+let cardPool = [];
 
 let keywordToSetLookup = {};
 function generateKeywordToSetLookup()
@@ -18,20 +33,6 @@ function generateKeywordToSetLookup()
         keywordToSetLookup[setName + secondKeyword] = setName;
     }
 }
-
-let settings = 
-{
-    expansions: {baseBase: true, base2nd: true},
-    cardExclusions: {}, //None of these cards should be included
-    cardInclusions: {}, //These cards are added to the pool (even when their expansion is not selected)
-    cardGuarantee: {}, //These cards will be included in the pool
-    tagExclusions: {}, //No cards of this tag should be included
-    tagGuarantee: {}, //At least one card of this tag will be included
-    special: {} //Special options (such as "always include a defense with an attack" or "include a village given more than 5 terminals")
-};
-
-let sortBySet = false;
-let cardPool = [];
 
 function setButtonStates()
 {

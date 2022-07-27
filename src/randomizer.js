@@ -4,7 +4,8 @@ const sets =
     "base",
     "intrigue",
     "seaside",
-    "prosperity"
+    "prosperity",
+    "empires"
 ];
 const baseKeyword = "Base";
 const firstKeyword = "1st";
@@ -17,7 +18,8 @@ let settings =
         baseBase: true, base2nd: true, 
         intrigueBase: true, intrigue2nd: true, 
         seasideBase: true, seaside1st: true,
-        prosperityBase: true, prosperity2nd: true
+        prosperityBase: true, prosperity2nd: true,
+        empires: true
     },
     cardExclusions: {}, //None of these cards should be included
     cardInclusions: {}, //These cards are added to the pool (even when their expansion is not selected)
@@ -152,6 +154,56 @@ function updateButtons()
 {
     getButtonStates();
     setButtonStates();
+}
+function toggleAllSets()
+{
+    for(let x = 0; x < sets.length; x++)
+    {
+        let setName = sets[x];
+        let setCheckbox = document.getElementById(setName);
+        let set1stRadio = document.getElementById(setName + firstKeyword);
+        let set2ndRadio = document.getElementById(setName + secondKeyword);
+
+        setCheckbox.checked = true; //Set main set
+        if(set1stRadio !== null) //Multiple Editions
+        {
+            //Set editions
+            if(!set1stRadio.disabled)
+            {
+                set1stRadio.checked = true; 
+            }
+            if(!set2ndRadio.disabled)
+            {
+                set2ndRadio.checked = true;
+            }
+        }
+    }
+    updateButtons();
+}
+function untoggleAllSets()
+{
+    for(let x = 0; x < sets.length; x++)
+    {
+        let setName = sets[x];
+        let setCheckbox = document.getElementById(setName);
+        let set1stRadio = document.getElementById(setName + firstKeyword);
+        let set2ndRadio = document.getElementById(setName + secondKeyword);
+
+        setCheckbox.checked = false; //Set main set
+        if(set1stRadio !== null) //Multiple Editions
+        {
+            //Set editions
+            if(!set1stRadio.disabled)
+            {
+                set1stRadio.checked = false; 
+            }
+            if(!set2ndRadio.disabled)
+            {
+                set2ndRadio.checked = false;
+            }
+        }
+    }
+    updateButtons();
 }
 
 function generate()

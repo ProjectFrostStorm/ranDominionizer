@@ -21,6 +21,10 @@
         <div id="settings" class="container">
             <div>
                 <div class="header">Sets/Expansions</div>
+                <div>
+                    <button type="button" onclick="toggleAllSets()">Enable All Sets</button>
+                    <button type="button" onclick="untoggleAllSets()">Disable All Sets</button>
+                </div>
                 <ul>
                     <li>
                         <span>
@@ -69,6 +73,13 @@
                             <input id="prosperity2nd" type="checkbox" name="prosperity" onclick="updateButtons()">
                             <label for="prosperity2nd">2nd Edition</label>
                         </span>
+                    </li>
+                    <li>
+                        <span>
+                            <input id="empires" type="checkbox" onclick="updateButtons()">
+                            <label for="empires">Empires</label>
+                        </span>
+                        <span></span>
                     </li>
                 </ul>
             </div>

@@ -10,6 +10,7 @@ let tags =
     "drawToX",
     "virtualCoin",
     "plusBuy",
+    "plusVP",
 
     "discarder",
     "delayedDrawer",
@@ -199,6 +200,22 @@ let cards =
     /*** 
      * PROSPERITY (BASE)
      ***/
+    Watchtower:     {cost: 3, set: "prosperityBase", types: ["action", "reaction"], tags: ["terminal", "drawer", "drawToX", "topDecker", "trasher"]},
+    Bishop:         {cost: 4, set: "prosperityBase", types: ["action"],             tags: ["terminal", "virtualCoin", "plusVP", "trasher", "trashForBenefit", "positiveInteraction"]},
+    Monument:       {cost: 4, set: "prosperityBase", types: ["action"],             tags: ["terminal", "virtualCoin", "plusVP"]},
+    Quarry:         {cost: 4, set: "prosperityBase", types: ["treasure"],           tags: ["bridge"]},
+    WorkersVillage: {cost: 4, set: "prosperityBase", types: ["action"],             tags: ["cantrip", "village", "plusBuy"]},
+    City:           {cost: 5, set: "prosperityBase", types: ["action"],             tags: ["cantrip", "village", "drawer", "virtualCoin", "plusBuy"]},
+    Mint:           {cost: 5, set: "prosperityBase", types: ["action"],             tags: ["terminal", "gainer", "trasher"]},
+    Rabble:         {cost: 5, set: "prosperityBase", types: ["action", "attack"],   tags: ["terminal", "drawer", "deckInspectionAttack"]},
+    Vault:          {cost: 5, set: "prosperityBase", types: ["action"],             tags: ["terminal", "drawer", "discardForBenefit", "virtualCoin", "positiveInteraction"]},
+    GrandMarket:    {cost: 6, set: "prosperityBase", types: ["action"],             tags: ["cantrip", "plusBuy", "virtualCoin", "peddler"]},
+    Hoard:          {cost: 6, set: "prosperityBase", types: ["treasure"],           tags: ["gainer"]},
+    Bank:           {cost: 7, set: "prosperityBase", types: ["treasure"],           tags: ["virtualCoin"]},
+    Expand:         {cost: 7, set: "prosperityBase", types: ["action"],             tags: ["terminal", "remodel", "trasher", "trashForBenefit"]},
+    Forge:          {cost: 7, set: "prosperityBase", types: ["action"],             tags: ["terminal", "trasher", "trashForBenefit", "gainer", "remodel"]},
+    KingsCourt:     {cost: 7, set: "prosperityBase", types: ["action"],             tags: ["throneRoom"]},
+    Peddler:        {cost: 8, set: "prosperityBase", types: ["action"],             tags: ["cantrip", "virtualCoin", "peddler"]},
 
     /*** 
      * PROSPERITY (1ST EDITION)
@@ -207,6 +224,15 @@ let cards =
     /*** 
      * PROSPERITY (2ND EDITION)
      ***/
+    Anvil:          {cost: 3, set: "prosperity2nd", types: ["treasure"],            tags: ["discardForBenefit", "workshop", "gainer"]},
+    Clerk:          {cost: 4, set: "prosperity2nd", types: ["action", "reaction", "attack"], tags: ["conditionalTerminal", "virtualCoin", "handSizeAttack", "turnWorseningAttack"]},
+    Investment:     {cost: 4, set: "prosperity2nd", types: ["treasure"],            tags: ["trasher", "virtualCoin", "oneshot", "plusVP", "choice"]},
+    Tiara:          {cost: 4, set: "prosperity2nd", types: ["treasure"],            tags: ["plusBuy", "topDecker", "throneRoom"]},
+    Charlatan:      {cost: 5, set: "prosperity2nd", types: ["action", "attack"],    tags: ["terminal", "virtualCoin", "curserAttack"]},
+    Collection:     {cost: 5, set: "prosperity2nd", types: ["treasure"],            tags: ["plusBuy", "plusVP"]},
+    CrystalBall:    {cost: 5, set: "prosperity2nd", types: ["treasure"],            tags: ["inspector", "trasher", "discarder"]},
+    Magnate:        {cost: 5, set: "prosperity2nd", types: ["action"],              tags: ["terminal", "drawer"]},
+    WarChest:       {cost: 5, set: "prosperity2nd", types: ["treasure"],            tags: ["workshop", "gainer"]},
 
     /*** 
      * HINTERLANDS (BASE)

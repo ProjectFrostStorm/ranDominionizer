@@ -28,9 +28,9 @@
                             <label for="base">Base Game</label>
                         </span>
                         <span>
-                            <input id="base1st" type="radio" name="base" onclick="updateButtons()" disabled>
+                            <input id="base1st" type="checkbox" name="base" onclick="updateButtons()" disabled>
                             <label for="base1st">1st Edition</label>
-                            <input id="base2nd" type="radio" name="base" onclick="updateButtons()">
+                            <input id="base2nd" type="checkbox" name="base" onclick="updateButtons()">
                             <label for="base2nd">2nd Edition</label>
                         </span>
                     </li>
@@ -40,9 +40,9 @@
                             <label for="intrigue">Intrigue</label>
                         </span>
                         <span>
-                            <input id="intrigue1st" type="radio" name="intrigue" onclick="updateButtons()" disabled>
+                            <input id="intrigue1st" type="checkbox" name="intrigue" onclick="updateButtons()" disabled>
                             <label for="intrigue1st">1st Edition</label>
-                            <input id="intrigue2nd" type="radio" name="intrigue" onclick="updateButtons()">
+                            <input id="intrigue2nd" type="checkbox" name="intrigue" onclick="updateButtons()">
                             <label for="intrigue2nd">2nd Edition</label>
                         </span>
                     </li>
@@ -52,10 +52,22 @@
                             <label for="seaside">Seaside</label>
                         </span>
                         <span>
-                            <input id="seaside1st" type="radio" name="seaside" onclick="updateButtons()">
+                            <input id="seaside1st" type="checkbox" name="seaside" onclick="updateButtons()">
                             <label for="seaside1st">1st Edition</label>
-                            <input id="seaside2nd" type="radio" name="seaside" onclick="updateButtons()">
+                            <input id="seaside2nd" type="checkbox" name="seaside" onclick="updateButtons()">
                             <label for="seaside2nd">2nd Edition</label>
+                        </span>
+                    </li>
+                    <li>
+                        <span>
+                            <input id="prosperity" type="checkbox" onclick="updateButtons()">
+                            <label for="prosperity">Prosperity</label>
+                        </span>
+                        <span>
+                            <input id="prosperity1st" type="checkbox" name="prosperity" onclick="updateButtons()" disabled>
+                            <label for="prosperity1st">1st Edition</label>
+                            <input id="prosperity2nd" type="checkbox" name="prosperity" onclick="updateButtons()">
+                            <label for="prosperity2nd">2nd Edition</label>
                         </span>
                     </li>
                 </ul>

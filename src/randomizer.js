@@ -3,7 +3,8 @@ const sets =
 [
     "base",
     "intrigue",
-    "seaside"
+    "seaside",
+    "prosperity"
 ];
 const baseKeyword = "Base";
 const firstKeyword = "1st";
@@ -11,7 +12,13 @@ const secondKeyword = "2nd";
 
 let settings = 
 {
-    expansions: {baseBase: true, base2nd: true, intrigueBase: true, intrigue2nd: true, seasideBase: true, seaside1st: true},
+    expansions: 
+    {
+        baseBase: true, base2nd: true, 
+        intrigueBase: true, intrigue2nd: true, 
+        seasideBase: true, seaside1st: true,
+        prosperityBase: true, prosperity2nd: true
+    },
     cardExclusions: {}, //None of these cards should be included
     cardInclusions: {}, //These cards are added to the pool (even when their expansion is not selected)
     cardGuarantee: {}, //These cards will be included in the pool
@@ -53,7 +60,15 @@ function setButtonStates()
             }
             else if(!set1stRadio.checked && !set2ndRadio.checked) //Neither editions selected
             {
-                set2ndRadio.checked = true;
+                //Set all possible to true
+                if(!set1stRadio.disabled)
+                {
+                    set1stRadio.checked = true;
+                }
+                if(!set2ndRadio.disabled)
+                {
+                    set2ndRadio.checked = true;
+                }
             }
         }
 
@@ -74,7 +89,7 @@ function setButtonStates()
                 {
                     set1stRadio.checked = true;
                 }
-                else if(settings.expansions[setName + secondKeyword] === true)
+                if(settings.expansions[setName + secondKeyword] === true)
                 {
                     set2ndRadio.checked = true;
                 }

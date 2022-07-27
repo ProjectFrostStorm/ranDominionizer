@@ -41,6 +41,9 @@ let tags =
     "trashFromSupply",
     "nonTrashingTrasher",
 
+    "discardFodder", 
+    "trashFodder",
+
     //Exchange
     "discardForBenefit",
     "trashForBenefit",
@@ -237,6 +240,23 @@ let cards =
     /*** 
      * HINTERLANDS (BASE)
      ***/
+    Crossroads:     {cost: 2,   set: "hinterlandsBase", types: ["action"],              tags: ["drawer", "village"]},
+    FoolsGold:      {cost: 2,   set: "hinterlandsBase", types: ["treasure", "reaction"],tags: ["virtualCoin", "gainer", "oneshot"]}, //No full resolution image
+    Develop:        {cost: 3,   set: "hinterlandsBase", types: ["action"],              tags: ["terminal", "remodel", "trasher", "trashForBenefit", "gainer", "topDecker"]},
+    Oasis:          {cost: 3,   set: "hinterlandsBase", types: ["action"],              tags: ["cantrip", "virtualCoin", "discarder"]},
+    Scheme:         {cost: 3,   set: "hinterlandsBase", types: ["action"],              tags: ["cantrip", "topDecker"]},
+    Tunnel:         {cost: 3,   set: "hinterlandsBase", types: ["victory", "reaction"], tags: ["discardForBenefit", "gainer"]},
+    JackOfAllTrades:{cost: 4,   set: "hinterlandsBase", types: ["action"],              tags: ["terminal", "gainer", "inspector", "discarder", "drawToX", "trasher", "defender"]},
+    SpiceMerchant:  {cost: 4,   set: "hinterlandsBase", types: ["action"],              tags: ["conditionalTerminal", "trasher", "trashForBenefit", "village", "virtualCoin", "plusBuy", "choice"]},
+    Trader:         {cost: 4,   set: "hinterlandsBase", types: ["action", "reaction"],  tags: ["terminal", "trasher", "gainer", "defender"]}, //Older image
+    Cartographer:   {cost: 5,   set: "hinterlandsBase", types: ["action"],              tags: ["cantrip", "inspector", "sifter", "discarder"]}, 
+    Haggler:        {cost: 5,   set: "hinterlandsBase", types: ["action"],              tags: ["terminal", "virtualCoin", "gainer"]}, //No full resolution image
+    Highway:        {cost: 5,   set: "hinterlandsBase", types: ["action"],              tags: ["cantrip", "bridge"]}, //No full resolution image
+    Inn:            {cost: 5,   set: "hinterlandsBase", types: ["action"],              tags: ["cantrip", "village", "sifter", "discarder"]}, //No full resolution image
+    Margrave:       {cost: 5,   set: "hinterlandsBase", types: ["action", "attack"],    tags: ["terminal", "drawer", "plusBuy", "handSizeAttack"]},
+    Stables:        {cost: 5,   set: "hinterlandsBase", types: ["action"],              tags: ["conditionalTerminal", "discardForBenefit", "drawer"]},
+    BorderVillage:  {cost: 6,   set: "hinterlandsBase", types: ["action"],              tags: ["cantrip", "village", "workshop", "gainer"]},
+    Farmland:       {cost: 6,   set: "hinterlandsBase", types: ["victory"],             tags: ["remodel", "trasher", "trashForBenefit"]},
 
     /*** 
      * HINTERLANDS (1ST EDITION)
@@ -245,6 +265,15 @@ let cards =
     /*** 
      * HINTERLANDS (2ND EDITION)
      ***/
+    GuardDog:       {cost: 3,   set: "hinterlands2nd",  types: ["action", "reaction"],  tags: ["terminal", "drawer"]}, //No full resolution image
+    Nomads:         {cost: 4,   set: "hinterlands2nd",  types: ["action"],              tags: ["terminal", "virtualCoin", "plusBuy", "trashFodder"]}, //No full resolution image
+    Trail:          {cost: 4,   set: "hinterlands2nd",  types: ["action", "reaction"],  tags: ["cantrip", "discardFodder", "trashFodder"]}, //No full resolution image
+    Weaver:         {cost: 4,   set: "hinterlands2nd",  types: ["action", "reaction"],  tags: ["terminal", "workshop", "gainer", "discardFodder"]}, //No full resolution image
+    Berserker:      {cost: 5,   set: "hinterlands2nd",  types: ["action", "attack"],    tags: ["terminal", "workshop", "gainer", "handSizeAttack"]},
+    Cauldron:       {cost: 5,   set: "hinterlands2nd",  types: ["treasure", "attack"],  tags: ["plusBuy", "curserAttack"]},
+    Souk:           {cost: 5,   set: "hinterlands2nd",  types: ["action"],              tags: ["terminal", "plusBuy", "virtualCoin"]}, //No full resolution image
+    Wheelwright:    {cost: 5,   set: "hinterlands2nd",  types: ["action"],              tags: ["cantrip", "discardForBenefit", "workshop", "gainer"]}, //No full resolution image
+    WitchsHut:      {cost: 5,   set: "hinterlands2nd",  types: ["action", "attack"],    tags: ["terminal", "drawer", "curserAttack", "discarder"]}, //No full resolution image
 
     /*** 
      * EMPIRES

@@ -5,6 +5,7 @@ const sets =
     "intrigue",
     "seaside",
     "prosperity",
+    "hinterlands",
     "empires"
 ];
 const baseKeyword = "Base";

@@ -12,6 +12,10 @@ let tags =
     "plusBuy",
 
     "discarder",
+    "delayedDrawer",
+    "setAside",
+    
+    "nonExileExile",
 
     //Card categories
     "village",
@@ -34,6 +38,7 @@ let tags =
     "inspector",
     "gainFromTrash",
     "trashFromSupply",
+    "nonTrashingTrasher",
 
     //Exchange
     "discardForBenefit",
@@ -111,7 +116,7 @@ let cards =
      ***/
     Courtyard:      {cost: 2,   set: "intrigueBase", types: ["action"],             tags: ["terminal", "drawer", "topDecker"]},
     Pawn:           {cost: 2,   set: "intrigueBase", types: ["action"],             tags: ["conditionalTerminal", "plusBuy", "virtualCoin", "choice"]},
-    Masquerade:     {cost: 3,   set: "intrigueBase", types: ["action"],             tags: ["terminal", "drawer", "trasher", "nonAttackerAttack"]},
+    Masquerade:     {cost: 3,   set: "intrigueBase", types: ["action"],             tags: ["terminal", "drawer", "trasher", "nonTrashingTrasher", "nonAttackerAttack"]},
     ShantyTown:     {cost: 3,   set: "intrigueBase", types: ["action"],             tags: ["village"]},
     Steward:        {cost: 3,   set: "intrigueBase", types: ["action"],             tags: ["terminal", "drawer", "virtualCoin", "trasher", "choice"]},
     Swindler:       {cost: 3,   set: "intrigueBase", types: ["action", "attack"],   tags: ["terminal", "virtualCoin", "trashingAttack", "curserAttack", "otherJunkerAttack"]},
@@ -147,14 +152,49 @@ let cards =
     /*** 
      * SEASIDE (BASE)
      ***/
+    Haven:          {cost: 2,   set: "seasideBase", types: ["action", "duration"],  tags: ["setAside", "delayedDrawer"]},
+    Lighthouse:     {cost: 2,   set: "seasideBase", types: ["action", "duration"],  tags: ["virtualCoin", "defender"]},
+    NativeVillage:  {cost: 2,   set: "seasideBase", types: ["action"],              tags: ["village", "nonExileExile"]},
+    FishingVillage: {cost: 3,   set: "seasideBase", types: ["action", "duration"],  tags: ["village", "virtualCoin"]},
+    Lookout:        {cost: 3,   set: "seasideBase", types: ["action"],              tags: ["trasher", "sifter", "inspector", "discarder"]},
+    Smugglers:      {cost: 3,   set: "seasideBase", types: ["action"],              tags: ["terminal", "workshop", "gainer"]},
+    Warehouse:      {cost: 3,   set: "seasideBase", types: ["action"],              tags: ["sifter", "warehouse", "discarder"]},
+    Caravan:        {cost: 4,   set: "seasideBase", types: ["action", "duration"],  tags: ["cantrip", "delayedDrawer"]},
+    Cutpurse:       {cost: 4,   set: "seasideBase", types: ["action", "attack"],    tags: ["terminal", "virtualCoin", "handSizeAttack"]},
+    Island:         {cost: 4,   set: "seasideBase", types: ["action", "victory"],   tags: ["terminal", "nonExileExile"]},
+    Salvager:       {cost: 4,   set: "seasideBase", types: ["action"],              tags: ["terminal", "plusBuy", "trasher", "trashForBenefit", "virtualCoin"]},
+    TreasureMap:    {cost: 4,   set: "seasideBase", types: ["action"],              tags: ["terminal", "oneshot", "gainer"]},
+    Bazaar:         {cost: 5,   set: "seasideBase", types: ["action"],              tags: ["cantrip", "village", "virtualCoin", "vanilla"]},
+    MerchantShip:   {cost: 5,   set: "seasideBase", types: ["action", "duration"],  tags: ["terminal", "virtualCoin"]},
+    Outpost:        {cost: 5,   set: "seasideBase", types: ["action", "duration"],  tags: ["terminal", "extraTurn"]},
+    Tactician:      {cost: 5,   set: "seasideBase", types: ["action", "duration"],  tags: ["terminal", "delayedDrawer", "plusBuy", "village", "discarder"]},
+    Treasury:       {cost: 5,   set: "seasideBase", types: ["action"],              tags: ["cantrip", "virtualCoin", "peddler", "topDecker"]},
+    Wharf:          {cost: 5,   set: "seasideBase", types: ["action", "duration"],  tags: ["terminal", "drawer", "plusBuy", "delayedDrawer"]},
 
     /*** 
      * SEASIDE (1ST EDITION)
      ***/
+    Embargo:        {cost: 2,   set: "seaside1st",  types: ["action"],              tags: ["terminal", "oneshot", "curserAttack"]}, //No full resolution image
+    PearlDiver:     {cost: 2,   set: "seaside1st",  types: ["action"],              tags: ["cantrip", "topDecker"]},
+    Ambassador:     {cost: 3,   set: "seaside1st",  types: ["action", "attack"],    tags: ["terminal", "nonTrashingTrasher", "otherJunkerAttack"]},
+    Navigator:      {cost: 4,   set: "seaside1st",  types: ["action"],              tags: ["terminal", "virtualCoin", "inspector"]},
+    PirateShip:     {cost: 4,   set: "seaside1st",  types: ["action", "attack"],    tags: ["terminal", "virtualCoin", "trashingAttack", "positiveInteraction", "choice"]}, //No full resolution image
+    SeaHag:         {cost: 4,   set: "seaside1st",  types: ["action", "attack"],    tags: ["terminal", "curserAttack", "turnWorseningAttack"]},
+    Explorer:       {cost: 5,   set: "seaside1st",  types: ["action"],              tags: ["terminal", "gainer"]},
+    GhostShip:      {cost: 5,   set: "seaside1st",  types: ["action", "attack"],    tags: ["terminal", "drawer", "handSizeAttack", "turnWorseningAttack"]},
 
     /*** 
      * SEASIDE (2ND EDITION)
      ***/
+    Astrolabe:      {cost: 3,   set: "seaside2nd",  types: ["treasure", "duration"],            tags: ["plusBuy"]},
+    Monkey:         {cost: 3,   set: "seaside2nd",  types: ["action", "duration"],              tags: ["terminal", "delayedDrawer"]},
+    SeaChart:       {cost: 3,   set: "seaside2nd",  types: ["action"],                          tags: ["cantrip", "inspector", "drawer"]},
+    Blockade:       {cost: 4,   set: "seaside2nd",  types: ["action", "duration"],              tags: ["terminal", "workshop", "gainer", "curserAttack"]},
+    Sailor:         {cost: 4,   set: "seaside2nd",  types: ["action", "duration"],              tags: ["virtualCoin", "trasher"]},
+    TidePools:      {cost: 4,   set: "seaside2nd",  types: ["action", "duration"],              tags: ["cantrip", "drawer", "discarder"]},
+    Corsair:        {cost: 5,   set: "seaside2nd",  types: ["action", "duration", "attack"],    tags: ["terminal", "virtualCoin", "delayedDrawer", "trashingAttack"]},
+    Pirate:         {cost: 5,   set: "seaside2nd",  types: ["action", "duration", "reaction"],  tags: ["conditionalTerminal", "gainer"]},
+    SeaWitch:       {cost: 5,   set: "seaside2nd",  types: ["action", "duration", "attack"],    tags: ["terminal", "drawer", "curserAttack", "sifter"]},
 
     /*** 
      * PROSPERITY (BASE)

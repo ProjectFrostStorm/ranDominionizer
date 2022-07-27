@@ -2,7 +2,8 @@
 const sets = 
 [
     "base",
-    "intrigue"
+    "intrigue",
+    "seaside"
 ];
 const baseKeyword = "Base";
 const firstKeyword = "1st";
@@ -10,7 +11,7 @@ const secondKeyword = "2nd";
 
 let settings = 
 {
-    expansions: {baseBase: true, base2nd: true, intrigueBase: true, intrigue2nd: true},
+    expansions: {baseBase: true, base2nd: true, intrigueBase: true, intrigue2nd: true, seasideBase: true, seaside1st: true},
     cardExclusions: {}, //None of these cards should be included
     cardInclusions: {}, //These cards are added to the pool (even when their expansion is not selected)
     cardGuarantee: {}, //These cards will be included in the pool

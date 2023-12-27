@@ -1,31 +1,36 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>randDominionizer</title>
+        <title>ranDominionizer</title>
 
         <link rel="stylesheet" type="text/css" href="main.css"> <!-- CSS Sheet -->
     </head>
 
     <body onload="setup()">
-        <h1>randDominionizer</h1>
+        <h1>ranDominionizer</h1>
 
         <div id="tabs" class="container">
-            <button type="button" onclick="generate()">Generate Set</button>
-            <button type="button" onclick="toggleSettings()">Toggle Settings</button>
-            <button type="button" onclick="toggleSort()" disabled>Toggle Sort</button>
+            <button type="button" onclick="generate()">Generate Set</button> |
+            <button type="button" onclick="toggleSettings()">Toggle Settings</button> |
+            <button type="button" onclick="resortResultCards('cost', currentSelection)">Sort by Cost</button>
+            <button type="button" onclick="resortResultCards('expansion', currentSelection)">Sort by Expansion</button>
+            <button type="button" onclick="resortResultCards('name', currentSelection)">Sort by Name</button>
         </div>
 
-        <div id="resultArea">
+        <div id="results">
+            <div id="resultLandscapes" hidden="hidden"></div>
+            <div id="resultCards" hidden="hidden"></div>
         </div>
 
         <div id="settings" class="container">
-            <div>
-                <div class="header">Sets/Expansions</div>
+            <div id="expansionSettings">
+                <div class="header">Expansions</div>
                 <div>
-                    <button type="button" onclick="toggleAllSets()">Enable All Sets</button>
-                    <button type="button" onclick="untoggleAllSets()">Disable All Sets</button>
+                    <button type="button" onclick="enableAllExpansions()">Enable All Sets</button>
+                    <button type="button" onclick="disableAllExpansions()">Disable All Sets</button>
                 </div>
-                <ul>
+                <ul id="expansionSettingsList">
+                <!--
                     <li>
                         <span>
                             <input id="base" type="checkbox" onclick="updateButtons()">
@@ -93,7 +98,129 @@
                         </span>
                         <span></span>
                     </li>
+                -->
                 </ul>
+            </div>
+            <div id="blacklistSettings">
+                <div class="header">Card Blacklisting</div>
+            </div>
+            <div id="generationSettings">
+                <div class="header">Kingdom Generation Rules</div>
+                <div>
+                    <div>Costs</div>
+                    <ul>
+                        <li>
+                            <span>
+                                <input id="includeCost2" type="checkbox" data-setting="rule" data-rule-trait="cost" data-rule-trait-value="2" data-rule="min" data-rule-parameter="1">
+                                <label for="includeCost2">Include 2 Cost</label>
+                            </span>
+                        </li>
+                        <li>
+                            <span>
+                                <input id="includeCost3" type="checkbox" data-setting="rule" data-rule-trait="cost" data-rule-trait-value="3" data-rule="min" data-rule-parameter="1">
+                                <label for="includeCost3">Include 3 Cost</label>
+                            </span>
+                            <span>
+                                <input id="include2Cost3" type="checkbox" data-setting="rule" data-rule-trait="cost" data-rule-trait-value="3" data-rule="min" data-rule-parameter="2">
+                                <label for="include2Cost3">Include 2x</label>
+                            </span>
+                        </li>
+                        <li>
+                            <span>
+                                <input id="includeCost4" type="checkbox" data-setting="rule" data-rule-trait="cost" data-rule-trait-value="4" data-rule="min" data-rule-parameter="1">
+                                <label for="includeCost4">Include 4 Cost</label>
+                            </span>
+                            <span>
+                                <input id="include2Cost4" type="checkbox" data-setting="rule" data-rule-trait="cost" data-rule-trait-value="4" data-rule="min" data-rule-parameter="2">
+                                <label for="include2Cost4">Include 2x</label>
+                            </span>
+                        </li>
+                        <li>
+                            <span>
+                                <input id="includeCost5" type="checkbox" data-setting="rule" data-rule-trait="cost" data-rule-trait-value="5" data-rule="min" data-rule-parameter="1">
+                                <label for="includeCost5">Include 5 Cost</label>
+                            </span>
+                            <span>
+                                <input id="include2Cost5" type="checkbox" data-setting="rule" data-rule-trait="cost" data-rule-trait-value="5" data-rule="min" data-rule-parameter="2">
+                                <label for="include2Cost5">Include 2x</label>
+                            </span>
+                        </li>
+                        <li>
+                            <span>
+                                <input id="includeCost6" type="checkbox" data-setting="rule" data-rule-trait="cost" data-rule-trait-value="6" data-rule="min" data-rule-parameter="1">
+                                <label for="includeCost6">Include 6 Cost</label>
+                            </span>
+                        </li>
+                        <li>
+                            <span>
+                                <input id="includeCost7" type="checkbox" data-setting="rule" data-rule-trait="cost" data-rule-trait-value="7" data-rule="min" data-rule-parameter="1">
+                                <label for="includeCost7">Include 7 Cost</label>
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <div>Tags: Quality of Game</div>
+                    <ul>
+                        <li>
+                            <span>
+                                <input id="includeCardRemover" type="checkbox" data-setting="rule" data-rule-trait="null" data-rule-trait-value="null" data-rule="oneCardRemover" data-rule-parameter="null">
+                                <label for="includeCardRemover">Include Card Remover (Trasher, Exiler, etc.)</label>
+                            </span>
+                        </li>
+                        <li>
+                            <span>
+                                <input disabled="disabled" id="includeTrasher" type="checkbox" data-setting="rule" data-rule-trait="tags" data-rule-trait-value="trasher" data-rule="min" data-rule-parameter="1">
+                                <label for="includeTrasher">Include Trasher</label>
+                            </span>
+                        </li>
+                        <li>
+                            <span>
+                                <input id="includeVillage" type="checkbox" data-setting="rule" data-rule-trait="tags" data-rule-trait-value="village" data-rule="min" data-rule-parameter="1">
+                                <label for="includeVillage">Include Village</label>
+                            </span>
+                        </li>
+                        <li>
+                            <span>
+                                <input id="includePlusBuy" type="checkbox" data-setting="rule" data-rule-trait="tags" data-rule-trait-value="plusBuy" data-rule="min" data-rule-parameter="1">
+                                <label for="includePlusBuy">Include +Buy</label>
+                            </span>
+                        </li>
+                        <li>
+                            <span>
+                                <input id="limitTerminal" type="checkbox" data-setting="rule" data-rule-trait="tags" data-rule-trait-value="terminal" data-rule="max" data-rule-parameter="5">
+                                <label for="limitTerminal">Limit Hard Terminals to 5</label>
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <div>Tags: Player Interaction</div>
+                    <ul>
+                        <li>
+                            <span>
+                                <input id="includeAttack" type="checkbox" data-setting="rule" data-rule-trait="types" data-rule-trait-value="attack" data-rule="min" data-rule-parameter="1" onclick="document.getElementById('excludeAttack').checked = false">
+                                <label for="includeAttack">Include Attack</label>
+                            </span>
+                            <span>
+                                <input id="excludeAttack" type="checkbox" data-setting="rule" data-rule-trait="types" data-rule-trait-value="attack" data-rule="max" data-rule-parameter="0" onclick="document.getElementById('includeAttack').checked = false">
+                                <label for="excludeAttack">Exclude Attacks</label>
+                            </span>
+                        </li>
+                        <li>
+                            <span>
+                                <input id="includeNonAttackAttack" type="checkbox" data-setting="rule" data-rule-trait="tags" data-rule-trait-value="nonAttackerAttack" data-rule="min" data-rule-parameter="1">
+                                <label for="includeNonAttackAttack">Include Unorthodox Attack</label>
+                            </span>
+                        </li>
+                        <li>
+                            <span>
+                                <input id="includePositiveInteraction" type="checkbox" data-setting="rule" data-rule-trait="tags" data-rule-trait-value="positiveInteraction" data-rule="min" data-rule-parameter="1">
+                                <label for="includePositiveInteraction">Include Good Interactions</label>
+                            </span>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
 

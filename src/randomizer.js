@@ -1,13 +1,6 @@
 
-const sets = 
-[
-    "base",
-    "intrigue",
-    "seaside",
-    "prosperity",
-    "hinterlands",
-    "empires"
-];
+
+/*
 const baseKeyword = "Base";
 const firstKeyword = "1st";
 const secondKeyword = "2nd";
@@ -156,56 +149,7 @@ function updateButtons()
     getButtonStates();
     setButtonStates();
 }
-function toggleAllSets()
-{
-    for(let x = 0; x < sets.length; x++)
-    {
-        let setName = sets[x];
-        let setCheckbox = document.getElementById(setName);
-        let set1stRadio = document.getElementById(setName + firstKeyword);
-        let set2ndRadio = document.getElementById(setName + secondKeyword);
 
-        setCheckbox.checked = true; //Set main set
-        if(set1stRadio !== null) //Multiple Editions
-        {
-            //Set editions
-            if(!set1stRadio.disabled)
-            {
-                set1stRadio.checked = true; 
-            }
-            if(!set2ndRadio.disabled)
-            {
-                set2ndRadio.checked = true;
-            }
-        }
-    }
-    updateButtons();
-}
-function untoggleAllSets()
-{
-    for(let x = 0; x < sets.length; x++)
-    {
-        let setName = sets[x];
-        let setCheckbox = document.getElementById(setName);
-        let set1stRadio = document.getElementById(setName + firstKeyword);
-        let set2ndRadio = document.getElementById(setName + secondKeyword);
-
-        setCheckbox.checked = false; //Set main set
-        if(set1stRadio !== null) //Multiple Editions
-        {
-            //Set editions
-            if(!set1stRadio.disabled)
-            {
-                set1stRadio.checked = false; 
-            }
-            if(!set2ndRadio.disabled)
-            {
-                set2ndRadio.checked = false;
-            }
-        }
-    }
-    updateButtons();
-}
 
 function generate()
 {
@@ -216,7 +160,7 @@ function generate()
     cardPool = generateMainPool(settings.expansions, settings.cardExclusions);
     let randomSet = getRandomSet(10, cardPool);
 
-    if(randomSet === [])
+    if(randomSet == [])
     {
         return;
     }
@@ -323,4 +267,191 @@ function toggleSort()
     sortBySet = !sortBySet;
     let newSet = sortSet(cardPool);
     drawResultSet(newSet);
+}
+
+*/
+
+//Rules: 
+//at least one X        = place one of X in final selection first
+//if one X, then one Y  = after each pick, check if its an X: if so, check if there's an Y and add it if not; if no Y when picking final card, don't add X
+
+let cardPool = [];
+
+let failedGenerations = 0; //Counter for bruteForceGenerate
+
+//
+//Helpers
+//RNG
+function getRandomInt(upperbound) //Returns a random int in [0,upperbound)
+{
+    return Math.floor(Math.random() * upperbound);
+}
+//Sort by Cost
+function sortByCost(cardList)
+{
+    return cardList.sort(function(a, b)
+    {
+        return -(cards[a].cost - cards[b].cost);
+    });
+}
+//Sort by expansion
+function sortByExpansion(cardList)
+{
+    return cardList.sort(function(a, b)
+    {
+        let expansionIndexA = expansions[cards[a].expansion].index;
+        let expansionIndexB = expansions[cards[b].expansion].index;
+        let cardCostA = cards[a].cost;
+        let cardCostB = cards[b].cost;
+        return -((expansionIndexA * 100 + cardCostA) - (expansionIndexB * 100 + cardCostB));
+    });
+}
+//Sort by name
+function sortByName(cardList)
+{
+    return cardList.sort();
+}
+
+//
+//Card Pool and Restrictions
+function buildCardPool()
+{
+    //Reset card pool
+    cardPool = [];
+
+    //Query settings
+    let expansionSelections = queryExpansionSettings();
+    for(const card of Object.keys(cards))
+    {
+        if(expansionSelections[cards[card].expansion][cards[card].edition])
+        {
+            cardPool.push(card);
+        }
+    }
+
+    return cardPool;
+}
+//Rules
+const rules = 
+{
+    //General rules
+    min: function(selection, trait, traitValue, parameter) //Parameter is an integer n, where the final set will contain >= n cards of X traitValue
+    {
+        let count = 0;
+        for(const cardName of selection)
+        {
+            //Match
+            if((cards[cardName][trait] == traitValue) || (Array.isArray(cards[cardName][trait]) && cards[cardName][trait].includes(traitValue)))
+            {
+                if(verboseDebug) {console.log("MIN - For " + trait + "=" + traitValue + " matching card is " + cardName);}
+                count++;
+            }
+        }
+
+        if(count < parameter) //Min rule
+        {
+            return false;
+        }
+        return true;
+    },
+    max: function(selection, trait, traitValue, parameter) //Parameter is an integer n, where the final set will contain <= n cards of X traitValue
+    {
+        let count = 0;
+        for(const cardName of selection)
+        {
+            //Match
+            if((cards[cardName][trait] == traitValue) || (Array.isArray(cards[cardName][trait]) && cards[cardName][trait].includes(traitValue)))
+            {
+                count++;
+                if(verboseDebug) {console.log("MAX - For " + trait + "=" + traitValue + " matching card is " + cardName + ", this is number " + count);}
+            }
+        }
+
+        if(count > parameter) //Max rule
+        {
+            return false;
+        }
+        return true;
+    },
+
+    //Specific rules
+    oneCardRemover: function(selection, trait, traitValue, parameter) //Contains at least 1 card that can remove cards (i.e. trash, exile, etc.)
+    {
+        if(this.min(selection, "tags", "trasher", 1) || this.min(selection, "tags", "nonTrashingTrasher", 1) || this.min(selection, "tags", "nonExileExile", 1) || this.min(selection, "tags", "exile", 1))
+        {
+            return true;
+        }
+        return false;
+    }
+};
+
+//
+//Random Generation
+function uniformGenerate(num, pool) //Pick with uniform randomness, ignoring tags and other restrictions
+{
+    let poolSize = pool.length;
+    let currentPool = pool.slice();
+    let selection = [];
+
+    if(num > poolSize)
+    {
+        console.log("!!! Pool Size Too Small !!!");
+        return null;
+    }
+
+    for(let x = 0; x < num; x++)
+    {
+        let nextIndex = getRandomInt(poolSize);
+        selection.push(currentPool[nextIndex]);
+        currentPool.splice(nextIndex, 1);
+        poolSize--;
+    }
+
+    return selection;
+}
+function bruteForceGenerate(num, pool, activeRules, limit) //Uniform generate sets until one adheres with all rules
+{
+    failedGenerations = 0;
+    for(let x = 0; x < limit; x++)
+    {
+        let candidate = uniformGenerate(num, pool);
+        if(candidate === null) {return null;}
+
+        let pass = true;
+        for(let y = 0; y < activeRules.length; y++)
+        {
+            let currentRule = activeRules[y];
+            
+            if(!rules[currentRule.rule](candidate, currentRule.trait, currentRule.traitValue, currentRule.parameter))
+            {
+                pass = false;
+                if(verboseDebug) {console.log("   Fails rule selection.");}
+                failedGenerations++;
+                break;
+            }
+        }
+
+        if(pass)
+        {
+            return candidate;
+        }
+    }
+
+    return null;
+}
+
+function testGenerate()
+{
+    return [
+        "Cellar",
+        "Chapel",
+        "Moat",
+        "Village",
+        "Workshop",
+        "Bureaucrat",
+        "Gardens",
+        "Militia",
+        "Moneylender",
+        "Remodel"
+    ];
 }

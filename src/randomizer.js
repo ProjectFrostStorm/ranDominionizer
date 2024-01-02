@@ -1,5 +1,5 @@
 
-
+{
 /*
 const baseKeyword = "Base";
 const firstKeyword = "1st";
@@ -270,12 +270,13 @@ function toggleSort()
 }
 
 */
+}
 
 //Rules: 
 //at least one X        = place one of X in final selection first
 //if one X, then one Y  = after each pick, check if its an X: if so, check if there's an Y and add it if not; if no Y when picking final card, don't add X
 
-let cardPool = [];
+//let cardPool = [];
 
 let failedGenerations = 0; //Counter for bruteForceGenerate
 
@@ -286,18 +287,23 @@ function getRandomInt(upperbound) //Returns a random int in [0,upperbound)
 {
     return Math.floor(Math.random() * upperbound);
 }
+
+//
+//Sorters (sorts everything in a selection object)
 //Sort by Cost
-function sortByCost(cardList)
+function sortByCost(selection)
 {
-    return cardList.sort(function(a, b)
+    selection.kingdom.sort(function(a, b) //Sort cards
     {
         return -(cards[a].cost - cards[b].cost);
     });
+
+    return selection;
 }
 //Sort by expansion
-function sortByExpansion(cardList)
+function sortByExpansion(selection)
 {
-    return cardList.sort(function(a, b)
+    selection.kingdom.sort(function(a, b) //Sort cards
     {
         let expansionIndexA = expansions[cards[a].expansion].index;
         let expansionIndexB = expansions[cards[b].expansion].index;
@@ -305,11 +311,15 @@ function sortByExpansion(cardList)
         let cardCostB = cards[b].cost;
         return -((expansionIndexA * 100 + cardCostA) - (expansionIndexB * 100 + cardCostB));
     });
+
+    return selection;
 }
 //Sort by name
-function sortByName(cardList)
+function sortByName(selection)
 {
-    return cardList.sort();
+    selection.kingdom.sort(); //Sort cards
+
+    return selection;
 }
 
 //
@@ -338,7 +348,7 @@ const rules =
     min: function(selection, trait, traitValue, parameter) //Parameter is an integer n, where the final set will contain >= n cards of X traitValue
     {
         let count = 0;
-        for(const cardName of selection)
+        for(const cardName of selection.kingdom)
         {
             //Match
             if((cards[cardName][trait] == traitValue) || (Array.isArray(cards[cardName][trait]) && cards[cardName][trait].includes(traitValue)))
@@ -357,7 +367,7 @@ const rules =
     max: function(selection, trait, traitValue, parameter) //Parameter is an integer n, where the final set will contain <= n cards of X traitValue
     {
         let count = 0;
-        for(const cardName of selection)
+        for(const cardName of selection.kingdom)
         {
             //Match
             if((cards[cardName][trait] == traitValue) || (Array.isArray(cards[cardName][trait]) && cards[cardName][trait].includes(traitValue)))
@@ -391,7 +401,8 @@ function uniformGenerate(num, pool) //Pick with uniform randomness, ignoring tag
 {
     let poolSize = pool.length;
     let currentPool = pool.slice();
-    let selection = [];
+    let selection = {};
+    selection.kingdom = [];
 
     if(num > poolSize)
     {
@@ -402,7 +413,7 @@ function uniformGenerate(num, pool) //Pick with uniform randomness, ignoring tag
     for(let x = 0; x < num; x++)
     {
         let nextIndex = getRandomInt(poolSize);
-        selection.push(currentPool[nextIndex]);
+        selection.kingdom.push(currentPool[nextIndex]);
         currentPool.splice(nextIndex, 1);
         poolSize--;
     }
@@ -442,16 +453,22 @@ function bruteForceGenerate(num, pool, activeRules, limit) //Uniform generate se
 
 function testGenerate()
 {
-    return [
-        "Cellar",
-        "Chapel",
-        "Moat",
-        "Village",
-        "Workshop",
-        "Bureaucrat",
-        "Gardens",
-        "Militia",
-        "Moneylender",
-        "Remodel"
-    ];
+   return {
+        kingdom: [
+            "Cellar",
+            "Chapel",
+            "Moat",
+            "Village",
+            "Workshop",
+            "Bureaucrat",
+            "Gardens",
+            "Militia",
+            "Moneylender",
+            "Remodel"
+        ],
+        landscapes: [
+            "Quest",
+            "Bonfire"
+        ]
+   };
 }

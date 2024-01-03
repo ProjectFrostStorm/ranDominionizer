@@ -33,6 +33,7 @@ function generateElements()
 {
     //
     createExpansionList(expansions);
+    createLandscapeList(expansions);
     createResultCardsContainers(maxResultCards, resultCardsContainers);
     createResultLandscapesContainers(maxResultLandscapes, resultLandscapesContainers);
 }
@@ -113,6 +114,43 @@ function createExpansionList(supportedExpansions)
         if(properties.nobase === true)
         {
             expansionToggle.setAttribute("disabled", "disabled");
+        }
+    }
+}
+//Generate Landscape Settings List
+function createLandscapeList(supportedExpansions) //Input is expansions object, same as createExpansionList
+{
+    //data-setting = landscape ==> object is an input object that indicates landscape settings
+    //data-landscape-selector-type = event/way/project/etc. ==> toggles landscape inclusion
+
+    let ulWrapper = document.getElementById("landscapeSettingsList");
+
+    for(const [expansion, properties] of Object.entries(supportedExpansions))
+    {
+        //Skip any expansions without landscapes
+        if(properties.landscapes === undefined) {continue;}
+
+        let entry = document.createElement("li");
+        ulWrapper.appendChild(entry);
+
+        //Expansion Entry
+        let expansionSpan = document.createElement("span");
+        entry.appendChild(expansionSpan);
+        expansionSpan.innerHTML = properties.displayName + ": ";
+        for(const type of properties.landscapes)
+        {
+            let landscapeToggle = document.createElement("input");
+            expansionSpan.appendChild(landscapeToggle);
+            landscapeToggle.setAttribute("id", expansion + "-" + type);
+            landscapeToggle.setAttribute("type", "checkbox");
+            landscapeToggle.setAttribute("data-setting", "landscape");
+            landscapeToggle.setAttribute("data-landscape-selector-type", type);
+            landscapeToggle.setAttribute("data-landscape-selector-expansion", expansion);
+
+            let landscapeToggleLabel = document.createElement("label");
+            expansionSpan.appendChild(landscapeToggleLabel);
+            landscapeToggleLabel.setAttribute("for", expansion + "-" + type);
+            landscapeToggleLabel.innerHTML = type.charAt(0).toUpperCase() + type.slice(1) + "s";
         }
     }
 }
@@ -251,49 +289,77 @@ function toggleSettings()
 //Expansions
 function queryExpansionSettings()
 {
-    let selection = {};
+    let settingSelection = {};
     
     for(const expansion of Object.keys(expansions))
     {
-        selection[expansion] = {base: false, first: false, second: false};
+        settingSelection[expansion] = {base: false, first: false, second: false};
         let currentSetting = querySingleExpansionSetting(expansion);
         if(currentSetting.base)
         {
-            selection[expansion].base = true;
+            settingSelection[expansion].base = true;
         }
         if(currentSetting.firstEd)
         {
-            selection[expansion].first = true;
+            settingSelection[expansion].first = true;
         }
         if(currentSetting.secondEd)
         {
-            selection[expansion].second = true;
+            settingSelection[expansion].second = true;
         }
     }
 
-    return selection;
+    return settingSelection;
 }
 function querySingleExpansionSetting(expansionName)
 {
     if(!(expansionName in expansions)) {return null;} //Validation
 
-    let selection = 
+    let settingSelection = 
     {
         base: false,
         firstEd: false,
         secondEd: false
     };
     let generalCheckbox = document.getElementById("base-" + expansionName);
-    selection.base = generalCheckbox.checked;
+    settingSelection.base = generalCheckbox.checked;
     if(expansions[expansionName].secondEd)
     {
         let firstEdCheckbox = document.getElementById("firsted-" + expansionName);
         let secondEdCheckbox = document.getElementById("seconded-" + expansionName);
-        selection.firstEd = firstEdCheckbox.checked;
-        selection.secondEd = secondEdCheckbox.checked;
+        settingSelection.firstEd = firstEdCheckbox.checked;
+        settingSelection.secondEd = secondEdCheckbox.checked;
     }
 
-    return selection;
+    return settingSelection;
+}
+//Landscapes
+function queryLandscapeSettings()
+{
+    let landscapeSelection = {}; //Set => {event: true, project: true, way: true, etc.}
+
+    let landscapeSettingsContainer = document.getElementById("landscapeSettingsList");
+    let settings = landscapeSettingsContainer.querySelectorAll("[data-setting='landscape']");
+    for(let x = 0; x < settings.length; x++)
+    {
+        let node = settings[x];
+
+        //Landscape enabled
+        if(node.checked)
+        {
+            let expansion = node.dataset.landscapeSelectorExpansion;
+            let type = node.dataset.landscapeSelectorType;
+
+            if(landscapeSelection[expansion] === undefined)
+            {
+                landscapeSelection[expansion] = {};
+            }
+
+            landscapeSelection[expansion][type] = true;
+        }
+    }
+
+    return landscapeSelection;
 }
 //Generation Rules
 function queryGenerationRules()
@@ -424,7 +490,6 @@ function drawResults(selection) //Draws all results (cards, landscapes, etc.)
     //TODO Result Extras 
 
     //Draw results
-    console.log(selection);
     drawResultCards(selection.kingdom);
     drawResultLandscapes(selection.landscapes);
     //TODO Result Extras 
@@ -435,8 +500,9 @@ function resortResults(sortMethod, selection)
 {
     if(selection.kingdom.length === 0) {return;}
 
-    //Resort cards
+    //Resort
     clearResultCards(maxResultCards);
+    clearResultLandscapes(maxResultLandscapes);
     if(sortMethod === "cost")
     {
         sortByCost(selection);
@@ -450,10 +516,7 @@ function resortResults(sortMethod, selection)
         sortByName(selection);
     }
 
-    //Resort landscapes
-    //TODO
-
-    drawResultCards(selection.kingdom);
+    drawResults(selection);
 }
 
 //*****************************************************************************************************
@@ -461,7 +524,7 @@ function resortResults(sortMethod, selection)
 function generate()
 {
     console.log("----------");
-    let selection = bruteForceGenerate(10, buildCardPool(), queryGenerationRules(), bruteForceLimit);
+    let selection = bruteForceGenerate(10, 2, buildCardPool(), queryGenerationRules(), bruteForceLimit);
     console.log("Failed generations: " + failedGenerations);
 
     if(selection === null)
@@ -475,11 +538,11 @@ function generate()
     sortByCost(selection);
     drawResults(selection);
 
-    /*
-    let selection = uniformGenerate(10, buildCardPool());
+    ///*
+    selection = uniformGenerate(10, 2, buildCardPool());
     sortByCost(selection);
     drawResultCards(selection);
-    */
+    //*/
 
-    drawResultCards(testGenerate());
+    //drawResultCards(testGenerate());
 }

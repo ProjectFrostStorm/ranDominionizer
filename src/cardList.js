@@ -98,24 +98,29 @@ const tags =
 
 const expansions = 
 {
-    base:           {secondEd: true,    displayName: "Base Game",   index: 0,   nofirst: true},
-    intrigue:       {secondEd: true,    displayName: "Intrigue",    index: 1,   nofirst: true},
+    base:           {secondEd: true,    displayName: "Base Game",   index: 0},
+    intrigue:       {secondEd: true,    displayName: "Intrigue",    index: 1},
     seaside:        {secondEd: true,    displayName: "Seaside",     index: 2},
     //alchemy:        {secondEd: true,    displayName: "Alchemy",     index: 3},
     prosperity:     {secondEd: true,    displayName: "Prosperity",  index: 4},
     cornucopia:     {secondEd: false,   displayName: "Cornucopia",  index: 5},
-    hinterlands:    {secondEd: true,    displayName: "Hinterlands", index: 6,   nofirst: true},
-    darkages:       {secondEd: false,   displayName: "Dark Ages",   index: 7,   nobase: true},
+    hinterlands:    {secondEd: true,    displayName: "Hinterlands", index: 6},
+    darkages:       {secondEd: false,   displayName: "Dark Ages",   index: 7},
     guilds:         {secondEd: false,   displayName: "Guilds",      index: 8},
-    adventures:     {secondEd: false,   displayName: "Adventures",  index: 9},
-    empires:        {secondEd: false,   displayName: "Empires",     index: 10},
+    adventures:     {secondEd: false,   displayName: "Adventures",  index: 9,   landscapes: ["event"]},
+    empires:        {secondEd: false,   displayName: "Empires",     index: 10,  landscapes: ["event", "landmark"]},
     //nocturne:       {secondEd: true,    displayName: "Nocturne",    index: 11},
-    renaissance:    {secondEd: false,   displayName: "Renaissance", index: 12},
-    //meangerie:      {secondEd: false,   displayName: "Meangerie",   index: 13},
+    renaissance:    {secondEd: false,   displayName: "Renaissance", index: 12,  landscapes: ["project"]},
+    //meangerie:      {secondEd: false,   displayName: "Meangerie",   index: 13,  landscapes: ["event", "way"]},
     //allies:         {secondEd: false,   displayName: "Allies",      index: 14},
-    plunder:        {secondEd: false,   displayName: "Plunder",     index: 15},
+    plunder:        {secondEd: false,   displayName: "Plunder",     index: 15,  landscapes: ["event", "trait"]},
     //risingsun:      {secondEd: false,   displayName: "Rising Sun",  index: 16},
 };
+//Temporary disables (nobase, nofirst, nosecond)
+expansions.base["nofirst"] = true;
+expansions.intrigue["nofirst"] = true;
+expansions.hinterlands["nofirst"] = true;
+expansions.darkages["nobase"] = true;
 
 const cards = 
 {

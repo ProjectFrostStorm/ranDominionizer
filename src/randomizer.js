@@ -298,6 +298,11 @@ function sortByCost(selection)
         return -(cards[a].cost - cards[b].cost);
     });
 
+    selection.landscapes.sort(function(a, b) //Sort landscapes
+    {
+        return -(landscapes[a].cost - landscapes[b].cost);
+    });
+
     return selection;
 }
 //Sort by expansion
@@ -312,12 +317,23 @@ function sortByExpansion(selection)
         return -((expansionIndexA * 100 + cardCostA) - (expansionIndexB * 100 + cardCostB));
     });
 
+    selection.landscapes.sort(function(a, b) //Sort landscapes
+    {
+        let expansionIndexA = expansions[landscapes[a].expansion].index;
+        let expansionIndexB = expansions[landscapes[b].expansion].index;
+        let landscapeCostA = landscapes[a].cost;
+        let landscapeCostB = landscapes[b].cost;
+        return -((expansionIndexA * 100 + landscapeCostA) - (expansionIndexB * 100 + landscapeCostB));
+    });
+
     return selection;
 }
 //Sort by name
 function sortByName(selection)
 {
     selection.kingdom.sort(); //Sort cards
+    
+    selection.landscapes.sort(); //Sort landscapes
 
     return selection;
 }
@@ -327,15 +343,25 @@ function sortByName(selection)
 function buildCardPool()
 {
     //Reset card pool
-    cardPool = [];
+    cardPool = {cards: [], landscapes: []};
 
-    //Query settings
+    //Query card settings
     let expansionSelections = queryExpansionSettings();
     for(const card of Object.keys(cards))
     {
         if(expansionSelections[cards[card].expansion][cards[card].edition])
         {
-            cardPool.push(card);
+            cardPool.cards.push(card);
+        }
+    }
+
+    //Query landscape settings
+    let landscapeSelections = queryLandscapeSettings();
+    for(const landscape of Object.keys(landscapes))
+    {
+        if(landscapeSelections[landscapes[landscape].expansion][landscapes[landscape].types[0]]) //NOTE Assuming no multi-typed landscapes
+        {
+            cardPool.landscapes.push(landscape);
         }
     }
 
@@ -397,35 +423,56 @@ const rules =
 
 //
 //Random Generation
-function uniformGenerate(num, pool) //Pick with uniform randomness, ignoring tags and other restrictions
+function uniformGenerate(numCards, numLandscapes, pool) //Pick with uniform randomness, ignoring tags and other restrictions
 {
-    let poolSize = pool.length;
-    let currentPool = pool.slice();
+    let cardPool = pool.cards;
+    let landscapePool = pool.landscapes;
+
+    let cardPoolSize = cardPool.length;
+    let landscapePoolSize = landscapePool.length;
+    let currentCardPool = cardPool.slice(); //Copy pool array
+    let currentlandscapePool = landscapePool.slice(); //Copy pool array
     let selection = {};
     selection.kingdom = [];
+    selection.landscapes = [];
 
-    if(num > poolSize)
+    if(numCards > cardPoolSize)
     {
         console.log("!!! Pool Size Too Small !!!");
         return null;
     }
 
-    for(let x = 0; x < num; x++)
+    //Select cards
+    for(let x = 0; x < numCards; x++)
     {
-        let nextIndex = getRandomInt(poolSize);
-        selection.kingdom.push(currentPool[nextIndex]);
-        currentPool.splice(nextIndex, 1);
-        poolSize--;
+        let nextIndex = getRandomInt(cardPoolSize);
+        selection.kingdom.push(currentCardPool[nextIndex]);
+        currentCardPool.splice(nextIndex, 1);
+        cardPoolSize--;
+    }
+
+    //Select landscapes
+    for(let x = 0; x < numLandscapes; x++)
+    {
+        if(landscapePoolSize <= 0) //No landscapes
+        {
+            break;
+        }
+
+        let nextIndex = getRandomInt(landscapePoolSize);
+        selection.landscapes.push(currentlandscapePool[nextIndex]);
+        currentlandscapePool.splice(nextIndex, 1);
+        landscapePoolSize--;
     }
 
     return selection;
 }
-function bruteForceGenerate(num, pool, activeRules, limit) //Uniform generate sets until one adheres with all rules
+function bruteForceGenerate(numCards, numLandscapes, pool, activeRules, limit) //Uniform generate sets until one adheres with all rules
 {
     failedGenerations = 0;
     for(let x = 0; x < limit; x++)
     {
-        let candidate = uniformGenerate(num, pool);
+        let candidate = uniformGenerate(numCards, numLandscapes, pool);
         if(candidate === null) {return null;}
 
         let pass = true;

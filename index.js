@@ -13,7 +13,7 @@ let currentSelection = {};
  */
 
 const bruteForceLimit = 5000;
-const verboseDebug = false;
+const verboseDebug = true;
 
 function setup()
 {
@@ -419,6 +419,25 @@ function disableAllExpansions()
 {
     setAllExpansions(false);
 }
+function setAllLandscapes(state)
+{
+    let landscapeSettingsContainer = document.getElementById("landscapeSettingsList");
+    let settings = landscapeSettingsContainer.querySelectorAll("[data-setting='landscape']");
+    for(let x = 0; x < settings.length; x++)
+    {
+        let node = settings[x];
+
+        node.checked = state;
+    }
+}
+function enableAllLandscapes()
+{
+    setAllLandscapes(true);
+}
+function disableAllLandscapes()
+{
+    setAllLandscapes(false);
+}
 //Draw cards
 function unhideResults()
 {
@@ -538,11 +557,11 @@ function generate()
     sortByCost(selection);
     drawResults(selection);
 
-    ///*
+    /*
     selection = uniformGenerate(10, 2, buildCardPool());
     sortByCost(selection);
     drawResultCards(selection);
-    //*/
+    */
 
     //drawResultCards(testGenerate());
 }

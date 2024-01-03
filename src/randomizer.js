@@ -377,9 +377,18 @@ const rules =
         for(const cardName of selection.kingdom)
         {
             //Match
-            if((cards[cardName][trait] == traitValue) || (Array.isArray(cards[cardName][trait]) && cards[cardName][trait].includes(traitValue)))
+            if((cards[cardName][trait] == traitValue) || (Array.isArray(cards[cardName][trait]) && cards[cardName][trait].includes(traitValue))) //Some traits are single "" while some are [""]
             {
                 if(verboseDebug) {console.log("MIN - For " + trait + "=" + traitValue + " matching card is " + cardName);}
+                count++;
+            }
+        }
+        for(const landscapeName of selection.landscapes)
+        {
+            //Match
+            if((landscapes[landscapeName][trait] == traitValue) || (Array.isArray(landscapes[landscapeName][trait]) && landscapes[landscapeName][trait].includes(traitValue))) //Some traits are single "" while some are [""]
+            {
+                if(verboseDebug) {console.log("MIN - For " + trait + "=" + traitValue + " matching card is " + landscapeName);}
                 count++;
             }
         }
@@ -396,10 +405,19 @@ const rules =
         for(const cardName of selection.kingdom)
         {
             //Match
-            if((cards[cardName][trait] == traitValue) || (Array.isArray(cards[cardName][trait]) && cards[cardName][trait].includes(traitValue)))
+            if((cards[cardName][trait] == traitValue) || (Array.isArray(cards[cardName][trait]) && cards[cardName][trait].includes(traitValue))) //Some traits are single "" while some are [""]
             {
                 count++;
                 if(verboseDebug) {console.log("MAX - For " + trait + "=" + traitValue + " matching card is " + cardName + ", this is number " + count);}
+            }
+        }
+        for(const landscapeName of selection.landscapes)
+        {
+            //Match
+            if((landscapes[landscapeName][trait] == traitValue) || (Array.isArray(landscapes[landscapeName][trait]) && landscapes[landscapeName][trait].includes(traitValue))) //Some traits are single "" while some are [""]
+            {
+                count++;
+                if(verboseDebug) {console.log("MAX - For " + trait + "=" + traitValue + " matching card is " + landscapeName + ", this is number " + count);}
             }
         }
 

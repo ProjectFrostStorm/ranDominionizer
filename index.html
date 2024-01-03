@@ -113,6 +113,17 @@
             </div>
             <div id="blacklistSettings">
                 <div class="header">Card Blacklisting</div>
+                <div>Add card and landscape names to blacklist. One per line. Names must be exact (but case and spaces are ignored).</div>
+                <div>
+                    <button onclick="applyBlacklist()">Apply Blacklist</button>
+                </div>
+                <div>
+                    <textarea id="blacklistInputArea" rows="5" cols="30" placeholder="Enter card names here"></textarea>
+                </div>
+                <div>Current Blacklist:</div>
+                <div>
+                    <textarea id="blacklistOutputArea" rows="5" cols="30" disabled>No cards currently blacklisted</textarea>
+                </div>
             </div>
             <div id="generationSettings">
                 <div class="header">Kingdom Generation Rules</div>

@@ -12,6 +12,9 @@ let currentSelection = {};
  * .extras = {} containing any additional kingdom requirements (i.e. Way of the Mouse, Young Witch), can also contain extra cards needed in setup (e.g. curses, travellers, prizes, etc.)
  */
 
+const defaultBlacklistOutputText = "No cards currently blacklisted";
+let currentBlacklist = [];
+
 const bruteForceLimit = 5000;
 const verboseDebug = true;
 
@@ -25,6 +28,8 @@ function setup()
     generateElements();
 
     preloadImages();
+
+    document.getElementById("blacklistOutputArea").value = defaultBlacklistOutputText;
 }
 
 //*****************************************************************************************************
@@ -337,6 +342,11 @@ function querySingleExpansionSetting(expansionName)
 function queryLandscapeSettings()
 {
     let landscapeSelection = {}; //Set => {event: true, project: true, way: true, etc.}
+    //Prepopulate dictionary
+    for(const expansion of Object.keys(expansions))
+    {
+        landscapeSelection[expansion] = {};
+    }
 
     let landscapeSettingsContainer = document.getElementById("landscapeSettingsList");
     let settings = landscapeSettingsContainer.querySelectorAll("[data-setting='landscape']");
@@ -536,6 +546,45 @@ function resortResults(sortMethod, selection)
     }
 
     drawResults(selection);
+}
+
+//*****************************************************************************************************
+//Blacklisting
+function processBlacklist(inputString) //Converts string from blacklist area to array of only valid card names
+{
+    let blacklist = inputString.split("\n");
+
+    //Cards and Landscapes
+    let lowercaseCards = Object.keys(cards).map(function(name) {return name.toLowerCase();});
+    let lowercaseLandscapes = Object.keys(landscapes).map(function(name) {return name.toLowerCase();});
+
+    for(let x = 0; x < blacklist.length; x++)
+    {
+        blacklist[x] = blacklist[x].replace(/\s/g, "").toLowerCase(); //Remove all whitespace
+        let currentString = blacklist[x];
+
+        if(!(lowercaseCards.includes(currentString) || lowercaseLandscapes.includes(currentString))) //Name is not a valid card or landscape
+        {
+            blacklist.splice(x, 1); //Remove
+            x--;
+        }
+    }
+
+    return blacklist;
+}
+function applyBlacklist()
+{
+    let blacklistedCards = processBlacklist(document.getElementById("blacklistInputArea").value);
+
+    //Update current list
+    let currentList = document.getElementById("blacklistOutputArea");
+    currentList.value = "";
+    for(const name of blacklistedCards)
+    {
+        currentList.value += name + "\n";
+    }
+    
+    currentBlacklist = blacklistedCards;
 }
 
 //*****************************************************************************************************

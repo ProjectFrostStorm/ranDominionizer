@@ -494,6 +494,8 @@ function bruteForceGenerate(numCards, numLandscapes, pool, activeRules, limit) /
         if(candidate === null) {return null;}
 
         let pass = true;
+
+        //Process Rules
         for(let y = 0; y < activeRules.length; y++)
         {
             let currentRule = activeRules[y];
@@ -506,6 +508,31 @@ function bruteForceGenerate(numCards, numLandscapes, pool, activeRules, limit) /
                 break;
             }
         }
+        if(!pass) {continue;}
+
+        //Process Blacklist
+        for(const cardName of candidate.kingdom)
+        {
+            if(currentBlacklist.includes(cardName.toLowerCase()))
+            {
+                pass = false;
+                if(verboseDebug) {console.log("BLACKLIST - " + cardName + " fails blacklist selection.");}
+                failedGenerations++;
+                break;
+            }
+        }
+        if(!pass) {continue;}
+        for(const landscapeName of candidate.landscapes)
+        {
+            if(currentBlacklist.includes(landscapeName.toLowerCase()))
+            {
+                pass = false;
+                if(verboseDebug) {console.log("BLACKLIST - " + landscapeName + " fails blacklist selection.");}
+                failedGenerations++;
+                break;
+            }
+        }
+        if(!pass) {continue;}
 
         if(pass)
         {

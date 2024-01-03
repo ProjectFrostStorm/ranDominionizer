@@ -35,6 +35,8 @@ const tags =
     "plusCoffers",
     "plusVillagers",
 
+    "plusHorse",
+
     //Synergy potential
     "discarder",
 
@@ -101,7 +103,7 @@ const expansions =
     base:           {secondEd: true,    displayName: "Base Game",   index: 0},
     intrigue:       {secondEd: true,    displayName: "Intrigue",    index: 1},
     seaside:        {secondEd: true,    displayName: "Seaside",     index: 2},
-    //alchemy:        {secondEd: true,    displayName: "Alchemy",     index: 3},
+    alchemy:        {secondEd: false,   displayName: "Alchemy",     index: 3},
     prosperity:     {secondEd: true,    displayName: "Prosperity",  index: 4},
     cornucopia:     {secondEd: false,   displayName: "Cornucopia",  index: 5},
     hinterlands:    {secondEd: true,    displayName: "Hinterlands", index: 6},
@@ -109,18 +111,23 @@ const expansions =
     guilds:         {secondEd: false,   displayName: "Guilds",      index: 8},
     adventures:     {secondEd: false,   displayName: "Adventures",  index: 9,   landscapes: ["event"]},
     empires:        {secondEd: false,   displayName: "Empires",     index: 10,  landscapes: ["event", "landmark"]},
-    //nocturne:       {secondEd: true,    displayName: "Nocturne",    index: 11},
+    nocturne:       {secondEd: false,   displayName: "Nocturne",    index: 11},
     renaissance:    {secondEd: false,   displayName: "Renaissance", index: 12,  landscapes: ["project"]},
-    //meangerie:      {secondEd: false,   displayName: "Meangerie",   index: 13,  landscapes: ["event", "way"]},
-    //allies:         {secondEd: false,   displayName: "Allies",      index: 14},
+    menagerie:      {secondEd: false,   displayName: "Menagerie",   index: 13,  landscapes: ["event", "way"]},
+    allies:         {secondEd: false,   displayName: "Allies",      index: 14},
     plunder:        {secondEd: false,   displayName: "Plunder",     index: 15,  landscapes: ["event", "trait"]},
-    //risingsun:      {secondEd: false,   displayName: "Rising Sun",  index: 16},
+    risingsun:      {secondEd: false,   displayName: "Rising Sun",  index: 16},
 };
 //Temporary disables (nobase, nofirst, nosecond)
 expansions.base["nofirst"] = true;
 expansions.intrigue["nofirst"] = true;
+expansions.alchemy["nobase"] = true;
 expansions.hinterlands["nofirst"] = true;
 expansions.darkages["nobase"] = true;
+expansions.nocturne["nobase"] = true;
+expansions.menagerie["nobase"] = true;
+expansions.allies["nobase"] = true;
+expansions.risingsun["nobase"] = true;
 
 const cards = 
 {
@@ -436,6 +443,10 @@ const cards =
     WildHunt:       {cost: 5,   expansion: "empires",       edition: "base",    types: ["action", "gathering"],             tags: ["terminal", "drawer", "gainer", "plusVP"]}, //Resized full resolution, slightly older card version (2016)
 
     /*** 
+     * NOCTURNE
+     ***/
+
+    /*** 
      * RENAISSANCE
      ***/
     BorderGuard:    {cost: 2,   expansion: "renaissance",   edition: "base",    types: ["action"],                          tags: ["cantrip", "sifter", "discarder"]},
@@ -463,6 +474,14 @@ const cards =
     Swashbuckler:   {cost: 5,   expansion: "renaissance",   edition: "base",    types: ["action"],                          tags: ["terminal", "drawer", "plusCoffers", "gainer"]},
     Treasurer:      {cost: 5,   expansion: "renaissance",   edition: "base",    types: ["action"],                          tags: ["terminal", "virtualCoin", "trasher", "gainFromTrash"]},
     Villain:        {cost: 5,   expansion: "renaissance",   edition: "base",    types: ["action", "attack"],                tags: ["terminal", "plusCoffers", "handSizeAttack"]},
+
+    /*** 
+     * MENAGERIE
+     ***/
+
+    /*** 
+     * ALLIES
+     ***/
 
     /*** 
      * PLUNDER
@@ -507,20 +526,182 @@ const cards =
     WealthyVillage: {cost: 5,   expansion: "plunder",       edition: "base",    types: ["action"],                          tags: ["cantrip", "village", "lootGainer"]},
     SackOfLoot:     {cost: 6,   expansion: "plunder",       edition: "base",    types: ["treasure"],                        tags: ["plusBuy", "lootGainer"]},
     KingsCache:     {cost: 7,   expansion: "plunder",       edition: "base",    types: ["treasure"],                        tags: ["throneRoom"]},
+
+    /*** 
+     * RISING SUN
+     ***/
 };
 
 const landscapes = 
 {
+    //Landscapes without costs are valued -99 for sorting
     /*** 
-     * EVENTS
+     * ADVENTURES
      ***/
     Alms:           {cost: 0,   expansion: "adventures",    edition: "base",    types: ["event"],               tags: ["workshop", "gainer"]},
     Borrow:         {cost: 0,   expansion: "adventures",    edition: "base",    types: ["event"],               tags: ["virtualCoin"]},
     Quest:          {cost: 0,   expansion: "adventures",    edition: "base",    types: ["event"],               tags: ["discarder", "gainer"]},
-
-
-
+    Save:           {cost: 1,   expansion: "adventures",    edition: "base",    types: ["event"],               tags: ["setAside"]},
+    ScoutingParty:  {cost: 2,   expansion: "adventures",    edition: "base",    types: ["event"],               tags: ["inspector", "sifter", "discarder"]},
+    TravellingFair: {cost: 2,   expansion: "adventures",    edition: "base",    types: ["event"],               tags: ["plusBuy", "topDecker"]},
     Bonfire:        {cost: 2,   expansion: "adventures",    edition: "base",    types: ["event"],               tags: ["trasher"]}, //Older version (2017)
+    Expedition:     {cost: 3,   expansion: "adventures",    edition: "base",    types: ["event"],               tags: ["delayedDrawer"]},
+    Ferry:          {cost: 3,   expansion: "adventures",    edition: "base",    types: ["event"],               tags: ["bridge"]},
+    Plan:           {cost: 3,   expansion: "adventures",    edition: "base",    types: ["event"],               tags: ["trasher"]}, //Older version (2017)
+    Mission:        {cost: 4,   expansion: "adventures",    edition: "base",    types: ["event"],               tags: ["extraTurn"]}, //Older version (2017)
+    Pilgrimage:     {cost: 4,   expansion: "adventures",    edition: "base",    types: ["event"],               tags: ["gainer"]},
+    Ball:           {cost: 5,   expansion: "adventures",    edition: "base",    types: ["event"],               tags: ["workshop", "gainer"]},
+    Raid:           {cost: 5,   expansion: "adventures",    edition: "base",    types: ["event"],               tags: ["gainer", "handSizeAttack", "turnWorseningAttack"]},
+    Seaway:         {cost: 5,   expansion: "adventures",    edition: "base",    types: ["event"],               tags: ["workshop", "gainer", "plusBuy"]},
+    Trade:          {cost: 5,   expansion: "adventures",    edition: "base",    types: ["event"],               tags: ["trasher", "trashForBenefit", "gainer"]},
+    LostArts:       {cost: 6,   expansion: "adventures",    edition: "base",    types: ["event"],               tags: ["village"]},
+    Training:       {cost: 6,   expansion: "adventures",    edition: "base",    types: ["event"],               tags: ["virtualCoin"]},
+    Inheritance:    {cost: 7,   expansion: "adventures",    edition: "base",    types: ["event"],               tags: []}, //Old version (2017)
+    Pathfinding:    {cost: 8,   expansion: "adventures",    edition: "base",    types: ["event"],               tags: ["drawer"]},
+    
+    /*** 
+     * EMPIRES
+     ***/
+    Annex:          {cost: -8,  expansion: "empires",       edition: "base",    types: ["event"],               tags: ["sifter", "gainer"]}, //NOTE Not quite a sifter
+    Donate:         {cost: -8,  expansion: "empires",       edition: "base",    types: ["event"],               tags: ["trasher", "gameChanger"]}, //Older version (2016)
+    Triumph:        {cost: -5,  expansion: "empires",       edition: "base",    types: ["event"],               tags: ["altvp", "gainer"]},
+    Advance:        {cost: 0,   expansion: "empires",       edition: "base",    types: ["event"],               tags: ["remodel", "trasher", "trashForBenefit"]},
+    Delve:          {cost: 2,   expansion: "empires",       edition: "base",    types: ["event"],               tags: ["gainer"]},
+    Tax:            {cost: 2,   expansion: "empires",       edition: "base",    types: ["event"],               tags: ["nonAttackerAttack"]}, //Older version (2016)
+    Banquet:        {cost: 3,   expansion: "empires",       edition: "base",    types: ["event"],               tags: ["gainer"]},
+    Ritual:         {cost: 4,   expansion: "empires",       edition: "base",    types: ["event"],               tags: ["trashForBenefit", "altvp"]},
+    SaltTheEarth:   {cost: 4,   expansion: "empires",       edition: "base",    types: ["event"],               tags: ["altvp", "trashFromSupply"]},
+    Wedding:        {cost: 4.5, expansion: "empires",       edition: "base",    types: ["event"],               tags: ["altvp", "gainer"]}, //.5 to sort above the 4s but below the 5s
+    Windfall:       {cost: 5,   expansion: "empires",       edition: "base",    types: ["event"],               tags: ["gainer"]},
+    Conquest:       {cost: 6,   expansion: "empires",       edition: "base",    types: ["event"],               tags: ["gainer", "altvp"]},
+    Dominate:       {cost: 14,  expansion: "empires",       edition: "base",    types: ["event"],               tags: ["altvp"]},
+    
+    Aqueduct:       {cost: -99, expansion: "empires",       edition: "base",    types: ["landmark"],            tags: ["altvp"]},
+    Arena:          {cost: -99, expansion: "empires",       edition: "base",    types: ["landmark"],            tags: ["altvp"]},
+    BanditFort:     {cost: -99, expansion: "empires",       edition: "base",    types: ["landmark"],            tags: ["altvp"]},
+    Basilica:       {cost: -99, expansion: "empires",       edition: "base",    types: ["landmark"],            tags: ["altvp"]}, //Older version (2016)
+    Baths:          {cost: -99, expansion: "empires",       edition: "base",    types: ["landmark"],            tags: ["altvp"]},
+    Battlefield:    {cost: -99, expansion: "empires",       edition: "base",    types: ["landmark"],            tags: ["altvp"]},
+    Colonnade:      {cost: -99, expansion: "empires",       edition: "base",    types: ["landmark"],            tags: ["altvp"]}, //Older version (2016)
+    DefiledShrine:  {cost: -99, expansion: "empires",       edition: "base",    types: ["landmark"],            tags: ["altvp"]}, //Older version (2016)
+    Fountain:       {cost: -99, expansion: "empires",       edition: "base",    types: ["landmark"],            tags: ["altvp"]},
+    Keep:           {cost: -99, expansion: "empires",       edition: "base",    types: ["landmark"],            tags: ["altvp"]},
+    Labyrinth:      {cost: -99, expansion: "empires",       edition: "base",    types: ["landmark"],            tags: ["altvp"]},
+    MountainPass:   {cost: -99, expansion: "empires",       edition: "base",    types: ["landmark"],            tags: ["altvp"]}, //Older version (2016)
+    Museum:         {cost: -99, expansion: "empires",       edition: "base",    types: ["landmark"],            tags: ["altvp"]},
+    Obelisk:        {cost: -99, expansion: "empires",       edition: "base",    types: ["landmark"],            tags: ["altvp"]},
+    Orchard:        {cost: -99, expansion: "empires",       edition: "base",    types: ["landmark"],            tags: ["altvp"]},
+    Palace:         {cost: -99, expansion: "empires",       edition: "base",    types: ["landmark"],            tags: ["altvp"]},
+    Tomb:           {cost: -99, expansion: "empires",       edition: "base",    types: ["landmark"],            tags: ["altvp"]},
+    Tower:          {cost: -99, expansion: "empires",       edition: "base",    types: ["landmark"],            tags: ["altvp"]},
+    TriumphalArch:  {cost: -99, expansion: "empires",       edition: "base",    types: ["landmark"],            tags: ["altvp"]},
+    Wall:           {cost: -99, expansion: "empires",       edition: "base",    types: ["landmark"],            tags: ["altvp"]},
+    WolfDen:        {cost: -99, expansion: "empires",       edition: "base",    types: ["landmark"],            tags: ["altvp"]},
+    
+    /*** 
+     * RENAISSANCE
+     ***/
+    Cathedral:      {cost: 3,   expansion: "renaissance",   edition: "base",    types: ["project"],             tags: ["trasher"]},
+    CityGate:       {cost: 3,   expansion: "renaissance",   edition: "base",    types: ["project"],             tags: ["inspector"]},
+    Pageant:        {cost: 3,   expansion: "renaissance",   edition: "base",    types: ["project"],             tags: ["plusCoffers"]},
+    Sewers:         {cost: 3,   expansion: "renaissance",   edition: "base",    types: ["project"],             tags: []}, //NOTE Conditional trasher, so no tags yet
+    StarChart:      {cost: 3,   expansion: "renaissance",   edition: "base",    types: ["project"],             tags: ["topDecker"]}, //Older version (2018)
+    Exploration:    {cost: 4,   expansion: "renaissance",   edition: "base",    types: ["project"],             tags: ["plusCoffers", "plusVillagers"]}, //Older version (2018)
+    Fair:           {cost: 4,   expansion: "renaissance",   edition: "base",    types: ["project"],             tags: ["plusBuy"]},
+    Silos:          {cost: 4,   expansion: "renaissance",   edition: "base",    types: ["project"],             tags: ["sifter"]},
+    SinisterPlot:   {cost: 4,   expansion: "renaissance",   edition: "base",    types: ["project"],             tags: ["drawer"]},
+    Academy:        {cost: 5,   expansion: "renaissance",   edition: "base",    types: ["project"],             tags: ["plusVillagers"]},
+    Capitalism:     {cost: 5,   expansion: "renaissance",   edition: "base",    types: ["project"],             tags: []},
+    Fleet:          {cost: 5,   expansion: "renaissance",   edition: "base",    types: ["project"],             tags: ["extraTurn"]},
+    Guildhall:      {cost: 5,   expansion: "renaissance",   edition: "base",    types: ["project"],             tags: ["plusCoffers"]},
+    Piazza:         {cost: 5,   expansion: "renaissance",   edition: "base",    types: ["project"],             tags: ["inspector"]},
+    RoadNetwork:    {cost: 5,   expansion: "renaissance",   edition: "base",    types: ["project"],             tags: ["drawer"]},
+    Barracks:       {cost: 6,   expansion: "renaissance",   edition: "base",    types: ["project"],             tags: ["village"]},
+    CropRotation:   {cost: 6,   expansion: "renaissance",   edition: "base",    types: ["project"],             tags: ["drawer"]},
+    Innovation:     {cost: 6,   expansion: "renaissance",   edition: "base",    types: ["project"],             tags: ["setAside"]}, //NOTE Not quite the archetype, but similar; Older version (2018)
+    Canal:          {cost: 7,   expansion: "renaissance",   edition: "base",    types: ["project"],             tags: ["bridge"]}, //Older version (2018)
+    Citadel:        {cost: 8,   expansion: "renaissance",   edition: "base",    types: ["project"],             tags: ["throneRoom"]},
+
+    /*** 
+     * MENAGERIE
+     ***/
+    Delay:          {cost: 0,   expansion: "menagerie",     edition: "base",    types: ["event"],               tags: ["setAside"]},
+    Desperation:    {cost: 0,   expansion: "menagerie",     edition: "base",    types: ["event"],               tags: ["virtualCoin"]},
+    Gamble:         {cost: 2,   expansion: "menagerie",     edition: "base",    types: ["event"],               tags: ["sifter", "inspector"]},
+    Pursue:         {cost: 2,   expansion: "menagerie",     edition: "base",    types: ["event"],               tags: ["sifter", "inspector"]},
+    Ride:           {cost: 2,   expansion: "menagerie",     edition: "base",    types: ["event"],               tags: ["plusHorse"]}, 
+    Toil:           {cost: 2,   expansion: "menagerie",     edition: "base",    types: ["event"],               tags: ["village"]}, //NOTE Not quite, but close enough
+    Enhance:        {cost: 3,   expansion: "menagerie",     edition: "base",    types: ["event"],               tags: ["remodel", "trasher", "trashForBenefit"]},
+    March:          {cost: 3,   expansion: "menagerie",     edition: "base",    types: ["event"],               tags: []},
+    Transport:      {cost: 3,   expansion: "menagerie",     edition: "base",    types: ["event"],               tags: ["gainer", "topDecker"]},
+    Banish:         {cost: 4,   expansion: "menagerie",     edition: "base",    types: ["event"],               tags: ["exile"]},
+    Bargain:        {cost: 4,   expansion: "menagerie",     edition: "base",    types: ["event"],               tags: ["gainer", "positiveInteraction"]},
+    Invest:         {cost: 4,   expansion: "menagerie",     edition: "base",    types: ["event"],               tags: ["drawer"]},
+    SeizeTheDay:    {cost: 4,   expansion: "menagerie",     edition: "base",    types: ["event"],               tags: ["extraTurn"]},
+    Commerce:       {cost: 5,   expansion: "menagerie",     edition: "base",    types: ["event"],               tags: ["gainer"]},
+    Demand:         {cost: 5,   expansion: "menagerie",     edition: "base",    types: ["event"],               tags: ["plusHorse", "workshop", "gainer", "topDecker"]},
+    Stampede:       {cost: 5,   expansion: "menagerie",     edition: "base",    types: ["event"],               tags: ["plusHorse"]},
+    Reap:           {cost: 7,   expansion: "menagerie",     edition: "base",    types: ["event"],               tags: ["gainer", "setAside"]},
+    Enclave:        {cost: 8,   expansion: "menagerie",     edition: "base",    types: ["event"],               tags: ["gainer", "altvp"]},
+    Alliance:       {cost: 10,  expansion: "menagerie",     edition: "base",    types: ["event"],               tags: ["gainer"]},
+    Populate:       {cost: 10,  expansion: "menagerie",     edition: "base",    types: ["event"],               tags: ["gainer"]},
+    
+    WayOfTheButterfly:{cost:-99,expansion: "menagerie",     edition: "base",    types: ["way"],                 tags: ["oneshot", "remodel", "trashForBenefit"]},
+    WayOfTheCamel:    {cost:-99,expansion: "menagerie",     edition: "base",    types: ["way"],                 tags: ["gainer"]},
+    WayOfTheChameleon:{cost:-99,expansion: "menagerie",     edition: "base",    types: ["way"],                 tags: ["virtualCoin", "drawer"]},
+    WayOfTheFrog:     {cost:-99,expansion: "menagerie",     edition: "base",    types: ["way"],                 tags: ["topDecker"]},
+    WayOfTheGoat:     {cost:-99,expansion: "menagerie",     edition: "base",    types: ["way"],                 tags: ["trasher"]},
+    WayOfTheHorse:    {cost:-99,expansion: "menagerie",     edition: "base",    types: ["way"],                 tags: ["drawer", "oneshot"]},
+    WayOfTheMole:     {cost:-99,expansion: "menagerie",     edition: "base",    types: ["way"],                 tags: ["discarder", "sifter"]},
+    WayOfTheMonkey:   {cost:-99,expansion: "menagerie",     edition: "base",    types: ["way"],                 tags: ["plusBuy", "virtualCoin"]},
+    WayOfTheMouse:    {cost:-99,expansion: "menagerie",     edition: "base",    types: ["way"],                 tags: []},
+    WayOfTheMule:     {cost:-99,expansion: "menagerie",     edition: "base",    types: ["way"],                 tags: ["virtualCoin"]},
+    WayOfTheOtter:    {cost:-99,expansion: "menagerie",     edition: "base",    types: ["way"],                 tags: ["drawer"]},
+    WayOfTheOwl:      {cost:-99,expansion: "menagerie",     edition: "base",    types: ["way"],                 tags: ["drawToX"]},
+    WayOfTheOx:       {cost:-99,expansion: "menagerie",     edition: "base",    types: ["way"],                 tags: ["village"]},
+    WayOfThePig:      {cost:-99,expansion: "menagerie",     edition: "base",    types: ["way"],                 tags: ["cantrip"]},
+    WayOfTheRat:      {cost:-99,expansion: "menagerie",     edition: "base",    types: ["way"],                 tags: ["gainer"]},
+    WayOfTheSeal:     {cost:-99,expansion: "menagerie",     edition: "base",    types: ["way"],                 tags: ["virtualCoin", "topDecker"]},
+    WayOfTheSheep:    {cost:-99,expansion: "menagerie",     edition: "base",    types: ["way"],                 tags: ["virtualCoin"]},
+    WayOfTheSquirrel: {cost:-99,expansion: "menagerie",     edition: "base",    types: ["way"],                 tags: ["delayedDrawer"]},
+    WayOfTheTurtle:   {cost:-99,expansion: "menagerie",     edition: "base",    types: ["way"],                 tags: ["setAside"]},
+    WayOfTheWorm:     {cost:-99,expansion: "menagerie",     edition: "base",    types: ["way"],                 tags: ["altvp"]},
+
+    /*** 
+     * PLUNDER
+     ***/
+    //TODO All cards are bad or incorrectly sized, replace when better images appear on the wiki
+    Bury:           {cost: 1,   expansion: "plunder",       edition: "base",    types: ["event"],               tags: ["topDecker"]}, //NOTE Not quite a top decker
+    Avoid:          {cost: 2,   expansion: "plunder",       edition: "base",    types: ["event"],               tags: ["sifter"]},
+    Deliver:        {cost: 2,   expansion: "plunder",       edition: "base",    types: ["event"],               tags: ["setAside"]},
+    Peril:          {cost: 2,   expansion: "plunder",       edition: "base",    types: ["event"],               tags: ["trashForBenefit", "lootGainer"]},
+    Rush:           {cost: 2,   expansion: "plunder",       edition: "base",    types: ["event"],               tags: ["setAside"]}, 
+    Foray:          {cost: 3,   expansion: "plunder",       edition: "base",    types: ["event"],               tags: ["discarder", "lootGainer"]},
+    Launch:         {cost: 3,   expansion: "plunder",       edition: "base",    types: ["event"],               tags: ["drawer", "village"]},
+    Mirror:         {cost: 3,   expansion: "plunder",       edition: "base",    types: ["event"],               tags: ["gainer"]},
+    Prepare:        {cost: 3,   expansion: "plunder",       edition: "base",    types: ["event"],               tags: ["setAside", "discarder"]},
+    Scrounge:       {cost: 3,   expansion: "plunder",       edition: "base",    types: ["event"],               tags: ["trasher", "gainer"]},
+    Journey:        {cost: 4,   expansion: "plunder",       edition: "base",    types: ["event"],               tags: ["extraTurn"]},
+    Maelstrom:      {cost: 4,   expansion: "plunder",       edition: "base",    types: ["event"],               tags: ["trasher", "trashingAttack", "positiveInteraction"]},
+    Looting:        {cost: 6,   expansion: "plunder",       edition: "base",    types: ["event"],               tags: ["lootGainer"]},
+    Invasion:       {cost: 10,  expansion: "plunder",       edition: "base",    types: ["event"],               tags: ["gainer", "lootGainer"]},
+    Prosper:        {cost: 10,  expansion: "plunder",       edition: "base",    types: ["event"],               tags: ["gainer", "lootGainer"]},
+
+    Cheap:          {cost: -99, expansion: "plunder",       edition: "base",    types: ["trait"],               tags: ["bridge"]},
+    Cursed:         {cost: -99, expansion: "plunder",       edition: "base",    types: ["trait"],               tags: ["lootGainer"]},
+    Fated:          {cost: -99, expansion: "plunder",       edition: "base",    types: ["trait"],               tags: ["topDecker"]},
+    Fawning:        {cost: -99, expansion: "plunder",       edition: "base",    types: ["trait"],               tags: ["gainer"]},
+    Friendly:       {cost: -99, expansion: "plunder",       edition: "base",    types: ["trait"],               tags: ["gainer", "discarder"]}, 
+    Hasty:          {cost: -99, expansion: "plunder",       edition: "base",    types: ["trait"],               tags: ["setAside"]},
+    Inherited:      {cost: -99, expansion: "plunder",       edition: "base",    types: ["trait"],               tags: ["gameChanger"]},
+    Inspiring:      {cost: -99, expansion: "plunder",       edition: "base",    types: ["trait"],               tags: ["village"]},
+    Nearby:         {cost: -99, expansion: "plunder",       edition: "base",    types: ["trait"],               tags: []}, //NOTE Same as Forum
+    Patient:        {cost: -99, expansion: "plunder",       edition: "base",    types: ["trait"],               tags: ["setAside"]},
+    Pious:          {cost: -99, expansion: "plunder",       edition: "base",    types: ["trait"],               tags: ["trasher"]},
+    Reckless:       {cost: -99, expansion: "plunder",       edition: "base",    types: ["trait"],               tags: ["throneRoom", "oneshot"]},
+    Rich:           {cost: -99, expansion: "plunder",       edition: "base",    types: ["trait"],               tags: ["gainer"]},
+    Shy:            {cost: -99, expansion: "plunder",       edition: "base",    types: ["trait"],               tags: ["drawer", "discarder"]},
+    Tireless:       {cost: -99, expansion: "plunder",       edition: "base",    types: ["trait"],               tags: ["setAside"]},
 };
 
 function validateCardList()

@@ -11,10 +11,16 @@
 
         <div id="tabs" class="container">
             <button type="button" onclick="generate()">Generate Set</button> |
-            <button type="button" onclick="toggleSettings()">Toggle Settings</button> |
+            <button type="button" onclick="toggleSettings()">Hide/Unhide Settings</button>
+            <button type="button" onclick="togglePresets()">Show/Hide Presets</button> |
             <button type="button" onclick="resortResults('cost', currentSelection)">Sort by Cost</button>
             <button type="button" onclick="resortResults('expansion', currentSelection)">Sort by Expansion</button>
             <button type="button" onclick="resortResults('name', currentSelection)">Sort by Name</button>
+        </div>
+        <div id="presetsContainer" class="container" hidden="hidden">
+            <button type="button" onclick="loadPreset('reset')">Reset All Settings</button> | 
+            <button type="button" onclick="loadPreset('alfa')">Load Preset Alfa</button>
+            <button type="button" onclick="loadPreset('quebec')">Load Preset Quebec</button>
         </div>
 
         <div id="results">
@@ -23,6 +29,8 @@
         </div>
 
         <div id="settings" class="container">
+            <div id="settingPresets">
+            </div>
             <div id="expansionSettings">
                 <div class="header">Expansions</div>
                 <div>
@@ -251,6 +259,8 @@
 
         <!-- Game Scripts -->
         <script type="text/javascript" src="src/cardList.js"></script>
+        <script type="text/javascript" src="src/presets.js"></script>
+        
         <script type="text/javascript" src="src/randomizer.js"></script>
         
         <script type="text/javascript" src="index.js"></script> 

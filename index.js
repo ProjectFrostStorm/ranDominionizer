@@ -16,7 +16,7 @@ const defaultBlacklistOutputText = "No cards currently blacklisted";
 let currentBlacklist = [];
 
 const bruteForceLimit = 5000;
-const verboseDebug = true;
+const verboseDebug = false;
 
 function setup()
 {
@@ -286,6 +286,19 @@ function toggleSettings()
     else
     {
         settingsDiv.setAttribute("hidden", "hidden");
+    }
+}
+function togglePresets()
+{
+    let presetsContainer = document.getElementById("presetsContainer");
+
+    if(presetsContainer.hasAttribute("hidden"))
+    {
+        presetsContainer.removeAttribute("hidden");
+    }
+    else
+    {
+        presetsContainer.setAttribute("hidden", "hidden");
     }
 }
 

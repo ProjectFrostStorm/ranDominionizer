@@ -511,9 +511,10 @@ function bruteForceGenerate(numCards, numLandscapes, pool, activeRules, limit) /
         if(!pass) {continue;}
 
         //Process Blacklist
+        let lowercaseBlacklist = currentBlacklist.map(function(x) {return x.toLowerCase();});
         for(const cardName of candidate.kingdom)
         {
-            if(currentBlacklist.includes(cardName.toLowerCase()))
+            if(lowercaseBlacklist.includes(cardName.toLowerCase()))
             {
                 pass = false;
                 if(verboseDebug) {console.log("BLACKLIST - " + cardName + " fails blacklist selection.");}
@@ -524,7 +525,7 @@ function bruteForceGenerate(numCards, numLandscapes, pool, activeRules, limit) /
         if(!pass) {continue;}
         for(const landscapeName of candidate.landscapes)
         {
-            if(currentBlacklist.includes(landscapeName.toLowerCase()))
+            if(lowercaseBlacklist.includes(landscapeName.toLowerCase()))
             {
                 pass = false;
                 if(verboseDebug) {console.log("BLACKLIST - " + landscapeName + " fails blacklist selection.");}

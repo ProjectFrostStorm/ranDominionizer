@@ -121,7 +121,7 @@
             </div>
             <div id="blacklistSettings">
                 <div class="header">Card Blacklisting</div>
-                <div>Add card and landscape names to blacklist. One per line. Names must be exact (but case and spaces are ignored).</div>
+                <div>List card and landscape names to blacklist. One per line. Names must be exact (but case and spaces are ignored). Current blacklist will be overridden (copy and paste the current blacklist to append to it instead).</div>
                 <div>
                     <button onclick="applyBlacklist()">Apply Blacklist</button>
                 </div>
@@ -239,13 +239,19 @@
                         <li>
                             <span>
                                 <input id="includeNonAttackAttack" type="checkbox" data-setting="rule" data-rule-trait="tags" data-rule-trait-value="nonAttackerAttack" data-rule="min" data-rule-parameter="1">
-                                <label for="includeNonAttackAttack">Include Unorthodox Attack</label>
+                                <label for="includeNonAttackAttack">Include Unorthodox Attack (Masquerade from Intrigue and Tax from Empires)</label>
                             </span>
                         </li>
                         <li>
                             <span>
                                 <input id="includePositiveInteraction" type="checkbox" data-setting="rule" data-rule-trait="tags" data-rule-trait-value="positiveInteraction" data-rule="min" data-rule-parameter="1">
-                                <label for="includePositiveInteraction">Include Good Interactions</label>
+                                <label for="includePositiveInteraction">Include Good Interaction</label>
+                            </span>
+                        </li>
+                        <li>
+                            <span>
+                                <input id="includeNonAttackInteraction" type="checkbox" data-setting="rule" data-rule-trait="null" data-rule-trait-value="null" data-rule="oneNonAttackInteraction" data-rule-parameter="null">
+                                <label for="includeNonAttackInteraction">Include Non-Attack Interaction or Positive Interaction</label>
                             </span>
                         </li>
                     </ul>

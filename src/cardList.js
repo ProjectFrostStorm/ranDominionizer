@@ -123,7 +123,6 @@ expansions.base["nofirst"] = true;
 expansions.intrigue["nofirst"] = true;
 expansions.alchemy["nobase"] = true;
 expansions.hinterlands["nofirst"] = true;
-expansions.darkages["nobase"] = true;
 expansions.nocturne["nobase"] = true;
 expansions.menagerie["nobase"] = true;
 expansions.allies["nobase"] = true;
@@ -132,7 +131,7 @@ expansions.risingsun["nobase"] = true;
 const cards = 
 {
     /*
-    : {cost: , set: "", types: [""], tags: [""]},
+    : {cost: , expansion: "", edition: "base", types: [""], tags: []},
     */
 
     /*** 
@@ -360,8 +359,43 @@ const cards =
     WitchsHut:      {cost: 5,   expansion: "hinterlands",   edition: "second",  types: ["action", "attack"],                tags: ["terminal", "drawer", "curserAttack", "discarder"]}, 
 
     /*** 
-     * DARK AGES TODO
+     * DARK AGES
      ***/
+    PoorHouse:      {cost: 1,   expansion: "darkages",      edition: "base",    types: ["action"],                          tags: ["terminal", "virtualCoin"]},
+    Beggar:         {cost: 2,   expansion: "darkages",      edition: "base",    types: ["action", "reaction"],              tags: ["terminal", "gainer"]},
+    Squire:         {cost: 2,   expansion: "darkages",      edition: "base",    types: ["action"],                          tags: ["conditionalTerminal", "virtualCoin", "village", "plusBuy", "gainer", "choice", "trashFodder"]},
+    Vagrant:        {cost: 2,   expansion: "darkages",      edition: "base",    types: ["action"],                          tags: ["cantrip", "inspector"]},
+    Forager:        {cost: 3,   expansion: "darkages",      edition: "base",    types: ["action"],                          tags: ["plusBuy", "trasher", "trashForBenefit", "virtualCoin"]},
+    Hermit:         {cost: 3,   expansion: "darkages",      edition: "base",    types: ["action"],                          tags: ["terminal", "trasher", "gainer", "workshop"]}, //Older card version (2017)
+    MarketSquare:   {cost: 3,   expansion: "darkages",      edition: "base",    types: ["action", "reaction"],              tags: ["cantrip", "plusBuy", "gainer"]},
+    Sage:           {cost: 3,   expansion: "darkages",      edition: "base",    types: ["action"],                          tags: ["cantrip", "digger", "discarder"]},
+    Storeroom:      {cost: 3,   expansion: "darkages",      edition: "base",    types: ["action"],                          tags: ["terminal", "plusBuy", "sifter", "discarder", "virtualCoin", "discardForBenefit"]},
+    Urchin:         {cost: 3,   expansion: "darkages",      edition: "base",    types: ["action", "attack"],                tags: ["cantrip", "handSizeAttack", "oneshot", "trasher", "virtualCoin"]}, //Includes Mercenary tags
+    Armory:         {cost: 4,   expansion: "darkages",      edition: "base",    types: ["action"],                          tags: ["terminal", "workshop", "gainer", "topDecker"]},
+    DeathCart:      {cost: 4,   expansion: "darkages",      edition: "base",    types: ["action", "looter"],                tags: ["terminal", "trasher", "oneshot", "virtualCoin"]}, //Older card version (2017); actually a conditionalTrasher
+    Feodum:         {cost: 4,   expansion: "darkages",      edition: "base",    types: ["victory"],                         tags: ["altvp", "trashFodder", "gainer"]},
+    Fortress:       {cost: 4,   expansion: "darkages",      edition: "base",    types: ["action"],                          tags: ["cantrip", "village", "trashFodder"]},
+    Ironmonger:     {cost: 4,   expansion: "darkages",      edition: "base",    types: ["action"],                          tags: ["cantrip", "inspector", "sifter", "discarder", "village", "virtualCoin", "drawer"]},
+    Marauder:       {cost: 4,   expansion: "darkages",      edition: "base",    types: ["action", "attack", "looter"],      tags: ["terminal", "gainer", "otherJunkerAttack"]},
+    Procession:     {cost: 4,   expansion: "darkages",      edition: "base",    types: ["action"],                          tags: ["throneRoom", "remodel", "trasher", "trashForBenefit"]}, //Older card version (2017)
+    Rats:           {cost: 4,   expansion: "darkages",      edition: "base",    types: ["action"],                          tags: ["cantrip", "trasher", "gainer", "trashFodder"]},
+    Scavenger:      {cost: 4,   expansion: "darkages",      edition: "base",    types: ["action"],                          tags: ["terminal", "virtualCoin", "reviveFromDiscard", "topDecker"]},
+    WanderingMinstrel:{cost: 4, expansion: "darkages",      edition: "base",    types: ["action"],                          tags: ["cantrip", "village", "inspector", "sifter", "discarder"]},
+    BandOfMisfits:  {cost: 5,   expansion: "darkages",      edition: "base",    types: ["action", "command"],               tags: ["conditionalTerminal"]}, //Older card version (2017)
+    BanditCamp:     {cost: 5,   expansion: "darkages",      edition: "base",    types: ["action"],                          tags: ["cantrip", "village", "gainer"]},
+    Catacombs:      {cost: 5,   expansion: "darkages",      edition: "base",    types: ["action"],                          tags: ["terminal", "inspector", "sifter", "drawer", "discarder", "trashFodder"]},
+    Count:          {cost: 5,   expansion: "darkages",      edition: "base",    types: ["action"],                          tags: ["terminal", "discarder", "topDecker", "gainer", "virtualCoin", "trasher", "choice"]},
+    Counterfeit:    {cost: 5,   expansion: "darkages",      edition: "base",    types: ["treasure"],                        tags: ["plusBuy", "throneRoom", "trasher"]}, //Older card version (2017)
+    Cultist:        {cost: 5,   expansion: "darkages",      edition: "base",    types: ["action", "attack", "looter"],      tags: ["terminal", "drawer", "otherJunkerAttack", "trashFodder"]},
+    Graverobber:    {cost: 5,   expansion: "darkages",      edition: "base",    types: ["action"],                          tags: ["terminal", "choice", "gainFromTrash", "topDecker", "remodel", "trasher", "trashForBenefit"]},
+    JunkDealer:     {cost: 5,   expansion: "darkages",      edition: "base",    types: ["action"],                          tags: ["cantrip", "virtualCoin", "trasher"]},
+    Knights:        {cost: 5,   expansion: "darkages",      edition: "base",    types: ["action", "attack", "knight"],      tags: ["trashingAttack"]}, //TODO add tags for each of the knights
+    Mystic:         {cost: 5,   expansion: "darkages",      edition: "base",    types: ["action"],                          tags: ["virtualCoin", "inspector"]},
+    Pillage:        {cost: 5,   expansion: "darkages",      edition: "base",    types: ["action", "attack"],                tags: ["terminal", "oneshot", "gainer", "handSizeAttack", "turnWorseningAttack"]}, //Slighty older card version (2017)
+    Rebuild:        {cost: 5,   expansion: "darkages",      edition: "base",    types: ["action"],                          tags: ["digger", "discarder", "trasher", "remodel", "trashForBenefit", "altvp"]}, //An "alternative" way of gaining vp, tho not quite altvp
+    Rogue:          {cost: 5,   expansion: "darkages",      edition: "base",    types: ["action", "attack"],                tags: ["terminal", "virtualCoin", "gainFromTrash", "trashingAttack"]},
+    Altar:          {cost: 6,   expansion: "darkages",      edition: "base",    types: ["action"],                          tags: ["terminal", "trasher", "gainer", "workshop"]},
+    HuntingGrounds: {cost: 6,   expansion: "darkages",      edition: "base",    types: ["action"],                          tags: ["terminal", "drawer", "trashFodder", "gainer"]},
 
     /*** 
      * GUILDS

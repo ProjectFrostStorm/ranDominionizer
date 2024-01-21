@@ -436,6 +436,14 @@ const rules =
             return true;
         }
         return false;
+    },
+    oneNonAttackInteraction: function(selection, trait, traitValue, parameter) //Contains at least 1 card that requires opponent input (but is not an Attack)
+    {
+        if(this.min(selection, "tags", "positiveInteraction", 1) || this.min(selection, "tags", "neutralInteraction", 1))
+        {
+            return true;
+        }
+        return false;
     }
 };
 

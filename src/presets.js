@@ -46,6 +46,7 @@ function loadPreset(presetName)
             setCheckbox("base-cornucopia", true);
             setCheckbox("base-hinterlands", true);
             setCheckbox("seconded-hinterlands", true);
+            setCheckbox("base-darkages", true);
             setCheckbox("base-guilds", true);
             setCheckbox("base-adventures", true);
             setCheckbox("base-empires", true);
@@ -86,7 +87,6 @@ function loadPreset(presetName)
                 "RoyalSeal",
                 //Cornucopia
                 "Harvest",
-                "Fairgrounds",
                 //Dark Ages
                 "Beggar",
                 //Guilds

@@ -155,5 +155,34 @@ function loadPreset(presetName)
             ];
             document.getElementById("blacklistOutputArea").value = currentBlacklist.join("\n");
             break;
+
+            case "quebec-online":
+                resetAllSettings();
+                //Expansion
+                setCheckbox("base-base", true);
+                setCheckbox("seconded-base", true);
+                setCheckbox("base-intrigue", true);
+                setCheckbox("seconded-intrigue", true);
+                //Landscapes
+                //Rules
+                setCheckbox("includeCost2", true);
+                setCheckbox("includeCost3", true);
+                setCheckbox("include2Cost3", true);
+                setCheckbox("includeCost4", true);
+                setCheckbox("include2Cost4", true);
+                setCheckbox("includeCost5", true);
+                setCheckbox("include2Cost5", true);
+                setCheckbox("includeCardRemover", true);
+                setCheckbox("includeVillage", true);
+                setCheckbox("includePlusBuy", true);
+                setCheckbox("limitTerminal", true);
+                //Blacklist
+                currentBlacklist = 
+                [
+                    //Intrigue
+                    "Duke",
+                ];
+                document.getElementById("blacklistOutputArea").value = currentBlacklist.join("\n");
+                break;
     }
 }

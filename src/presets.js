@@ -44,10 +44,13 @@ function loadPreset(presetName)
             setCheckbox("firsted-prosperity", true);
             setCheckbox("seconded-prosperity", true);
             setCheckbox("base-cornucopia", true);
+            setCheckbox("firsted-cornucopia", true);
             setCheckbox("base-hinterlands", true);
             setCheckbox("seconded-hinterlands", true);
             setCheckbox("base-darkages", true);
             setCheckbox("base-guilds", true);
+            setCheckbox("firsted-guilds", true);
+            setCheckbox("base-guildscornucopia2e", true);
             setCheckbox("base-adventures", true);
             setCheckbox("base-empires", true);
             setCheckbox("base-renaissance", true);

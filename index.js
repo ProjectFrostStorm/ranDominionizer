@@ -90,18 +90,21 @@ function createExpansionList(supportedExpansions)
             firstEditionToggleLabel.innerHTML = "1st Edition";
 
             //Second Edition
-            let secondEditionToggle = document.createElement("input");
-            expansionSpan.appendChild(secondEditionToggle);
-            secondEditionToggle.setAttribute("id", "seconded-" + expansion);
-            secondEditionToggle.setAttribute("type", "checkbox");
-            secondEditionToggle.setAttribute("data-setting", "expansion");
-            secondEditionToggle.setAttribute("data-expansion-selector-type", "seconded");
-            secondEditionToggle.setAttribute("data-expansion-selector-for", expansion);
+            if(properties.noIndividual2E !== true) //Special case for Guilds and Cornucopia 2E, since they have a combined 2E there should not be an individual 2E toggle
+            {
+                let secondEditionToggle = document.createElement("input");
+                expansionSpan.appendChild(secondEditionToggle);
+                secondEditionToggle.setAttribute("id", "seconded-" + expansion);
+                secondEditionToggle.setAttribute("type", "checkbox");
+                secondEditionToggle.setAttribute("data-setting", "expansion");
+                secondEditionToggle.setAttribute("data-expansion-selector-type", "seconded");
+                secondEditionToggle.setAttribute("data-expansion-selector-for", expansion);
 
-            let secondEditionToggleLabel = document.createElement("label");
-            expansionSpan.appendChild(secondEditionToggleLabel);
-            secondEditionToggleLabel.setAttribute("for", "seconded-" + expansion);
-            secondEditionToggleLabel.innerHTML = "2nd Edition";
+                let secondEditionToggleLabel = document.createElement("label");
+                expansionSpan.appendChild(secondEditionToggleLabel);
+                secondEditionToggleLabel.setAttribute("for", "seconded-" + expansion);
+                secondEditionToggleLabel.innerHTML = "2nd Edition";
+            }
 
             
             //Unavailable sets
@@ -344,9 +347,13 @@ function querySingleExpansionSetting(expansionName)
     if(expansions[expansionName].secondEd)
     {
         let firstEdCheckbox = document.getElementById("firsted-" + expansionName);
-        let secondEdCheckbox = document.getElementById("seconded-" + expansionName);
         settingSelection.firstEd = firstEdCheckbox.checked;
-        settingSelection.secondEd = secondEdCheckbox.checked;
+
+        if(expansions[expansionName].noIndividual2E !== true)
+        {
+            let secondEdCheckbox = document.getElementById("seconded-" + expansionName);
+            settingSelection.secondEd = secondEdCheckbox.checked;
+        }
     }
 
     return settingSelection;
@@ -427,7 +434,7 @@ function setAllExpansions(state)
             {
                 firstEdCheckbox.checked = state; 
             }
-            if(!secondEdCheckbox.disabled)
+            if(secondEdCheckbox !== null && !secondEdCheckbox.disabled) //Ignore 2e box if only has 1e box
             {
                 secondEdCheckbox.checked = state;
             }
@@ -611,6 +618,14 @@ function generate()
     if(selection === null)
     {
         console.log("Failed to generate set.");
+        if(failedGenerations === 0) //Not enough cards, no generations attempted
+        {
+            alert("Error: Not enough cards in generation pool. \n\nThis may be caused by not selecting enough expansions.");
+        }
+        else //Ran out of attempts
+        {
+            alert("Error: Failed to generate a new kingdom after " + bruteForceLimit + " attempts. \n\nThis may be caused by an impossible set of generation rules (e.g. forcing a 7 cost without an expansion that contains a 7).");
+        }
         return;
     }
 

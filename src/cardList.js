@@ -105,18 +105,19 @@ const expansions =
     seaside:        {secondEd: true,    displayName: "Seaside",     index: 2},
     alchemy:        {secondEd: false,   displayName: "Alchemy",     index: 3},
     prosperity:     {secondEd: true,    displayName: "Prosperity",  index: 4},
-    cornucopia:     {secondEd: false,   displayName: "Cornucopia",  index: 5},
+    cornucopia:     {secondEd: true,    displayName: "Cornucopia",  index: 5,   noIndividual2E: true}, //Guilds and Cornucopia 2E are combined into one
     hinterlands:    {secondEd: true,    displayName: "Hinterlands", index: 6},
     darkages:       {secondEd: false,   displayName: "Dark Ages",   index: 7},
-    guilds:         {secondEd: false,   displayName: "Guilds",      index: 8},
-    adventures:     {secondEd: false,   displayName: "Adventures",  index: 9,   landscapes: ["event"]},
-    empires:        {secondEd: false,   displayName: "Empires",     index: 10,  landscapes: ["event", "landmark"]},
-    nocturne:       {secondEd: false,   displayName: "Nocturne",    index: 11},
-    renaissance:    {secondEd: false,   displayName: "Renaissance", index: 12,  landscapes: ["project"]},
-    menagerie:      {secondEd: false,   displayName: "Menagerie",   index: 13,  landscapes: ["event", "way"]},
-    allies:         {secondEd: false,   displayName: "Allies",      index: 14},
-    plunder:        {secondEd: false,   displayName: "Plunder",     index: 15,  landscapes: ["event", "trait"]},
-    risingsun:      {secondEd: false,   displayName: "Rising Sun",  index: 16},
+    guilds:         {secondEd: true,    displayName: "Guilds",      index: 8,   noIndividual2E: true},
+    guildscornucopia2e: {secondEd: false, displayName: "Guilds and Cornucopia 2nd Edition", index: 9}, //Special case for G&C2E
+    adventures:     {secondEd: false,   displayName: "Adventures",  index: 10,   landscapes: ["event"]},
+    empires:        {secondEd: false,   displayName: "Empires",     index: 11,  landscapes: ["event", "landmark"]},
+    nocturne:       {secondEd: false,   displayName: "Nocturne",    index: 12},
+    renaissance:    {secondEd: false,   displayName: "Renaissance", index: 13,  landscapes: ["project"]},
+    menagerie:      {secondEd: false,   displayName: "Menagerie",   index: 14,  landscapes: ["event", "way"]},
+    allies:         {secondEd: false,   displayName: "Allies",      index: 15},
+    plunder:        {secondEd: false,   displayName: "Plunder",     index: 16,  landscapes: ["event", "trait"]},
+    risingsun:      {secondEd: false,   displayName: "Rising Sun",  index: 17},
 };
 //Temporary disables (nobase, nofirst, nosecond)
 expansions.base["nofirst"] = true;
@@ -304,21 +305,25 @@ const cards =
     WarChest:       {cost: 5,   expansion: "prosperity",    edition: "second",  types: ["treasure"],                        tags: ["workshop", "gainer"]},
 
     /*** 
-     * CORNUCOPIA 
+     * CORNUCOPIA (BASE)
      ***/
     Hamlet:         {cost: 2,   expansion: "cornucopia",    edition: "base",    types: ["action"],                          tags: ["cantrip", "village", "plusBuy", "discarder"]},
-    FortuneTeller:  {cost: 3,   expansion: "cornucopia",    edition: "base",    types: ["action", "attack"],                tags: ["terminal", "virtualCoin", "deckInspectionAttack", "discarder"]},
     Menagerie:      {cost: 3,   expansion: "cornucopia",    edition: "base",    types: ["action"],                          tags: ["cantrip", "drawer"]},
-    FarmingVillage: {cost: 4,   expansion: "cornucopia",    edition: "base",    types: ["action"],                          tags: ["cantrip", "village", "digger", "discarder"]},
-    HorseTraders:   {cost: 4,   expansion: "cornucopia",    edition: "base",    types: ["action", "reaction"],              tags: ["terminal", "plusBuy", "virtualCoin", "discarder", "defender"]},
     Remake:         {cost: 4,   expansion: "cornucopia",    edition: "base",    types: ["action"],                          tags: ["terminal", "remodel", "trasher", "trashForBenefit"]},
-    Tournament:     {cost: 4,   expansion: "cornucopia",    edition: "base",    types: ["action"],                          tags: ["peddler", "gainer", "neutralInteraction", "virtualCoin"]},
     YoungWitch:     {cost: 4,   expansion: "cornucopia",    edition: "base",    types: ["action", "attack"],                tags: ["terminal", "sifter", "curserAttack"]}, //No full resolution
-    Harvest:        {cost: 5,   expansion: "cornucopia",    edition: "base",    types: ["action"],                          tags: ["terminal", "virtualCoin"]},
     HornOfPlenty:   {cost: 5,   expansion: "cornucopia",    edition: "base",    types: ["treasure"],                        tags: ["gainer"]},
     HuntingParty:   {cost: 5,   expansion: "cornucopia",    edition: "base",    types: ["action"],                          tags: ["cantrip", "drawer"]},
     Jester:         {cost: 5,   expansion: "cornucopia",    edition: "base",    types: ["action", "attack"],                tags: ["terminal", "virtualCoin", "discarder", "curserAttack", "otherJunkerAttack", "gainer"]},
     Fairgrounds:    {cost: 6,   expansion: "cornucopia",    edition: "base",    types: ["victory"],                         tags: ["altvp"]},
+
+    /*** 
+     * CORNUCOPIA (1ST EDITION)
+     ***/
+    FortuneTeller:  {cost: 3,   expansion: "cornucopia",    edition: "first",   types: ["action", "attack"],                tags: ["terminal", "virtualCoin", "deckInspectionAttack", "discarder"]},
+    FarmingVillage: {cost: 4,   expansion: "cornucopia",    edition: "first",   types: ["action"],                          tags: ["cantrip", "village", "digger", "discarder"]},
+    HorseTraders:   {cost: 4,   expansion: "cornucopia",    edition: "first",   types: ["action", "reaction"],              tags: ["terminal", "plusBuy", "virtualCoin", "discarder", "defender"]},
+    Tournament:     {cost: 4,   expansion: "cornucopia",    edition: "first",   types: ["action"],                          tags: ["peddler", "gainer", "neutralInteraction", "virtualCoin"]},
+    Harvest:        {cost: 5,   expansion: "cornucopia",    edition: "first",   types: ["action"],                          tags: ["terminal", "virtualCoin"]},
 
     /*** 
      * HINTERLANDS (BASE)
@@ -398,21 +403,37 @@ const cards =
     HuntingGrounds: {cost: 6,   expansion: "darkages",      edition: "base",    types: ["action"],                          tags: ["terminal", "drawer", "trashFodder", "gainer"]},
 
     /*** 
-     * GUILDS
+     * GUILDS (BASE)
      ***/
     CandlestickMaker:{cost: 2,  expansion: "guilds",        edition: "base",    types: ["action"],                          tags: ["plusBuy", "plusCoffers", "vanilla"]},
     Stonemason:     {cost: 2,   expansion: "guilds",        edition: "base",    types: ["action"],                          tags: ["terminal", "trasher", "trashForBenefit", "gainer"]}, //No full resolution
-    Doctor:         {cost: 3,   expansion: "guilds",        edition: "base",    types: ["action"],                          tags: ["terminal", "trasher", "inspector"]}, //No full resolution
-    Masterpiece:    {cost: 3,   expansion: "guilds",        edition: "base",    types: ["treasure"],                        tags: ["gainer"]},
     Advisor:        {cost: 4,   expansion: "guilds",        edition: "base",    types: ["action"],                          tags: ["cantrip", "drawer", "neutralInteraction"]},
     Herald:         {cost: 4,   expansion: "guilds",        edition: "base",    types: ["action"],                          tags: ["cantrip", "inspector"]}, //No full resolution
     Plaza:          {cost: 4,   expansion: "guilds",        edition: "base",    types: ["action"],                          tags: ["cantrip", "village", "discarder", "discardForBenefit", "plusCoffers"]},
-    Taxman:         {cost: 4,   expansion: "guilds",        edition: "base",    types: ["action", "attack"],                tags: ["terminal", "trasher", "handSizeAttack", "remodel", "trashForBenefit"]},
     Baker:          {cost: 5,   expansion: "guilds",        edition: "base",    types: ["action"],                          tags: ["cantrip", "plusCoffers", "vanilla", "gameChanger"]},
     Butcher:        {cost: 5,   expansion: "guilds",        edition: "base",    types: ["action"],                          tags: ["terminal", "plusCoffers", "trasher", "trashForBenefit", "remodel"]},
     Journeyman:     {cost: 5,   expansion: "guilds",        edition: "base",    types: ["action"],                          tags: ["terminal", "drawer", "digger", "discarder"]},
     MerchantGuild:  {cost: 5,   expansion: "guilds",        edition: "base",    types: ["action"],                          tags: ["terminal", "virtualCoin", "plusBuy", "plusCoffers"]}, //Resized full resolution, much older card version (2013)
     Soothsayer:     {cost: 5,   expansion: "guilds",        edition: "base",    types: ["action", "attack"],                tags: ["terminal", "gainer", "curserAttack", "positiveInteraction"]},
+
+    /*** 
+     * GUILDS (1ST EDITION)
+     ***/
+    Doctor:         {cost: 3,   expansion: "guilds",        edition: "first",   types: ["action"],                          tags: ["terminal", "trasher", "inspector"]}, //No full resolution
+    Masterpiece:    {cost: 3,   expansion: "guilds",        edition: "first",   types: ["treasure"],                        tags: ["gainer"]},
+    Taxman:         {cost: 4,   expansion: "guilds",        edition: "first",   types: ["action", "attack"],                tags: ["terminal", "trasher", "handSizeAttack", "remodel", "trashForBenefit"]},
+    
+    /*** 
+     * GUILDS AND CORNUCOPIA (2ND EDITION) [No full resolution for all of G&C2E]
+     ***/
+    Farrier:        {cost: 2,   expansion: "guildscornucopia2e",edition: "base",types: ["action"],                          tags: ["cantrip", "plusBuy", "delayedDrawer"]}, 
+    Shop:           {cost: 3,   expansion: "guildscornucopia2e",edition: "base",types: ["action"],                          tags: ["conditionalTerminal", "virtualCoin", "peddler"]}, 
+    Infirmary:      {cost: 3,   expansion: "guildscornucopia2e",edition: "base",types: ["action"],                          tags: ["terminal", "trasher"]}, 
+    Farmhands:      {cost: 4,   expansion: "guildscornucopia2e",edition: "base",types: ["action"],                          tags: ["cantrip", "village", "setAside"]}, 
+    Carnival:       {cost: 5,   expansion: "guildscornucopia2e",edition: "base",types: ["action"],                          tags: ["terminal", "drawer", "discarder"]}, 
+    Ferryman:       {cost: 5,   expansion: "guildscornucopia2e",edition: "base",types: ["action"],                          tags: ["cantrip", "sifter", "discarder", "gainer"]}, 
+    Footpad:        {cost: 5,   expansion: "guildscornucopia2e",edition: "base",types: ["action", "attack"],                tags: ["terminal", "plusCoffers", "handSizeAttack", "gameChanger"]}, 
+    Joust:          {cost: 5,   expansion: "guildscornucopia2e",edition: "base",types: ["action"],                          tags: ["cantrip", "peddler", "gainer", "neutralInteraction", "virtualCoin"]}, 
 
     /*** 
      * ADVENTURES

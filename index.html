@@ -120,6 +120,20 @@
 
                 </ul>
             </div>
+            <div id="whitelistSettings">
+                <div class="header">Card Locking</div>
+                <div>Click on a card to lock it. It will be forced into any future generation until the lock list is cleared.</div>
+                <div>
+                    <button onclick="clearWhitelist()">Clear Locked List</button>
+                </div>
+                <div>Current Locked Cards:</div>
+                <div>
+                    <textarea id="whitelistAreaCards" rows="5" cols="30" disabled>No cards currently locked</textarea>
+                </div>
+                <div>
+                    <textarea id="whitelistAreaLandscapes" rows="2" cols="30" disabled>No landscapes currently locked</textarea>
+                </div>
+            </div>
             <div id="blacklistSettings">
                 <div class="header">Card Blacklisting</div>
                 <div>List card and landscape names to blacklist. One per line. Names must be exact (but case and spaces are ignored). Current blacklist will be overridden (copy and paste the current blacklist to append to it instead).</div>

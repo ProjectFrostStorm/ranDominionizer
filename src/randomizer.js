@@ -468,6 +468,40 @@ function uniformGenerate(numCards, numLandscapes, pool) //Pick with uniform rand
         return null;
     }
 
+    //Pre-add the whitelist
+    for(let x = 0; x < currentWhitelist.kingdom.length; x++)
+    {
+        let currentCard = currentWhitelist.kingdom[x];
+
+        //Add to selection
+        selection.kingdom.push(currentCard);
+        numCards--;
+
+        //Remove from cardPool if present
+        let index = currentCardPool.indexOf(currentCard);
+        if(index !== -1) //Is in the card pool
+        {
+            currentCardPool.splice(index, 1);
+        }
+        cardPoolSize--;
+    }
+    for(let x = 0; x < currentWhitelist.landscapes.length; x++)
+    {
+        let currentLandscape = currentWhitelist.landscapes[x];
+
+        //Add to selection
+        selection.landscapes.push(currentLandscape);
+        numLandscapes--;
+
+        //Remove from cardPool if present
+        let index = currentlandscapePool.indexOf(currentLandscape);
+        if(index !== -1) //Is in the card pool
+        {
+            currentlandscapePool.splice(index, 1);
+        }
+        landscapePoolSize--;
+    }
+
     //Select cards
     for(let x = 0; x < numCards; x++)
     {

@@ -13,7 +13,14 @@ let currentSelection = {};
  */
 
 const defaultBlacklistOutputText = "No cards currently blacklisted";
+const defaultWhitelistCardsOutputText = "No cards currently forced";
+const defaultWhitelistLandscapesOutputText = "No landscapes currently forced";
 let currentBlacklist = [];
+let currentWhitelist = 
+{
+    kingdom: [],
+    landscapes: []
+};
 
 const bruteForceLimit = 5000;
 const verboseDebug = false;
@@ -30,13 +37,15 @@ function setup()
     preloadImages();
 
     document.getElementById("blacklistOutputArea").value = defaultBlacklistOutputText;
+    document.getElementById("whitelistAreaCards").value = defaultWhitelistCardsOutputText;
+    document.getElementById("whitelistAreaLandscapes").value = defaultWhitelistLandscapesOutputText;
 }
 
 //*****************************************************************************************************
 //Dynamic Generation of DOM Elements
 function generateElements()
 {
-    //
+    //Dynamically created elements
     createExpansionList(expansions);
     createLandscapeList(expansions);
     createResultCardsContainers(maxResultCards, resultCardsContainers);
@@ -241,6 +250,12 @@ function preloadImages()
         cards[cardName].image.src = cardImageSrc(cardName, cards[cardName].expansion, cards[cardName].edition);
         cards[cardName].image.alt = cardName;
 
+        //For whitelisting
+        cards[cardName].image.onclick = function() 
+        {
+            addToKingdomWhitelist(cardName);
+        };
+
         document.getElementById("preload").appendChild(cards[cardName].image);
 
         cards[cardName].image.setAttribute("width", "200px"); //Temp
@@ -255,6 +270,12 @@ function preloadImages()
         landscapes[landscapeName].image.onload = onloadFunction;
         landscapes[landscapeName].image.src = landscapeImageSrc(landscapeName, landscapes[landscapeName].expansion, landscapes[landscapeName].edition);
         landscapes[landscapeName].image.alt = landscapeName;
+
+        //For whitelisting
+        landscapes[landscapeName].image.onclick = function() 
+        {
+            addToLandscapesWhitelist(landscapeName);
+        };
 
         document.getElementById("preload").appendChild(landscapes[landscapeName].image);
 
@@ -605,6 +626,39 @@ function applyBlacklist()
     }
     
     currentBlacklist = blacklistedCards;
+}
+
+//Whitelisting
+function addToKingdomWhitelist(cardName)
+{
+    currentWhitelist.kingdom.push(cardName);
+
+    //Update current list
+    let currentList = document.getElementById("whitelistAreaCards");
+    currentList.value = "";
+    for(const name of currentWhitelist.kingdom)
+    {
+        currentList.value += name + "\n";
+    }
+}
+function addToLandscapesWhitelist(landscapeName)
+{
+    currentWhitelist.landscapes.push(landscapeName);
+
+    //Update current list
+    let currentList = document.getElementById("whitelistAreaLandscapes");
+    currentList.value = "";
+    for(const name of currentWhitelist.landscapes)
+    {
+        currentList.value += name + "\n";
+    }
+}
+function clearWhitelist()
+{
+    currentWhitelist.kingdom = [];
+    currentWhitelist.landscapes = [];
+    document.getElementById("whitelistAreaCards").value = defaultWhitelistCardsOutputText;
+    document.getElementById("whitelistAreaLandscapes").value = defaultWhitelistLandscapesOutputText;
 }
 
 //*****************************************************************************************************

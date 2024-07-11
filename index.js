@@ -631,6 +631,10 @@ function applyBlacklist()
 //Whitelisting
 function addToKingdomWhitelist(cardName)
 {
+    if(currentWhitelist.kingdom.indexOf(cardName) !== -1) //Only add to list if not already in whitelist
+    {
+        return;
+    }
     currentWhitelist.kingdom.push(cardName);
 
     //Update current list
@@ -643,6 +647,10 @@ function addToKingdomWhitelist(cardName)
 }
 function addToLandscapesWhitelist(landscapeName)
 {
+    if(currentWhitelist.landscapes.indexOf(landscapeName) !== -1) //Only add to list if not already in whitelist
+    {
+        return;
+    }
     currentWhitelist.landscapes.push(landscapeName);
 
     //Update current list

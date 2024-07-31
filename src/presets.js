@@ -64,6 +64,7 @@ function loadPreset(presetName)
             setCheckbox("menagerie-way", true);
             setCheckbox("plunder-event", true);
             setCheckbox("plunder-trait", true);
+            setCheckbox("promo-event", true);
             //Rules
             setCheckbox("includeCost2", true);
             setCheckbox("includeCost3", true);

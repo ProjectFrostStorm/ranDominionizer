@@ -112,7 +112,7 @@ const expansions =
     darkages:       {secondEd: false,   displayName: "Dark Ages",   index: 7},
     guilds:         {secondEd: true,    displayName: "Guilds",      index: 8,   noIndividual2E: true},
     guildscornucopia2e: {secondEd: false, displayName: "Guilds and Cornucopia 2nd Edition", index: 9}, //Special case for G&C2E
-    adventures:     {secondEd: false,   displayName: "Adventures",  index: 10,   landscapes: ["event"]},
+    adventures:     {secondEd: false,   displayName: "Adventures",  index: 10,  landscapes: ["event"]},
     empires:        {secondEd: false,   displayName: "Empires",     index: 11,  landscapes: ["event", "landmark"]},
     nocturne:       {secondEd: false,   displayName: "Nocturne",    index: 12},
     renaissance:    {secondEd: false,   displayName: "Renaissance", index: 13,  landscapes: ["project"]},
@@ -120,7 +120,7 @@ const expansions =
     allies:         {secondEd: false,   displayName: "Allies",      index: 15},
     plunder:        {secondEd: false,   displayName: "Plunder",     index: 16,  landscapes: ["event", "trait"]},
     risingsun:      {secondEd: false,   displayName: "Rising Sun",  index: 17},
-    promo:          {secondEd: false,   displayName: "Promo (use blacklist to exclude unowned cards)",  index: 1000},
+    promo:          {secondEd: false,   displayName: "Promo",  index: 1000, landscapes: ["event"]},
 };
 //Temporary disables (nobase, nofirst, nosecond)
 expansions.base["nofirst"] = true;
@@ -641,7 +641,7 @@ const landscapes =
     /*** 
      * PROMO
      ***/
-    Summon:         {cost: 5,   expansion: "promo",         edition: "",        types: ["event"],               tags: ["workshop", "gainer", "topDecker"]},
+    Summon:         {cost: 5,   expansion: "promo",         edition: "base",    types: ["event"],               tags: ["workshop", "gainer", "topDecker"]},
 
     /*** 
      * ADVENTURES

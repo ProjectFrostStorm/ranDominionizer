@@ -64,6 +64,7 @@ const tags =
     "trashFromSupply",
     "nonTrashingTrasher",
     "reviveFromDiscard",        //Takes a card from discard (into hand, deck, or play)
+    "exileFromSupply",
 
     "discardFodder", 
     "trashFodder",
@@ -83,6 +84,7 @@ const tags =
     "deckLitterAttack",         //Cards are placed onto/into the deck
     "deckInspectionAttack",
     "turnWorseningAttack",
+    "exilingAttack",
 
     //Other
     "oneshot",
@@ -118,6 +120,7 @@ const expansions =
     allies:         {secondEd: false,   displayName: "Allies",      index: 15},
     plunder:        {secondEd: false,   displayName: "Plunder",     index: 16,  landscapes: ["event", "trait"]},
     risingsun:      {secondEd: false,   displayName: "Rising Sun",  index: 17},
+    promo:          {secondEd: false,   displayName: "Promo (use blacklist to exclude unowned cards)",  index: 1000},
 };
 //Temporary disables (nobase, nofirst, nosecond)
 expansions.base["nofirst"] = true;
@@ -125,7 +128,6 @@ expansions.intrigue["nofirst"] = true;
 expansions.alchemy["nobase"] = true;
 expansions.hinterlands["nofirst"] = true;
 expansions.nocturne["nobase"] = true;
-expansions.menagerie["nobase"] = true;
 expansions.allies["nobase"] = true;
 expansions.risingsun["nobase"] = true;
 
@@ -134,6 +136,22 @@ const cards =
     /*
     : {cost: , expansion: "", edition: "base", types: [""], tags: []},
     */
+
+    /*** 
+     * PROMO
+     ***/
+    //Tagging TODO
+    BlackMarket:    {cost: 3,   expansion: "promo",         edition: "base",    types: ["action"],                          tags: ["terminal"]},
+    Church:         {cost: 3,   expansion: "promo",         edition: "base",    types: ["action", "duration"],              tags: []},
+    Dismantle:      {cost: 4,   expansion: "promo",         edition: "base",    types: ["action"],                          tags: ["terminal"]},
+    Envoy:          {cost: 4,   expansion: "promo",         edition: "base",    types: ["action"],                          tags: ["terminal"]},
+    Sauna:          {cost: 4,   expansion: "promo",         edition: "base",    types: ["action"],                          tags: ["terminal"]},
+    WalledVillage:  {cost: 4,   expansion: "promo",         edition: "base",    types: ["action"],                          tags: ["cantrip"]},
+    Governor:       {cost: 5,   expansion: "promo",         edition: "base",    types: ["action"],                          tags: []},
+    Marchland:      {cost: 5,   expansion: "promo",         edition: "base",    types: ["victory"],                         tags: []},
+    Stash:          {cost: 5,   expansion: "promo",         edition: "base",    types: ["treasure"],                        tags: []},
+    Captain:        {cost: 6,   expansion: "promo",         edition: "base",    types: ["action", "duration", "command"],   tags: ["conditionalTerminal"]},
+    Prince:         {cost: 8,   expansion: "promo",         edition: "base",    types: ["action", "duration", "command"],   tags: ["conditionalTerminal"]},
 
     /*** 
      * BASE (BASE)
@@ -533,6 +551,36 @@ const cards =
     /*** 
      * MENAGERIE
      ***/
+    BlackCat:       {cost: 2,   expansion: "menagerie",     edition: "base",    types: ["action", "attack", "reaction"],    tags: ["terminal", "drawer", "curserAttack"]},
+    Sleigh:         {cost: 2,   expansion: "menagerie",     edition: "base",    types: ["action", "reaction"],              tags: ["terminal", "plusHorse", "topDecker"]},
+    Supplies:       {cost: 2,   expansion: "menagerie",     edition: "base",    types: ["treasure"],                        tags: ["gainer", "topDecker"]},
+    CamelTrain:     {cost: 3,   expansion: "menagerie",     edition: "base",    types: ["action"],                          tags: ["terminal", "exileFromSupply"]},
+    Goatherd:       {cost: 3,   expansion: "menagerie",     edition: "base",    types: ["action"],                          tags: ["trasher", "drawer"]}, //Not quite a drawer
+    Scrap:          {cost: 3,   expansion: "menagerie",     edition: "base",    types: ["action"],                          tags: ["conditionalTerminal", "trasher", "plusBuy", "virtualCoin", "gainer", "plusHorse", "choice"]}, //Based on Pawn's tagging
+    Sheepdog:       {cost: 3,   expansion: "menagerie",     edition: "base",    types: ["action", "reaction"],              tags: ["terminal", "drawer"]}, //Could qualify as conditionalTerminal
+    SnowyVillage:   {cost: 3,   expansion: "menagerie",     edition: "base",    types: ["action"],                          tags: ["cantrip", "village", "plusBuy"]},
+    Stockpile:      {cost: 3,   expansion: "menagerie",     edition: "base",    types: ["treasure"],                        tags: ["plusBuy", "oneshot"]},
+    BountyHunter:   {cost: 4,   expansion: "menagerie",     edition: "base",    types: ["action"],                          tags: ["exile", "virtualCoin"]},
+    Cardinal:       {cost: 4,   expansion: "menagerie",     edition: "base",    types: ["action", "attack"],                tags: ["terminal", "virtualCoin", "exilingAttack"]},
+    Cavalry:        {cost: 4,   expansion: "menagerie",     edition: "base",    types: ["action"],                          tags: ["terminal", "plusHorse"]}, //Same as Villa's tagging
+    Groom:          {cost: 4,   expansion: "menagerie",     edition: "base",    types: ["action"],                          tags: ["conditionalTerminal", "workshop", "gainer", "plusHorse"]},
+    Hostelry:       {cost: 4,   expansion: "menagerie",     edition: "base",    types: ["action"],                          tags: ["cantrip", "village", "plusHorse"]},
+    VillageGreen:   {cost: 4,   expansion: "menagerie",     edition: "base",    types: ["action", "duration", "reaction"],  tags: ["cantrip", "village", "discardFodder"]},
+    Barge:          {cost: 5,   expansion: "menagerie",     edition: "base",    types: ["action", "duration"],              tags: ["terminal", "drawer", "delayedDrawer", "plusBuy"]},
+    Coven:          {cost: 5,   expansion: "menagerie",     edition: "base",    types: ["action", "attack"],                tags: ["virtualCoin", "curserAttack"]},
+    Displace:       {cost: 5,   expansion: "menagerie",     edition: "base",    types: ["action"],                          tags: ["terminal", "exile", "remodel"]},
+    Falconer:       {cost: 5,   expansion: "menagerie",     edition: "base",    types: ["action", "reaction"],              tags: ["terminal", "gainer"]},
+    Gatekeeper:     {cost: 5,   expansion: "menagerie",     edition: "base",    types: ["action", "duration", "attack"],    tags: ["terminal", "virtualCoin", "exilingAttack"]},
+    HuntingLodge:   {cost: 5,   expansion: "menagerie",     edition: "base",    types: ["action"],                          tags: ["cantrip", "village", "drawer", "discarder"]},
+    Kiln:           {cost: 5,   expansion: "menagerie",     edition: "base",    types: ["action"],                          tags: ["terminal", "virtualCoin", "gainer"]},
+    Livery:         {cost: 5,   expansion: "menagerie",     edition: "base",    types: ["action"],                          tags: ["terminal", "virtualCoin", "plusHorse"]},
+    Mastermind:     {cost: 5,   expansion: "menagerie",     edition: "base",    types: ["action", "duration"],              tags: ["throneRoom"]},
+    Paddock:        {cost: 5,   expansion: "menagerie",     edition: "base",    types: ["action"],                          tags: ["conditionalTerminal", "virtualCoin", "plusHorse"]},
+    Sanctuary:      {cost: 5,   expansion: "menagerie",     edition: "base",    types: ["action"],                          tags: ["cantrip", "plusBuy", "exile"]},
+    Fisherman:      {cost: 4.5, expansion: "menagerie",     edition: "base",    types: ["action"],                          tags: ["cantrip", "virtualCoin", "peddler"]},
+    Destrier:       {cost: 5.5, expansion: "menagerie",     edition: "base",    types: ["action"],                          tags: ["cantrip", "drawer"]},
+    Wayfarer:       {cost: 0.1, expansion: "menagerie",     edition: "base",    types: ["action"],                          tags: ["terminal", "drawer", "gainer"]},
+    AnimalFair:     {cost: 6.5, expansion: "menagerie",     edition: "base",    types: ["action"],                          tags: ["terminal", "virtualCoin", "plusBuy"]},
 
     /*** 
      * ALLIES
@@ -590,6 +638,11 @@ const cards =
 const landscapes = 
 {
     //Landscapes without costs are valued -99 for sorting
+    /*** 
+     * PROMO
+     ***/
+    Summon:         {cost: 5,   expansion: "promo",         edition: "",        types: ["event"],               tags: ["workshop", "gainer", "topDecker"]},
+
     /*** 
      * ADVENTURES
      ***/

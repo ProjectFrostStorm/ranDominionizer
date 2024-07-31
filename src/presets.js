@@ -166,7 +166,13 @@ function loadPreset(presetName)
                 setCheckbox("seconded-base", true);
                 setCheckbox("base-intrigue", true);
                 setCheckbox("seconded-intrigue", true);
+                setCheckbox("base-hinterlands", true);
+                setCheckbox("seconded-hinterlands", true);
+                setCheckbox("base-empires", true);
+                setCheckbox("base-promo", true);
                 //Landscapes
+                setCheckbox("empires-event", true);
+                setCheckbox("empires-landmark", true);
                 //Rules
                 setCheckbox("includeCost2", true);
                 setCheckbox("includeCost3", true);
@@ -182,8 +188,59 @@ function loadPreset(presetName)
                 //Blacklist
                 currentBlacklist = 
                 [
-                    //Intrigue
-                    "Duke",
+                    //Promos
+                    "BlackMarket",
+                    "Church",
+                    "Dismantle",
+                    "Envoy",
+                    "Sauna",
+                    "WalledVillage",
+                    "Governor",
+                    "Stash",
+                    "Captain",
+                ];
+                document.getElementById("blacklistOutputArea").value = currentBlacklist.join("\n");
+                break;
+
+            case "romeo-online":
+                resetAllSettings();
+                //Expansion
+                setCheckbox("base-base", true);
+                setCheckbox("seconded-base", true);
+                setCheckbox("base-intrigue", true);
+                setCheckbox("seconded-intrigue", true);
+                setCheckbox("base-guilds", true);
+                setCheckbox("base-guildscornucopia2e", true);
+                setCheckbox("base-menagerie", true);
+                setCheckbox("base-promo", true);
+                //Landscapes
+                setCheckbox("menagerie-event", true);
+                setCheckbox("menagerie-way", true);
+                //Rules
+                setCheckbox("includeCost2", true);
+                setCheckbox("includeCost3", true);
+                setCheckbox("include2Cost3", true);
+                setCheckbox("includeCost4", true);
+                setCheckbox("include2Cost4", true);
+                setCheckbox("includeCost5", true);
+                setCheckbox("include2Cost5", true);
+                setCheckbox("includeCardRemover", true);
+                setCheckbox("includeVillage", true);
+                setCheckbox("includePlusBuy", true);
+                setCheckbox("limitTerminal", true);
+                //Blacklist
+                currentBlacklist = 
+                [
+                    //Promos
+                    "BlackMarket",
+                    "Church",
+                    "Dismantle",
+                    "Envoy",
+                    "Sauna",
+                    "WalledVillage",
+                    "Governor",
+                    "Stash",
+                    "Captain",
                 ];
                 document.getElementById("blacklistOutputArea").value = currentBlacklist.join("\n");
                 break;

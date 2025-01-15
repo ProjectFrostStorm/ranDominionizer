@@ -54,6 +54,7 @@ function loadPreset(presetName)
             setCheckbox("base-adventures", true);
             setCheckbox("base-empires", true);
             setCheckbox("base-renaissance", true);
+            setCheckbox("base-menagerie", true);
             setCheckbox("base-plunder", true);
             //Landscapes
             setCheckbox("adventures-event", true);
@@ -97,11 +98,6 @@ function loadPreset(presetName)
                 "Masterpiece",
                 //Empire
                 "Annex",
-                //Menagerie (horses)
-                "Ride",
-                "Bargain",
-                "Demand",
-                "Stampede",
             ];
             document.getElementById("blacklistOutputArea").value = currentBlacklist.join("\n");
             break;
@@ -199,6 +195,7 @@ function loadPreset(presetName)
                     "Governor",
                     "Stash",
                     "Captain",
+                    "Prince"
                 ];
                 document.getElementById("blacklistOutputArea").value = currentBlacklist.join("\n");
                 break;
@@ -242,6 +239,7 @@ function loadPreset(presetName)
                     "Governor",
                     "Stash",
                     "Captain",
+                    "Prince"
                 ];
                 document.getElementById("blacklistOutputArea").value = currentBlacklist.join("\n");
                 break;

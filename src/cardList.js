@@ -119,7 +119,7 @@ const expansions =
     menagerie:      {secondEd: false,   displayName: "Menagerie",   index: 14,  landscapes: ["event", "way"]},
     allies:         {secondEd: false,   displayName: "Allies",      index: 15},
     plunder:        {secondEd: false,   displayName: "Plunder",     index: 16,  landscapes: ["event", "trait"]},
-    risingsun:      {secondEd: false,   displayName: "Rising Sun",  index: 17},
+    risingsun:      {secondEd: false,   displayName: "Rising Sun",  index: 17,  landscapes: ["event", "prophecy"]},
     promo:          {secondEd: false,   displayName: "Promo",  index: 1000, landscapes: ["event"]},
 };
 //Temporary disables (nobase, nofirst, nosecond)
@@ -129,7 +129,6 @@ expansions.alchemy["nobase"] = true;
 expansions.hinterlands["nofirst"] = true;
 expansions.nocturne["nobase"] = true;
 expansions.allies["nobase"] = true;
-expansions.risingsun["nobase"] = true;
 
 const cards = 
 {
@@ -353,7 +352,7 @@ const cards =
     Scheme:         {cost: 3,   expansion: "hinterlands",   edition: "base",    types: ["action"],                          tags: ["cantrip", "topDecker"]},
     Tunnel:         {cost: 3,   expansion: "hinterlands",   edition: "base",    types: ["victory", "reaction"],             tags: ["discardForBenefit", "gainer"]},
     JackOfAllTrades:{cost: 4,   expansion: "hinterlands",   edition: "base",    types: ["action"],                          tags: ["terminal", "gainer", "inspector", "discarder", "drawToX", "trasher", "defender"]},
-    SpiceMerchant:  {cost: 4,   expansion: "hinterlands",   edition: "base",    types: ["action"],                          tags: ["conditionalTerminal", "trasher", "trashForBenefit", "village", "virtualCoin", "plusBuy", "choice"]},
+    SpiceMerchant:  {cost: 4,   expansion: "hinterlands",   edition: "base",    types: ["action"],                          tags: ["conditionalTerminal", "trasher", "trashForBenefit", "virtualCoin", "plusBuy", "choice"]},
     Trader:         {cost: 4,   expansion: "hinterlands",   edition: "base",    types: ["action", "reaction"],              tags: ["terminal", "trasher", "gainer", "defender"]}, 
     Cartographer:   {cost: 5,   expansion: "hinterlands",   edition: "base",    types: ["action"],                          tags: ["cantrip", "inspector", "sifter", "discarder"]}, 
     Haggler:        {cost: 5,   expansion: "hinterlands",   edition: "base",    types: ["action"],                          tags: ["terminal", "virtualCoin", "gainer"]}, 
@@ -633,6 +632,31 @@ const cards =
     /*** 
      * RISING SUN
      ***/
+    MountainShrine: {cost: -5,  expansion: "risingsun",     edition: "base",    types: ["action", "omen"],                  tags: [""]},
+    Daimyo:         {cost: -6,  expansion: "risingsun",     edition: "base",    types: ["action", "command"],               tags: [""]},
+    Artist:         {cost: -8,  expansion: "risingsun",     edition: "base",    types: ["action"],                          tags: [""]},
+    Fishmonger:     {cost: 2,   expansion: "risingsun",     edition: "base",    types: ["action", "shadow"],                tags: [""]},
+    SnakeWitch:     {cost: 2,   expansion: "risingsun",     edition: "base",    types: ["action", "attack"],                tags: [""]},
+    Aristocrat:     {cost: 3,   expansion: "risingsun",     edition: "base",    types: ["action"],                          tags: [""]},
+    Craftsman:      {cost: 3,   expansion: "risingsun",     edition: "base",    types: ["action"],                          tags: [""]},
+    Riverboat:      {cost: 3,   expansion: "risingsun",     edition: "base",    types: ["action", "duration"],              tags: [""]},
+    RootCellar:     {cost: 3,   expansion: "risingsun",     edition: "base",    types: ["action"],                          tags: [""]},
+    Alley:          {cost: 4,   expansion: "risingsun",     edition: "base",    types: ["action", "shadow"],                tags: [""]},
+    Change:         {cost: 4,   expansion: "risingsun",     edition: "base",    types: ["action"],                          tags: [""]},
+    Ninja:          {cost: 4,   expansion: "risingsun",     edition: "base",    types: ["action", "attack", "shadow"],      tags: [""]},
+    Poet:           {cost: 4,   expansion: "risingsun",     edition: "base",    types: ["action", "omen"],                  tags: [""]},
+    RiverShrine:    {cost: 4,   expansion: "risingsun",     edition: "base",    types: ["action", "omen"],                  tags: [""]},
+    RusticVillage:  {cost: 4,   expansion: "risingsun",     edition: "base",    types: ["action", "omen"],                  tags: [""]},
+    GoldMine:       {cost: 5,   expansion: "risingsun",     edition: "base",    types: ["action"],                          tags: [""]},
+    ImperialEnvoy:  {cost: 5,   expansion: "risingsun",     edition: "base",    types: ["action"],                          tags: [""]},
+    Kitsune:        {cost: 5,   expansion: "risingsun",     edition: "base",    types: ["action", "attack", "omen"],        tags: [""]},
+    Litter:         {cost: 5,   expansion: "risingsun",     edition: "base",    types: ["action"],                          tags: [""]},
+    RiceBroker:     {cost: 5,   expansion: "risingsun",     edition: "base",    types: ["action"],                          tags: [""]},
+    Ronin:          {cost: 5,   expansion: "risingsun",     edition: "base",    types: ["action", "shadow"],                tags: [""]},
+    Tanuki:         {cost: 5,   expansion: "risingsun",     edition: "base",    types: ["action", "shadow"],                tags: [""]},
+    TeaHouse:       {cost: 5,   expansion: "risingsun",     edition: "base",    types: ["action", "omen"],                  tags: [""]},
+    Samurai:        {cost: 6,   expansion: "risingsun",     edition: "base",    types: ["action", "duration", "attack"],    tags: [""]},
+    Rice:           {cost: 7,   expansion: "risingsun",     edition: "base",    types: ["treasure"],                        tags: [""]},
 };
 
 const landscapes = 
@@ -783,7 +807,7 @@ const landscapes =
     Avoid:          {cost: 2,   expansion: "plunder",       edition: "base",    types: ["event"],               tags: ["sifter"]},
     Deliver:        {cost: 2,   expansion: "plunder",       edition: "base",    types: ["event"],               tags: ["setAside"]},
     Peril:          {cost: 2,   expansion: "plunder",       edition: "base",    types: ["event"],               tags: ["trashForBenefit", "lootGainer"]},
-    Rush:           {cost: 2,   expansion: "plunder",       edition: "base",    types: ["event"],               tags: ["setAside"]}, 
+    Rush:           {cost: 2,   expansion: "plunder",       edition: "base",    types: ["event"],               tags: ["setAside"]},
     Foray:          {cost: 3,   expansion: "plunder",       edition: "base",    types: ["event"],               tags: ["discarder", "lootGainer"]},
     Launch:         {cost: 3,   expansion: "plunder",       edition: "base",    types: ["event"],               tags: ["drawer", "village"]},
     Mirror:         {cost: 3,   expansion: "plunder",       edition: "base",    types: ["event"],               tags: ["gainer"]},
@@ -799,7 +823,7 @@ const landscapes =
     Cursed:         {cost: -99, expansion: "plunder",       edition: "base",    types: ["trait"],               tags: ["lootGainer"]},
     Fated:          {cost: -99, expansion: "plunder",       edition: "base",    types: ["trait"],               tags: ["topDecker"]},
     Fawning:        {cost: -99, expansion: "plunder",       edition: "base",    types: ["trait"],               tags: ["gainer"]},
-    Friendly:       {cost: -99, expansion: "plunder",       edition: "base",    types: ["trait"],               tags: ["gainer", "discarder"]}, 
+    Friendly:       {cost: -99, expansion: "plunder",       edition: "base",    types: ["trait"],               tags: ["gainer", "discarder"]},
     Hasty:          {cost: -99, expansion: "plunder",       edition: "base",    types: ["trait"],               tags: ["setAside"]},
     Inherited:      {cost: -99, expansion: "plunder",       edition: "base",    types: ["trait"],               tags: ["gameChanger"]},
     Inspiring:      {cost: -99, expansion: "plunder",       edition: "base",    types: ["trait"],               tags: ["village"]},
@@ -810,6 +834,36 @@ const landscapes =
     Rich:           {cost: -99, expansion: "plunder",       edition: "base",    types: ["trait"],               tags: ["gainer"]},
     Shy:            {cost: -99, expansion: "plunder",       edition: "base",    types: ["trait"],               tags: ["drawer", "discarder"]},
     Tireless:       {cost: -99, expansion: "plunder",       edition: "base",    types: ["trait"],               tags: ["setAside"]},
+
+    /*** 
+     * RISING SUN
+     ***/
+    Continue:       {cost: -8,  expansion: "risingsun",     edition: "base",    types: ["event"],               tags: [""]},
+    Amass:          {cost: 2,   expansion: "risingsun",     edition: "base",    types: ["event"],               tags: [""]},
+    Asceticism:     {cost: 2,   expansion: "risingsun",     edition: "base",    types: ["event"],               tags: [""]},
+    Credit:         {cost: 2,   expansion: "risingsun",     edition: "base",    types: ["event"],               tags: [""]},
+    Foresight:      {cost: 2,   expansion: "risingsun",     edition: "base",    types: ["event"],               tags: [""]},
+    Kintsugi:       {cost: 3,   expansion: "risingsun",     edition: "base",    types: ["event"],               tags: [""]},
+    Practice:       {cost: 3,   expansion: "risingsun",     edition: "base",    types: ["event"],               tags: [""]},
+    SeaTrade:       {cost: 4,   expansion: "risingsun",     edition: "base",    types: ["event"],               tags: [""]},
+    ReceiveTribute: {cost: 5,   expansion: "risingsun",     edition: "base",    types: ["event"],               tags: [""]},
+    Gather:         {cost: 7,   expansion: "risingsun",     edition: "base",    types: ["event"],               tags: [""]},
+    
+    ApproachingArmy:{cost: -99, expansion: "risingsun",     edition: "base",    types: ["prophecy"],            tags: [""]},
+    BidingTime:     {cost: -99, expansion: "risingsun",     edition: "base",    types: ["prophecy"],            tags: [""]},
+    Bureaucracy:    {cost: -99, expansion: "risingsun",     edition: "base",    types: ["prophecy"],            tags: [""]},
+    DivineWind:     {cost: -99, expansion: "risingsun",     edition: "base",    types: ["prophecy"],            tags: [""]},
+    Enlightenment:  {cost: -99, expansion: "risingsun",     edition: "base",    types: ["prophecy"],            tags: [""]},
+    FlourishingTrade:{cost: -99,expansion: "risingsun",     edition: "base",    types: ["prophecy"],            tags: [""]},
+    GoodHarvest:    {cost: -99, expansion: "risingsun",     edition: "base",    types: ["prophecy"],            tags: [""]},
+    GreatLeader:    {cost: -99, expansion: "risingsun",     edition: "base",    types: ["prophecy"],            tags: [""]},
+    Growth:         {cost: -99, expansion: "risingsun",     edition: "base",    types: ["prophecy"],            tags: [""]},
+    HarshWinter:    {cost: -99, expansion: "risingsun",     edition: "base",    types: ["prophecy"],            tags: [""]},
+    KindEmperor:    {cost: -99, expansion: "risingsun",     edition: "base",    types: ["prophecy"],            tags: [""]},
+    Panic:          {cost: -99, expansion: "risingsun",     edition: "base",    types: ["prophecy"],            tags: [""]},
+    Progress:       {cost: -99, expansion: "risingsun",     edition: "base",    types: ["prophecy"],            tags: [""]},
+    RapidExpansion: {cost: -99, expansion: "risingsun",     edition: "base",    types: ["prophecy"],            tags: [""]},
+    Sickness:       {cost: -99, expansion: "risingsun",     edition: "base",    types: ["prophecy"],            tags: [""]},
 };
 
 function validateCardList()

@@ -56,6 +56,7 @@ function loadPreset(presetName)
             setCheckbox("base-renaissance", true);
             setCheckbox("base-menagerie", true);
             setCheckbox("base-plunder", true);
+            setCheckbox("base-risingsun", true);
             //Landscapes
             setCheckbox("adventures-event", true);
             setCheckbox("empires-event", true);
@@ -65,6 +66,8 @@ function loadPreset(presetName)
             setCheckbox("menagerie-way", true);
             setCheckbox("plunder-event", true);
             setCheckbox("plunder-trait", true);
+            setCheckbox("risingsun-event", true);
+            setCheckbox("risingsun-prophecy", true);
             setCheckbox("promo-event", true);
             //Rules
             setCheckbox("includeCost2", true);
@@ -113,11 +116,14 @@ function loadPreset(presetName)
             setCheckbox("base-hinterlands", true);
             setCheckbox("seconded-hinterlands", true);
             setCheckbox("base-empires", true);
+            setCheckbox("base-risingsun", true);
             //Landscapes
             setCheckbox("adventures-event", true);
             setCheckbox("empires-event", true);
             setCheckbox("empires-landmark", true);
             setCheckbox("renaissance-project", true);
+            setCheckbox("risingsun-event", true);
+            setCheckbox("risingsun-prophecy", true);
             //Rules
             setCheckbox("includeCost2", true);
             setCheckbox("includeCost3", true);
@@ -166,10 +172,13 @@ function loadPreset(presetName)
                 setCheckbox("base-hinterlands", true);
                 setCheckbox("seconded-hinterlands", true);
                 setCheckbox("base-empires", true);
+                setCheckbox("base-risingsun", true);
                 setCheckbox("base-promo", true);
                 //Landscapes
                 setCheckbox("empires-event", true);
                 setCheckbox("empires-landmark", true);
+                setCheckbox("risingsun-event", true);
+                setCheckbox("risingsun-prophecy", true);
                 //Rules
                 setCheckbox("includeCost2", true);
                 setCheckbox("includeCost3", true);

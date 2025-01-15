@@ -444,6 +444,16 @@ const rules =
             return true;
         }
         return false;
+    },
+
+    //Guarantee rules (min 1 only if there is min 1 of another)
+    //Always true
+    enforceOmensAddingProphecy: function(selection)
+    {
+        if(!this.min(selection, "type", "omen", 1) || this.min(selection, "type"))
+        {
+            //TODO
+        }
     }
 };
 

@@ -460,15 +460,26 @@ const rules =
     //Vanilla rules (these rules are always true regardless of player settings)
     vanillaRules: 
     {
-        //Rising Sun
-        enforceOmensAddingProphecy: function(selection) //Omens always spawns a prophecy
+        //Allies
+        enforceLiaisonsAndAllies: function(selection) //Liaisons always spawn an ally and vice versa
         {
-            return rules.enforceTrait1AddingTrait2(selection, "types", "omen", "types", "prophecy");
+            return rules.enforceTrait1AddingTrait2(selection, "types", "liaison", "types", "ally") && rules.enforceTrait1AddingTrait2(selection, "types", "ally", "types", "liaison");
         },
-        enforceApproachingArmyAddingAttack: function(selection)
+        //Rising Sun
+        enforceOmensAndProphecies: function(selection) //Omens always spawn a prophecy and vice versa
+        {
+            return rules.enforceTrait1AddingTrait2(selection, "types", "omen", "types", "prophecy") && rules.enforceTrait1AddingTrait2(selection, "types", "prophecy", "types", "omen");
+        },
+        enforceApproachingArmyAddingAttack: function(selection) //Approaching Army sets up an attack into the kingdom
         {
             return rules.enforceTrait1AddingTrait2(selection, "name", "ApproachingArmy", "types", "attack");
+        },
+        /* //If only prophecies were selected in the landscape pool, then all generations fail (ideally, it should just generate with one landscape instead of two)
+        limitPropheciesToOne: function(selection)
+        {
+            return rules.max(selection, "types", "prophecy", 1);
         }
+        */
     }
 };
 

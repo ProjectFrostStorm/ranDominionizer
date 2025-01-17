@@ -167,9 +167,9 @@ function createLandscapeList(supportedExpansions) //Input is expansions object, 
             let landscapeToggleLabel = document.createElement("label");
             expansionSpan.appendChild(landscapeToggleLabel);
             landscapeToggleLabel.setAttribute("for", expansion + "-" + type);
-            if(type.charAt(type.length - 1).toLowerCase() === "y") //Rising Sun's Prophecies
+            if(type.toLowerCase() === "prophecy") //Rising Sun's Prophecies (cannot dynamically test for -y plurals because of Ways)
             {
-                landscapeToggleLabel.innerHTML = type.charAt(0).toUpperCase() + type.slice(1, type.length - 1) + "ies";
+                landscapeToggleLabel.innerHTML = "Prophecies";
             }
             else
             {

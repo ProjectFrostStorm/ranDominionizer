@@ -122,6 +122,8 @@ function loadPreset(presetName)
             setCheckbox("empires-event", true);
             setCheckbox("empires-landmark", true);
             setCheckbox("renaissance-project", true);
+            setCheckbox("menagerie-event", true);
+            setCheckbox("menagerie-way", true);
             setCheckbox("risingsun-event", true);
             setCheckbox("risingsun-prophecy", true);
             //Rules

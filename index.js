@@ -1,5 +1,6 @@
 const maxResultCards = 10;
 const maxResultLandscapes = 2;
+const maxExtras = 50; //Constrained by how many cards that set aside extras
 
 const resultCardsContainers = []; //additional pointer to the card result containers (span wrappers that contains card images)
 const resultLandscapesContainers = []; //additional pointer to the landscape result containers (span wrappers that contains landscape images)
@@ -50,6 +51,7 @@ function generateElements()
     createLandscapeList(expansions);
     createResultCardsContainers(maxResultCards, resultCardsContainers);
     createResultLandscapesContainers(maxResultLandscapes, resultLandscapesContainers);
+    createResultExtrasContainers(maxExtras, resultExtrasContainers);
 }
 //Generate Expansion Settings List
 function createExpansionList(supportedExpansions)
@@ -214,6 +216,33 @@ function createResultLandscapesContainers(numCards, containerArray)
         let imageDiv = document.createElement("span"); //Holds the image object
         containerArray[x].appendChild(imageDiv);
         imageDiv.setAttribute("id", "resultLandscapeImageContainer" + x);
+        
+        /*
+        let rerollDiv = document.createElement("span"); //Holds the reroll button object
+        containerArray[x].appendChild(rerollDiv);
+        rerollDiv.innerHTML = "Reroll";
+        */
+    }
+}
+//Create Extra Card Containers
+function createResultExtrasContainers(numCards, containerArray)
+{
+    let resultExtrasArea = document.getElementById("resultExtras");
+
+    for(let x = 0; x < numCards; x++)
+    {
+        containerArray[x] = document.createElement("span");
+        resultExtrasArea.appendChild(containerArray[x]);
+        containerArray[x].setAttribute("id", "resultExtra" + x);
+
+        //TODO Patch work UI solution, want to improve later
+        let label = document.createElement("span");
+        containerArray[x].appendChild(label);
+        label.setAttribute("id", "resultExtraLabel" + x);
+
+        let imageDiv = document.createElement("span"); //Holds the image object
+        containerArray[x].appendChild(imageDiv);
+        imageDiv.setAttribute("id", "resultExtraImageContainer" + x);
         
         /*
         let rerollDiv = document.createElement("span"); //Holds the reroll button object
@@ -507,6 +536,7 @@ function unhideResults()
 {
     let resultLandscapesArea = document.getElementById("resultLandscapes");
     let resultCardsArea = document.getElementById("resultCards");
+    let resultExtrasArea = document.getElementById("resultExtras");
     if(resultLandscapesArea.hasAttribute("hidden"))
     {
         resultLandscapesArea.removeAttribute("hidden");
@@ -515,7 +545,10 @@ function unhideResults()
     {
         resultCardsArea.removeAttribute("hidden");
     }
-    //TODO Result Extras 
+    if(resultExtrasArea.hasAttribute("hidden"))
+    {
+        resultExtrasArea.removeAttribute("hidden");
+    }
 }
 function clearResultCards(num)
 {
@@ -538,6 +571,20 @@ function clearResultLandscapes(num)
         {
             //NOTE: Assume no other elements
             landscapeImageContainer.removeChild(landscapeImageContainer.firstChild);
+        }
+    }
+}
+function clearResultExtras(num)
+{
+    for(let x = 0; x < num; x++)
+    {
+        //Clear label
+        document.getElementById("resultExtraLabel" + x).innerHTML = "";
+        //Add card image
+        let resultExtraImageContainer = document.getElementById("resultExtraImageContainer" + x);
+        if(resultExtraImageContainer.firstChild !== null) //Has an image object
+        {
+            resultExtraImageContainer.removeChild(resultExtraImageContainer.firstChild); //Clear it
         }
     }
 }
@@ -565,17 +612,47 @@ function drawResultLandscapes(resultLandscapes) //Input is array of landscapes n
         landscapeImageContainer.appendChild(landscapes[resultLandscapes[x]].image);
     }
 }
+function drawResultExtras(resultExtras)
+{
+    if(resultExtras === undefined) {return;} //No extras
+
+    let extraKeys = Object.keys(resultExtras);
+    for(let x = 0; x < extraKeys.length; x++)
+    {
+        let currentName = resultExtras[extraKeys[x]];
+        //Is a card
+        if(cards[currentName] !== undefined)
+        {
+            //Add label
+            document.getElementById("resultExtraLabel" + x).innerHTML = extraKeys[x] + ": ";
+            //Add card image
+            document.getElementById("resultExtraImageContainer" + x).appendChild(cards[currentName].image);
+        }
+        //Is a landscape
+        else if(landscapes[currentName] !== undefined)
+        {
+            //Add label
+            document.getElementById("resultExtraLabel" + x).innerHTML = extraKeys[x] + ": ";
+            //Add card image
+            document.getElementById("resultExtraImageContainer" + x).appendChild(landscapes[currentName].image);
+        }
+        else //Invalid
+        {
+            return;
+        }
+    }
+}
 function drawResults(selection) //Draws all results (cards, landscapes, etc.)
 {
     //Clear results
     clearResultCards(maxResultCards);
     clearResultLandscapes(maxResultLandscapes);
-    //TODO Result Extras 
+    clearResultExtras(maxExtras);
 
     //Draw results
     drawResultCards(selection.kingdom);
     drawResultLandscapes(selection.landscapes);
-    //TODO Result Extras 
+    drawResultExtras(selection.extras);
 
     unhideResults(); //Unhide if hidden
 }

@@ -403,6 +403,27 @@ const rules =
                 count++;
             }
         }
+        for(const extraType of Object.keys(selection.extras))
+        {
+            const extraName = selection.extras[extraType];
+            //Match (extras could be both cards or landscapes)
+            if(cards[extraName] !== undefined) //Cards
+            {
+                if((cards[extraName][trait] == traitValue) || (Array.isArray(cards[extraName][trait]) && cards[extraName][trait].includes(traitValue))) //Some traits are single "" while some are [""]
+                {
+                    if(verboseDebug) {console.log("MIN - For " + trait + "=" + traitValue + " matching card is " + extraName);}
+                    count++;
+                }
+            }
+            else if(landscapes[extraName] !== undefined) //Landscapes
+            {
+                if((landscapes[extraName][trait] == traitValue) || (Array.isArray(landscapes[extraName][trait]) && landscapes[extraName][trait].includes(traitValue))) //Some traits are single "" while some are [""]
+                {
+                    if(verboseDebug) {console.log("MIN - For " + trait + "=" + traitValue + " matching card is " + extraName);}
+                    count++;
+                }
+            }
+        }
 
         if(count < parameter) //Min rule
         {
@@ -429,6 +450,27 @@ const rules =
             {
                 count++;
                 if(verboseDebug) {console.log("MAX - For " + trait + "=" + traitValue + " matching card is " + landscapeName + ", this is number " + count);}
+            }
+        }
+        for(const extraType of Object.keys(selection.extras))
+        {
+            const extraName = selection.extras[extraType];
+            //Match (extras could be both cards or landscapes)
+            if(cards[extraName] !== undefined) //Cards
+            {
+                if((cards[extraName][trait] == traitValue) || (Array.isArray(cards[extraName][trait]) && cards[extraName][trait].includes(traitValue))) //Some traits are single "" while some are [""]
+                {
+                    count++;
+                    if(verboseDebug) {console.log("MAX - For " + trait + "=" + traitValue + " matching card is " + extraName + ", this is number " + count);}
+                }
+            }
+            else if(landscapes[extraName] !== undefined) //Landscapes
+            {
+                if((landscapes[extraName][trait] == traitValue) || (Array.isArray(landscapes[extraName][trait]) && landscapes[extraName][trait].includes(traitValue))) //Some traits are single "" while some are [""]
+                {
+                    count++;
+                    if(verboseDebug) {console.log("MAX - For " + trait + "=" + traitValue + " matching card is " + extraName + ", this is number " + count);}
+                }
             }
         }
 
@@ -470,16 +512,117 @@ const rules =
         {
             return rules.enforceTrait1AddingTrait2(selection, "types", "omen", "types", "prophecy") && rules.enforceTrait1AddingTrait2(selection, "types", "prophecy", "types", "omen");
         },
-        enforceApproachingArmyAddingAttack: function(selection) //Approaching Army sets up an attack into the kingdom
-        {
-            return rules.enforceTrait1AddingTrait2(selection, "name", "ApproachingArmy", "types", "attack");
-        },
+        //Name template for one direction implications: enforceXAddingY, for both directions: enforceXsAndYs
         /* //If only prophecies were selected in the landscape pool, then all generations fail (ideally, it should just generate with one landscape instead of two)
         limitPropheciesToOne: function(selection)
         {
             return rules.max(selection, "types", "prophecy", 1);
         }
         */
+    }
+};
+//Builds a subpool of valid extra cards for a card that adds extra
+const buildSubPool = 
+{
+    //Main function
+    build: function(pool, filter)
+    {
+        //Non-existant filter
+        if(filter === undefined)
+        {
+            return null;
+        }
+
+        let finalPool = {cards: [], landscapes: []};
+        for(let x = 0; x < pool.cards.length; x++)
+        {
+            let cardInfoObj = buildSubPool.retrieveCardInfo(pool.cards[x]);
+            if(cardInfoObj !== null && filter(cardInfoObj))
+            {
+                finalPool.cards.push(pool.cards[x]);
+            }
+        }
+        for(let x = 0; x < pool.landscapes.length; x++)
+        {
+            let cardInfoObj = buildSubPool.retrieveCardInfo(pool.landscapes[x]);
+            if(cardInfoObj !== null && filter(cardInfoObj))
+            {
+                finalPool.landscapes.push(pool.landscapes[x]);
+            }
+        }
+        return finalPool;
+    },
+    //Helper, returns an object containing the card info from cards or landscapes and some properties that contain extra info; or null if the name is invalid
+    retrieveCardInfo: function(name)
+    {
+        if(cards[name] !== undefined)
+        {
+            return {
+                info: cards[name],
+                type: "card"
+            };
+        }
+        if(landscapes[name] !== undefined)
+        {
+            return {
+                info: landscapes[name],
+                type: "landscape"
+            };
+        }
+        return null;
+    },
+
+    filters: 
+    {
+        //Cornucopia
+        YoungWitch: function(cardInfo)
+        {
+            //Unused 2 or 3 cost kingdom pile
+            if(cardInfo.type === "card" && (cardInfo.info["cost"] === 2 || cardInfo.info["cost"] === 3))
+            {
+                return true;
+            }
+            return false;
+        },
+        //Guilds and Cornucopia 2E
+        Ferryman: function(cardInfo)
+        {
+            //Unused 3 or 4 cost kingdom pile
+            if(cardInfo.type === "card" && (cardInfo.info["cost"] === 3 || cardInfo.info["cost"] === 4))
+            {
+                return true;
+            }
+            return false;
+        },
+        //Menagerie
+        WayOfTheMouse: function(cardInfo)
+        {
+            //Unused 2 or 3 cost action pile
+            if(cardInfo.type === "card" && (cardInfo.info["cost"] === 2 || cardInfo.info["cost"] === 3) && cardInfo.info["types"].includes("action"))
+            {
+                return true;
+            }
+            return false;
+        },
+        //Rising Sun
+        Riverboat: function(cardInfo)
+        {
+            //Unused 5 cost non-duration action pile
+            if(cardInfo.type === "card" && cardInfo.info["cost"] === 5 && cardInfo.info["types"].includes("action") && !cardInfo.info["types"].includes("duration"))
+            {
+                return true;
+            }
+            return false;
+        },
+        ApproachingArmy: function(cardInfo)
+        {
+            //Unused 2 or 3 cost action pile
+            if(cardInfo.type === "card" && cardInfo.info["types"].includes("action") && cardInfo.info["types"].includes("attack"))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 };
 
@@ -497,6 +640,7 @@ function uniformGenerate(numCards, numLandscapes, pool) //Pick with uniform rand
     let selection = {};
     selection.kingdom = [];
     selection.landscapes = [];
+    selection.extras = {};
 
     if(numCards > cardPoolSize)
     {
@@ -559,6 +703,44 @@ function uniformGenerate(numCards, numLandscapes, pool) //Pick with uniform rand
         selection.landscapes.push(currentlandscapePool[nextIndex]);
         currentlandscapePool.splice(nextIndex, 1);
         landscapePoolSize--;
+    }
+
+    //Add extras (e.g. Way of the Mouse's extra 2 or 3 cost)
+    for(let x = 0; x < selection.kingdom.length; x++) //Check for extras in the kingdom
+    {
+        let currentName = selection.kingdom[x];
+        let subpool = buildSubPool.build({cards: currentCardPool, landscapes: currentlandscapePool}, buildSubPool.filters[currentName]);
+        if(subpool !== null) //This is a card that adds extras
+        {
+            //NOTE: Currently only pulls one card from subpool or one landscape from subpool; if subpool has cards, it will not pull from landscapes (i.e. only ever pulls from cards or landscapes, not both)
+            if(subpool.cards.length !== 0) //Pull a card
+            {
+                selection.extras[currentName] = subpool.cards[getRandomInt(subpool.cards.length)];
+            }
+            else if(subpool.landscapes.length !== 0) //Pull a landscape
+            {
+                selection.extras[currentName] = subpool.landscapes[getRandomInt(subpool.landscapes.length)];
+            }
+        }
+    }
+    for(let x = 0; x < selection.landscapes.length; x++) //Check for extras in the landscapes
+    {
+        let currentName = selection.landscapes[x];
+        let subpool = buildSubPool.build({cards: currentCardPool, landscapes: currentlandscapePool}, buildSubPool.filters[currentName]);
+        console.log(currentName + ": " + subpool);
+        if(subpool !== null) //This is a card that adds extras
+        {
+            //NOTE: Currently only pulls one card from subpool or one landscape from subpool; if subpool has cards, it will not pull from landscapes (i.e. only ever pulls from cards or landscapes, not both)
+            if(subpool.cards.length !== 0) //Pull a card
+            {
+                selection.extras[currentName] = subpool.cards[getRandomInt(subpool.cards.length)];
+                //TODO if there is no valid cards for an extra (e.g. all the valid 5 cost cards are used already), the randomizer currently does nothing (it should skip to next iteration instead)
+            }
+            else if(subpool.landscapes.length !== 0) //Pull a landscape
+            {
+                selection.extras[currentName] = subpool.landscapes[getRandomInt(subpool.landscapes.length)];
+            }
+        }
     }
 
     return selection;

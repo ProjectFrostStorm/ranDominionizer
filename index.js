@@ -252,10 +252,13 @@ function preloadImages()
     {
         let cardName = cardNames[x];
 
+        //Add a card's respective image to its data set entry
         cards[cardName].image = new Image();
         cards[cardName].image.onload = onloadFunction;
         cards[cardName].image.src = cardImageSrc(cardName, cards[cardName].expansion, cards[cardName].edition);
         cards[cardName].image.alt = cardName;
+        //Also add a duplicate of its name
+        cards[cardName].name = cardName;
 
         //For whitelisting
         cards[cardName].image.onclick = function() 
@@ -273,10 +276,13 @@ function preloadImages()
     {
         let landscapeName = landscapeNames[x];
 
+        //Add a landscape's respective image to its data set entry
         landscapes[landscapeName].image = new Image();
         landscapes[landscapeName].image.onload = onloadFunction;
         landscapes[landscapeName].image.src = landscapeImageSrc(landscapeName, landscapes[landscapeName].expansion, landscapes[landscapeName].edition);
         landscapes[landscapeName].image.alt = landscapeName;
+        //Also add a duplicate of its name
+        landscapes[landscapeName].name = landscapeName;
 
         //For whitelisting
         landscapes[landscapeName].image.onclick = function() 

@@ -370,6 +370,17 @@ function buildCardPool()
 //Rules
 const rules = 
 {
+    //Helper rules (cannot be invoked from queryGenerationRules())
+    enforceTrait1AddingTrait2: function(selection, trait1, trait1Value, trait2, trait2Value) //If the selection contains a card with trait1, it must also contain a card with trait2
+    {
+        //A ==> B <=> ~A || B
+        if(!this.min(selection, trait1, trait1Value, 1) || this.min(selection, trait2, trait2Value, 1))
+        {
+            return true;
+        }
+        return false;
+    },
+
     //General rules
     min: function(selection, trait, traitValue, parameter) //Parameter is an integer n, where the final set will contain >= n cards of X traitValue
     {
@@ -446,13 +457,17 @@ const rules =
         return false;
     },
 
-    //Guarantee rules (min 1 only if there is min 1 of another)
-    //Always true
-    enforceOmensAddingProphecy: function(selection)
+    //Vanilla rules (these rules are always true regardless of player settings)
+    vanillaRules: 
     {
-        if(!this.min(selection, "type", "omen", 1) || this.min(selection, "type"))
+        //Rising Sun
+        enforceOmensAddingProphecy: function(selection) //Omens always spawns a prophecy
         {
-            //TODO
+            return rules.enforceTrait1AddingTrait2(selection, "types", "omen", "types", "prophecy");
+        },
+        enforceApproachingArmyAddingAttack: function(selection)
+        {
+            return rules.enforceTrait1AddingTrait2(selection, "name", "ApproachingArmy", "types", "attack");
         }
     }
 };
@@ -547,15 +562,28 @@ function bruteForceGenerate(numCards, numLandscapes, pool, activeRules, limit) /
 
         let pass = true;
 
+        //Process Vanilla (always true) Rules
+        let vanillaRuleNames = Object.keys(rules.vanillaRules);
+        for(let y = 0; y < vanillaRuleNames.length; y++)
+        {
+            if(!rules.vanillaRules[vanillaRuleNames[y]](candidate))
+            {
+                pass = false;
+                if(verboseDebug) {console.log("   Fails vanilla rule selection: " + vanillaRuleNames[y]);}
+                failedGenerations++;
+                break;
+            }
+        }
+        if(!pass) {continue;}
         //Process Rules
         for(let y = 0; y < activeRules.length; y++)
         {
             let currentRule = activeRules[y];
             
-            if(!rules[currentRule.rule](candidate, currentRule.trait, currentRule.traitValue, currentRule.parameter))
+            if(!pass || !rules[currentRule.rule](candidate, currentRule.trait, currentRule.traitValue, currentRule.parameter))
             {
                 pass = false;
-                if(verboseDebug) {console.log("   Fails rule selection.");}
+                if(verboseDebug) {console.log("   Fails rule selection: " + currentRule.rule);}
                 failedGenerations++;
                 break;
             }

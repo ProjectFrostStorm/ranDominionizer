@@ -153,13 +153,11 @@ function loadPreset(presetName)
                 "Training",
                 "Inheritance",
                 "Pathfinding",
-                /*
                 //Menagerie (horses)
                 "Ride",
                 "Bargain",
                 "Demand",
                 "Stampede",
-                */
             ];
             document.getElementById("blacklistOutputArea").value = currentBlacklist.join("\n");
             break;

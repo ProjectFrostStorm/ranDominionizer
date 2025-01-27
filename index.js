@@ -1,5 +1,5 @@
-const maxResultCards = 10;
-const maxResultLandscapes = 2;
+const maxResultCards = 20;
+const maxResultLandscapes = 4;
 const maxExtras = 50; //Constrained by how many cards that set aside extras
 
 const resultCardsContainers = []; //additional pointer to the card result containers (span wrappers that contains card images)

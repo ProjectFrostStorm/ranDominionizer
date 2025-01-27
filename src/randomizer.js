@@ -727,7 +727,7 @@ function uniformGenerate(numCards, numLandscapes, pool) //Pick with uniform rand
     {
         let currentName = selection.landscapes[x];
         let subpool = buildSubPool.build({cards: currentCardPool, landscapes: currentlandscapePool}, buildSubPool.filters[currentName]);
-        console.log(currentName + ": " + subpool);
+        
         if(subpool !== null) //This is a card that adds extras
         {
             //NOTE: Currently only pulls one card from subpool or one landscape from subpool; if subpool has cards, it will not pull from landscapes (i.e. only ever pulls from cards or landscapes, not both)

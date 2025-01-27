@@ -105,6 +105,47 @@ function loadPreset(presetName)
             document.getElementById("blacklistOutputArea").value = currentBlacklist.join("\n");
             break;
 
+        case "echo":
+            resetAllSettings();
+            //Expansion
+            setCheckbox("base-base", true);
+            setCheckbox("seconded-base", true);
+            setCheckbox("base-intrigue", true);
+            setCheckbox("seconded-intrigue", true);
+            setCheckbox("base-empires", true);
+            //Landscapes
+            //setCheckbox("adventures-event", true);
+            setCheckbox("empires-event", true);
+            setCheckbox("empires-landmark", true);
+            //setCheckbox("renaissance-project", true);
+            //setCheckbox("menagerie-event", true);
+            //setCheckbox("menagerie-way", true);
+            //setCheckbox("plunder-event", true);
+            //setCheckbox("plunder-trait", true);
+            //setCheckbox("risingsun-event", true);
+            //setCheckbox("promo-event", true);
+            //Rules
+            setCheckbox("includeCost2", true);
+            setCheckbox("includeCost3", true);
+            setCheckbox("include2Cost3", true);
+            setCheckbox("includeCost4", true);
+            setCheckbox("include2Cost4", true);
+            setCheckbox("includeCost5", true);
+            setCheckbox("include2Cost5", true);
+            setCheckbox("includeCardRemover", true);
+            setCheckbox("includeVillage", true);
+            setCheckbox("includePlusBuy", true);
+            setCheckbox("limitTerminal", true);
+            /*
+            //Blacklist
+            currentBlacklist = 
+            [
+                //
+            ];
+            document.getElementById("blacklistOutputArea").value = currentBlacklist.join("\n");
+            */
+            break;
+
         case "quebec":
             resetAllSettings();
             //Expansion

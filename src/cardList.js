@@ -180,6 +180,12 @@ const cards =
     /*** 
      * BASE (1ST EDITION)
      ***/
+    Chancellor:     {cost: 3,   expansion: "base",          edition: "first",   types: ["action"],                          tags: ["terminal", "virtualCoin"]},
+    Woodcutter:     {cost: 3,   expansion: "base",          edition: "first",   types: ["action"],                          tags: ["terminal", "plusBuy", "virtualCoin"]},
+    Feast:          {cost: 4,   expansion: "base",          edition: "first",   types: ["action"],                          tags: ["terminal", "oneshot", "gainer"]},
+    Spy:            {cost: 4,   expansion: "base",          edition: "first",   types: ["action", "attack"],                tags: ["cantrip", "inspector", "discarder"]},
+    Thief:          {cost: 4,   expansion: "base",          edition: "first",   types: ["action", "attack"],                tags: ["terminal", "gainer", "trashingAttack"]},
+    Adventurer:     {cost: 6,   expansion: "base",          edition: "first",   types: ["action"],                          tags: ["terminal", "digger", "discarder", "drawer"]},
 
     /*** 
      * BASE (2ND EDITION)
@@ -188,7 +194,7 @@ const cards =
     Merchant:       {cost: 3,   expansion: "base",          edition: "second",  types: ["action"],                          tags: ["cantrip", "virtualCoin", "peddler"]},
     Vassal:         {cost: 3,   expansion: "base",          edition: "second",  types: ["action"],                          tags: ["conditionalTerminal", "virtualCoin", "discarder"]},
     Poacher:        {cost: 4,   expansion: "base",          edition: "second",  types: ["action"],                          tags: ["cantrip", "virtualCoin", "peddler", "discarder"]},
-    Bandit:         {cost: 5,   expansion: "base",          edition: "second",  types: ["action", "attack"],                tags: ["terminal", "gainer", "trashingAttack"]},
+    Bandit:         {cost: 5,   expansion: "base",          edition: "second",  types: ["action", "attack"],                tags: ["terminal", "gainer", "trashingAttack", "discarder"]},
     Sentry:         {cost: 5,   expansion: "base",          edition: "second",  types: ["action"],                          tags: ["cantrip", "trasher", "sifter", "discarder", "inspector"]},
     Artisan:        {cost: 6,   expansion: "base",          edition: "second",  types: ["action"],                          tags: ["terminal", "workshop", "gainer", "topDecker"]},
     
@@ -218,6 +224,12 @@ const cards =
     /*** 
      * INTRIGUE (1ST EDITION)
      ***/
+    SecretChamber:  {cost: 2,   expansion: "intrigue",      edition: "first",   types: ["action", "reaction"],              tags: ["terminal", "discardForBenefit", "discarder", "virtualCoin", "inspector"]},
+    GreatHall:      {cost: 3,   expansion: "intrigue",      edition: "first",   types: ["action", "victory"],               tags: ["cantrip", "altvp"]},
+    Coppersmith:    {cost: 4,   expansion: "intrigue",      edition: "first",   types: ["action"],                          tags: ["terminal", "virtualCoin"]},
+    Scout:          {cost: 4,   expansion: "intrigue",      edition: "first",   types: ["action"],                          tags: ["inspector", "sifter"]},
+    Saboteur:       {cost: 5,   expansion: "intrigue",      edition: "first",   types: ["action", "attack"],                tags: ["terminal", "trashingAttack", "discarder"]},
+    Tribute:        {cost: 5,   expansion: "intrigue",      edition: "first",   types: ["action"],                          tags: ["conditionalTerminal", "village", "virtualCoin", "drawer", "discarder"]},
 
     /*** 
      * INTRIGUE (2ND EDITION)
@@ -288,7 +300,7 @@ const cards =
     City:           {cost: 5,   expansion: "prosperity",    edition: "base",    types: ["action"],                          tags: ["cantrip", "village", "drawer", "virtualCoin", "plusBuy"]},
     Mint:           {cost: 5,   expansion: "prosperity",    edition: "base",    types: ["action"],                          tags: ["terminal", "gainer", "trasher"]},
     Rabble:         {cost: 5,   expansion: "prosperity",    edition: "base",    types: ["action", "attack"],                tags: ["terminal", "drawer", "deckInspectionAttack"]},
-    Vault:          {cost: 5,   expansion: "prosperity",    edition: "base",    types: ["action"],                          tags: ["terminal", "drawer", "discardForBenefit", "virtualCoin", "positiveInteraction"]},
+    Vault:          {cost: 5,   expansion: "prosperity",    edition: "base",    types: ["action"],                          tags: ["terminal", "drawer", "discardForBenefit", "discarder", "virtualCoin", "positiveInteraction"]},
     GrandMarket:    {cost: 6,   expansion: "prosperity",    edition: "base",    types: ["action"],                          tags: ["cantrip", "plusBuy", "virtualCoin", "peddler", "gainCondition"]},
     Hoard:          {cost: 6,   expansion: "prosperity",    edition: "base",    types: ["treasure"],                        tags: ["gainer"]},
     Bank:           {cost: 7,   expansion: "prosperity",    edition: "base",    types: ["treasure"],                        tags: ["virtualCoin"]},
@@ -368,6 +380,7 @@ const cards =
     /*** 
      * HINTERLANDS (1ST EDITION)
      ***/
+    //Mandarin, NomadCamp, and Oracle do not have correctly sized images
 
     /*** 
      * HINTERLANDS (2ND EDITION)

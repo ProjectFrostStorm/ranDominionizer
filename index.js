@@ -173,6 +173,10 @@ function createLandscapeList(supportedExpansions) //Input is expansions object, 
             {
                 landscapeToggleLabel.innerHTML = "Prophecies";
             }
+            else if(type.toLowerCase() === "ally") //Allies' Allies
+            {
+                landscapeToggleLabel.innerHTML = "Allies";
+            }
             else
             {
                 landscapeToggleLabel.innerHTML = type.charAt(0).toUpperCase() + type.slice(1) + "s";

@@ -119,18 +119,18 @@ const expansions =
     nocturne:       {secondEd: false,   displayName: "Nocturne",    index: 12},
     renaissance:    {secondEd: false,   displayName: "Renaissance", index: 13,  landscapes: ["project"]},
     menagerie:      {secondEd: false,   displayName: "Menagerie",   index: 14,  landscapes: ["event", "way"]},
-    allies:         {secondEd: false,   displayName: "Allies",      index: 15},
+    allies:         {secondEd: false,   displayName: "Allies",      index: 15,  landscapes: ["ally"]},
     plunder:        {secondEd: false,   displayName: "Plunder",     index: 16,  landscapes: ["event", "trait"]},
     risingsun:      {secondEd: false,   displayName: "Rising Sun",  index: 17,  landscapes: ["event", "prophecy"]},
     promo:          {secondEd: false,   displayName: "Promo",  index: 1000, landscapes: ["event"]},
 };
 //Temporary disables (nobase, nofirst, nosecond)
-expansions.base["nofirst"] = true;
-expansions.intrigue["nofirst"] = true;
-expansions.alchemy["nobase"] = true;
-expansions.hinterlands["nofirst"] = true;
-expansions.nocturne["nobase"] = true;
-expansions.allies["nobase"] = true;
+//expansions.base["nofirst"] = true;
+//expansions.intrigue["nofirst"] = true;
+//expansions.alchemy["nobase"] = true;
+//expansions.hinterlands["nofirst"] = true;
+//expansions.nocturne["nobase"] = true;
+//expansions.allies["nobase"] = true;
 
 const cards = 
 {
@@ -290,6 +290,22 @@ const cards =
     SeaWitch:       {cost: 5,   expansion: "seaside",       edition: "second",  types: ["action", "duration", "attack"],    tags: ["terminal", "drawer", "curserAttack", "sifter"]},
 
     /*** 
+     * ALCHEMY
+     ***/
+    Transmute:      {cost: 0.1, expansion: "alchemy",       edition: "base",    types: ["action"],                          tags: [""]},
+    Vineyard:       {cost: 0.1, expansion: "alchemy",       edition: "base",    types: ["victory"],                         tags: [""]},
+    Herbalist:      {cost: 2,   expansion: "alchemy",       edition: "base",    types: ["action"],                          tags: [""]},
+    Apothecary:     {cost: 2.1, expansion: "alchemy",       edition: "base",    types: ["action"],                          tags: [""]},
+    ScryingPool:    {cost: 2.1, expansion: "alchemy",       edition: "base",    types: ["action", "attack"],                tags: [""]},
+    University:     {cost: 2.1, expansion: "alchemy",       edition: "base",    types: ["action"],                          tags: [""]},
+    Alchemist:      {cost: 3.1, expansion: "alchemy",       edition: "base",    types: ["action"],                          tags: [""]},
+    Familiar:       {cost: 3.1, expansion: "alchemy",       edition: "base",    types: ["action", "attack"],                tags: [""]},
+    PhilosophersStone:{cost: 3.1,expansion: "alchemy",      edition: "base",    types: ["treasure"],                        tags: [""]},
+    Golem:          {cost: 4.1, expansion: "alchemy",       edition: "base",    types: ["action"],                          tags: [""]},
+    Apprentice:     {cost: 5,   expansion: "alchemy",       edition: "base",    types: ["action"],                          tags: [""]},
+    Possession:     {cost: 6.1, expansion: "alchemy",       edition: "base",    types: ["action"],                          tags: [""]},
+
+    /*** 
      * PROSPERITY (BASE)
      ***/
     Watchtower:     {cost: 3,   expansion: "prosperity",    edition: "base",    types: ["action", "reaction"],              tags: ["terminal", "drawer", "drawToX", "topDecker", "trasher"]},
@@ -381,6 +397,16 @@ const cards =
      * HINTERLANDS (1ST EDITION)
      ***/
     //Mandarin, NomadCamp, and Oracle do not have correctly sized images
+    //TODO Tagging
+    Duchess:        {cost: 2,   expansion: "hinterlands",   edition: "first",   types: ["action"],                          tags: ["terminal"]},
+    Oracle:         {cost: 3,   expansion: "hinterlands",   edition: "first",   types: ["action", "attack"],                tags: ["terminal"]},
+    NobleBrigand:   {cost: 4,   expansion: "hinterlands",   edition: "first",   types: ["action", "attack"],                tags: ["terminal"]},
+    NomadCamp:      {cost: 4,   expansion: "hinterlands",   edition: "first",   types: ["action"],                          tags: ["terminal"]},
+    SilkRoad:       {cost: 4,   expansion: "hinterlands",   edition: "first",   types: ["victory"],                         tags: ["altvp"]},
+    Cache:          {cost: 5,   expansion: "hinterlands",   edition: "first",   types: ["treasure"],                        tags: [""]},
+    Embassy:        {cost: 5,   expansion: "hinterlands",   edition: "first",   types: ["action"],                          tags: ["terminal"]},
+    IllGottenGains: {cost: 5,   expansion: "hinterlands",   edition: "first",   types: ["treasure"],                        tags: [""]},
+    Mandarin:       {cost: 5,   expansion: "hinterlands",   edition: "first",   types: ["action"],                          tags: ["terminal"]},
 
     /*** 
      * HINTERLANDS (2ND EDITION)
@@ -532,6 +558,40 @@ const cards =
     /*** 
      * NOCTURNE
      ***/
+    //TODO tagging
+    Druid:          {cost: 2,   expansion: "nocturne",      edition: "base",    types: ["action", "fate"],                  tags: [""]},
+    FaithfulHound:  {cost: 2,   expansion: "nocturne",      edition: "base",    types: ["action", "reaction"],              tags: [""]},
+    Guardian:       {cost: 2,   expansion: "nocturne",      edition: "base",    types: ["night", "duration"],               tags: [""]},
+    Monastery:      {cost: 2,   expansion: "nocturne",      edition: "base",    types: ["night"],                           tags: [""]},
+    Pixie:          {cost: 2,   expansion: "nocturne",      edition: "base",    types: ["action", "fate"],                  tags: [""]},
+    Tracker:        {cost: 2,   expansion: "nocturne",      edition: "base",    types: ["action", "fate"],                  tags: [""]},
+    Changeling:     {cost: 3,   expansion: "nocturne",      edition: "base",    types: ["night"],                           tags: [""]},
+    Fool:           {cost: 3,   expansion: "nocturne",      edition: "base",    types: ["action", "fate"],                  tags: [""]},
+    GhostTown:      {cost: 3,   expansion: "nocturne",      edition: "base",    types: ["night", "duration"],               tags: [""]},
+    Leprechaun:     {cost: 3,   expansion: "nocturne",      edition: "base",    types: ["action", "doom"],                  tags: [""]},
+    NightWatchman:  {cost: 3,   expansion: "nocturne",      edition: "base",    types: ["night"],                           tags: [""]},
+    SecretCave:     {cost: 3,   expansion: "nocturne",      edition: "base",    types: ["action", "duration"],              tags: [""]},
+    Bard:           {cost: 4,   expansion: "nocturne",      edition: "base",    types: ["action", "fate"],                  tags: [""]},
+    BlessedVillage: {cost: 4,   expansion: "nocturne",      edition: "base",    types: ["action", "fate"],                  tags: [""]},
+    Cemetery:       {cost: 4,   expansion: "nocturne",      edition: "base",    types: ["victory"],                         tags: [""]},
+    Conclave:       {cost: 4,   expansion: "nocturne",      edition: "base",    types: ["action"],                          tags: [""]},
+    DevilsWorkshop: {cost: 4,   expansion: "nocturne",      edition: "base",    types: ["night"],                           tags: [""]},
+    Exorcist:       {cost: 4,   expansion: "nocturne",      edition: "base",    types: ["night"],                           tags: [""]},
+    Necromancer:    {cost: 4,   expansion: "nocturne",      edition: "base",    types: ["action"],                          tags: [""]},
+    Shepherd:       {cost: 4,   expansion: "nocturne",      edition: "base",    types: ["action"],                          tags: [""]},
+    Skulk:          {cost: 4,   expansion: "nocturne",      edition: "base",    types: ["action", "attack", "doom"],        tags: [""]},
+    Cobbler:        {cost: 5,   expansion: "nocturne",      edition: "base",    types: ["night", "duration"],               tags: [""]},
+    Crypt:          {cost: 5,   expansion: "nocturne",      edition: "base",    types: ["night", "duration"],               tags: [""]},
+    CursedVillage:  {cost: 5,   expansion: "nocturne",      edition: "base",    types: ["action", "doom"],                  tags: [""]},
+    DenOfSin:       {cost: 5,   expansion: "nocturne",      edition: "base",    types: ["night", "duration"],               tags: [""]},
+    Idol:           {cost: 5,   expansion: "nocturne",      edition: "base",    types: ["treasure", "attack", "fate"],      tags: [""]},
+    Pooka:          {cost: 5,   expansion: "nocturne",      edition: "base",    types: ["action"],                          tags: [""]},
+    SacredGrove:    {cost: 5,   expansion: "nocturne",      edition: "base",    types: ["action", "fate"],                  tags: [""]},
+    Tormentor:      {cost: 5,   expansion: "nocturne",      edition: "base",    types: ["action", "attack", "doom"],        tags: [""]},
+    TragicHero:     {cost: 5,   expansion: "nocturne",      edition: "base",    types: ["action"],                          tags: [""]},
+    Vampire:        {cost: 5,   expansion: "nocturne",      edition: "base",    types: ["night", "attack", "doom"],         tags: [""]},
+    Werewolf:       {cost: 5,   expansion: "nocturne",      edition: "base",    types: ["action", "night", "attack", "doom"],tags:[""]},
+    Raider:         {cost: 6,   expansion: "nocturne",      edition: "base",    types: ["night", "duration", "attack"],     tags: [""]},
 
     /*** 
      * RENAISSANCE
@@ -599,6 +659,38 @@ const cards =
     /*** 
      * ALLIES
      ***/
+    //TODO Tagging
+    Bauble:         {cost: 2,   expansion: "allies",        edition: "base",    types: ["treasure", "liaison"],             tags: [""]},
+    Sycophant:      {cost: 2,   expansion: "allies",        edition: "base",    types: ["action", "liaison"],               tags: [""]},
+    TownCrier:      {cost: 2,   expansion: "allies",        edition: "base",    types: ["action", "townsfolk"],             tags: [""]},
+    HerbGatherer:   {cost: 3,   expansion: "allies",        edition: "base",    types: ["action", "augur"],                 tags: [""]},
+    BattlePlan:     {cost: 3,   expansion: "allies",        edition: "base",    types: ["action", "clash"],                 tags: [""]},
+    Tent:           {cost: 3,   expansion: "allies",        edition: "base",    types: ["action", "fort"],                  tags: [""]},
+    Importer:       {cost: 3,   expansion: "allies",        edition: "base",    types: ["action", "duration", "liaison"],   tags: [""]},
+    MerchantCamp:   {cost: 3,   expansion: "allies",        edition: "base",    types: ["action"],                          tags: [""]},
+    OldMap:         {cost: 3,   expansion: "allies",        edition: "base",    types: ["action", "odyssey"],               tags: [""]},
+    Sentinel:       {cost: 3,   expansion: "allies",        edition: "base",    types: ["action"],                          tags: [""]},
+    Underling:      {cost: 3,   expansion: "allies",        edition: "base",    types: ["action", "liaison"],               tags: [""]},
+    Student:        {cost: 3,   expansion: "allies",        edition: "base",    types: ["action", "wizard", "liaison"],     tags: [""]},
+    Broker:         {cost: 4,   expansion: "allies",        edition: "base",    types: ["action", "liaison"],               tags: [""]},
+    Carpenter:      {cost: 4,   expansion: "allies",        edition: "base",    types: ["action"],                          tags: [""]},
+    Courier:        {cost: 4,   expansion: "allies",        edition: "base",    types: ["action"],                          tags: [""]},
+    Innkeeper:      {cost: 4,   expansion: "allies",        edition: "base",    types: ["action"],                          tags: [""]},
+    RoyalGalley:    {cost: 4,   expansion: "allies",        edition: "base",    types: ["action", "duration"],              tags: [""]},
+    Town:           {cost: 4,   expansion: "allies",        edition: "base",    types: ["action"],                          tags: [""]},
+    Barbarian:      {cost: 5,   expansion: "allies",        edition: "base",    types: ["action", "attack"],                tags: [""]},
+    CapitalCity:    {cost: 5,   expansion: "allies",        edition: "base",    types: ["action"],                          tags: [""]},
+    Contract:       {cost: 5,   expansion: "allies",        edition: "base",    types: ["treasure", "duration", "liaison"], tags: [""]},
+    Emissary:       {cost: 5,   expansion: "allies",        edition: "base",    types: ["action", "liaison"],               tags: [""]},
+    Galleria:       {cost: 5,   expansion: "allies",        edition: "base",    types: ["action"],                          tags: [""]},
+    Guildmaster:    {cost: 5,   expansion: "allies",        edition: "base",    types: ["action", "liaison"],               tags: [""]},
+    Highwayman:     {cost: 5,   expansion: "allies",        edition: "base",    types: ["action", "duration", "attack"],    tags: [""]},
+    Hunter:         {cost: 5,   expansion: "allies",        edition: "base",    types: ["action"],                          tags: [""]},
+    Modify:         {cost: 5,   expansion: "allies",        edition: "base",    types: ["action"],                          tags: [""]},
+    Skirmisher:     {cost: 5,   expansion: "allies",        edition: "base",    types: ["action", "attack"],                tags: [""]},
+    Specialist:     {cost: 5,   expansion: "allies",        edition: "base",    types: ["action"],                          tags: [""]},
+    Swap:           {cost: 5,   expansion: "allies",        edition: "base",    types: ["action"],                          tags: [""]},
+    Marquis:        {cost: 6,   expansion: "allies",        edition: "base",    types: ["action"],                          tags: [""]},
 
     /*** 
      * PLUNDER
@@ -813,6 +905,34 @@ const landscapes =
     WayOfTheSquirrel: {cost:-99,expansion: "menagerie",     edition: "base",    types: ["way"],                 tags: ["delayedDrawer"]},
     WayOfTheTurtle:   {cost:-99,expansion: "menagerie",     edition: "base",    types: ["way"],                 tags: ["setAside"]},
     WayOfTheWorm:     {cost:-99,expansion: "menagerie",     edition: "base",    types: ["way"],                 tags: ["altvp"]},
+
+    /*** 
+     * ALLIES
+     ***/
+    //Tagging TODO
+    ArchitectsGuild:    {cost: -99, expansion: "allies",    edition: "base",    types: ["ally"],                tags: [""]},
+    BandOfNomads:       {cost: -99, expansion: "allies",    edition: "base",    types: ["ally"],                tags: [""]},
+    CaveDwellers:       {cost: -99, expansion: "allies",    edition: "base",    types: ["ally"],                tags: [""]},
+    CircleOfWitches:    {cost: -99, expansion: "allies",    edition: "base",    types: ["ally"],                tags: [""]},
+    CityState:          {cost: -99, expansion: "allies",    edition: "base",    types: ["ally"],                tags: [""]},
+    CoastalHaven:       {cost: -99, expansion: "allies",    edition: "base",    types: ["ally"],                tags: [""]},
+    CraftersGuild:      {cost: -99, expansion: "allies",    edition: "base",    types: ["ally"],                tags: [""]},
+    DesertGuides:       {cost: -99, expansion: "allies",    edition: "base",    types: ["ally"],                tags: [""]},
+    FamilyOfInventors:  {cost: -99, expansion: "allies",    edition: "base",    types: ["ally"],                tags: [""]},
+    FellowshipOfScribes:{cost: -99, expansion: "allies",    edition: "base",    types: ["ally"],                tags: [""]},
+    ForestDwellers:     {cost: -99, expansion: "allies",    edition: "base",    types: ["ally"],                tags: [""]},
+    GangOfPickpockets:  {cost: -99, expansion: "allies",    edition: "base",    types: ["ally"],                tags: [""]},
+    IslandFolk:         {cost: -99, expansion: "allies",    edition: "base",    types: ["ally"],                tags: [""]},
+    LeagueOfBankers:    {cost: -99, expansion: "allies",    edition: "base",    types: ["ally"],                tags: [""]},
+    LeagueOfShopkeepers:{cost: -99, expansion: "allies",    edition: "base",    types: ["ally"],                tags: [""]},
+    MarketTowns:        {cost: -99, expansion: "allies",    edition: "base",    types: ["ally"],                tags: [""]},
+    MountainFolk:       {cost: -99, expansion: "allies",    edition: "base",    types: ["ally"],                tags: [""]},
+    OrderOfAstrologers: {cost: -99, expansion: "allies",    edition: "base",    types: ["ally"],                tags: [""]},
+    OrderOfMasons:      {cost: -99, expansion: "allies",    edition: "base",    types: ["ally"],                tags: [""]},
+    PeacefulCult:       {cost: -99, expansion: "allies",    edition: "base",    types: ["ally"],                tags: [""]},
+    PlateauShepherds:   {cost: -99, expansion: "allies",    edition: "base",    types: ["ally"],                tags: [""]},
+    TrappersLodge:      {cost: -99, expansion: "allies",    edition: "base",    types: ["ally"],                tags: [""]},
+    WoodworkersGuild:   {cost: -99, expansion: "allies",    edition: "base",    types: ["ally"],                tags: [""]},
 
     /*** 
      * PLUNDER

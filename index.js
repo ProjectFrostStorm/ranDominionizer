@@ -40,6 +40,10 @@ function setup()
     document.getElementById("blacklistOutputArea").value = defaultBlacklistOutputText;
     document.getElementById("whitelistAreaCards").value = defaultWhitelistCardsOutputText;
     document.getElementById("whitelistAreaLandscapes").value = defaultWhitelistLandscapesOutputText;
+
+    //Gallery
+    createGallery();
+    createGalleryTableOfContents();
 }
 
 //*****************************************************************************************************
@@ -341,6 +345,129 @@ function landscapeImageSrc(cardName, expansion, edition)
 {
     //console.log("images/cards/" + set + "/" + cardName + ".jpg");
     return "images/cards/" + expansion + "-" + edition + "/landscapes/" + cardName + ".jpg";
+}
+
+//*****************************************************************************************************
+//Gallery
+function toggleGallery()
+{
+    let randomizer = document.getElementById("randomizer");
+    let gallery = document.getElementById("gallery");
+    //Show gallery, hide randomizer
+    if(!randomizer.hasAttribute("hidden") || gallery.hasAttribute("hidden"))
+    {
+        gallery.removeAttribute("hidden");
+        randomizer.setAttribute("hidden", "hidden");
+    }
+    //Show randomizer, hide randomizer
+    else if(randomizer.hasAttribute("hidden") || !gallery.hasAttribute("hidden"))
+    {
+        randomizer.removeAttribute("hidden");
+        gallery.setAttribute("hidden", "hidden");
+    }
+}
+function createGallery()
+{
+    let gallery = document.getElementById("galleryContainer");
+
+    //Cards
+    let expansionContainers = {};
+    for(const [cardName, properties] of Object.entries(cards))
+    {
+        let expansion = properties.expansion;
+        if(expansionContainers[expansion] === undefined) //New expansion row
+        {
+            expansionContainers[expansion] = document.createElement("DIV");
+            gallery.appendChild(expansionContainers[expansion]);
+
+            //Header
+            let header = document.createElement("H2");
+            header.setAttribute("id", expansion + "Cards");
+            header.innerHTML = expansions[expansion].displayName;
+            expansionContainers[expansion].appendChild(header);
+        }
+
+        let link = document.createElement("A");
+        link.setAttribute("href", "https://wiki.dominionstrategy.com/index.php/" + cardName.replace(/([A-Z])/g, ' $1').trim()); //https://stackoverflow.com/questions/5582228/insert-space-before-capital-letters
+        link.setAttribute("target", "_blank"); //Opens the link in a new tab
+        expansionContainers[expansion].appendChild(link);
+        link.appendChild(properties.image);
+    }
+
+    //Landscapes
+    expansionContainers = {};
+    for(const [cardName, properties] of Object.entries(landscapes))
+    {
+        let expansion = properties.expansion;
+        if(expansionContainers[expansion] === undefined) //New expansion row
+        {
+            expansionContainers[expansion] = document.createElement("DIV");
+            gallery.appendChild(expansionContainers[expansion]);
+
+            //Header
+            let header = document.createElement("H2");
+            header.setAttribute("id", expansion + "Landscapes");
+            header.innerHTML = expansions[expansion].displayName + " Landscapes";
+            expansionContainers[expansion].appendChild(header);
+        }
+
+        let link = document.createElement("A");
+        link.setAttribute("href", "https://wiki.dominionstrategy.com/index.php/" + cardName.replace(/([A-Z])/g, ' $1').trim()); //https://stackoverflow.com/questions/5582228/insert-space-before-capital-letters
+        link.setAttribute("target", "_blank"); //Opens the link in a new tab
+        expansionContainers[expansion].appendChild(link);
+        link.appendChild(properties.image);
+    }
+}
+function createGalleryTableOfContents()
+{
+    let table = document.getElementById("galleryTableOfContents");
+
+    //Cards
+    expansionContainers = {};
+    for(const [cardName, properties] of Object.entries(cards))
+    {
+        let expansion = properties.expansion;
+        if(expansionContainers[expansion] === undefined) //New expansion row
+        {
+            expansionContainers[expansion] = document.createElement("LI");
+            table.appendChild(expansionContainers[expansion]);
+
+            let link = document.createElement("A");
+            link.setAttribute("href", "#" + expansion + "Cards");
+            link.innerHTML = expansions[expansion].displayName;
+            expansionContainers[expansion].appendChild(link);
+        }
+    }
+
+    //Landscapes
+    expansionContainers = {};
+    for(const [cardName, properties] of Object.entries(landscapes))
+    {
+        let expansion = properties.expansion;
+        if(expansionContainers[expansion] === undefined) //New expansion row
+        {
+            expansionContainers[expansion] = document.createElement("LI");
+            table.appendChild(expansionContainers[expansion]);
+
+            let link = document.createElement("A");
+            link.setAttribute("href", "#" + expansion + "Landscapes");
+            link.innerHTML = expansions[expansion].displayName + " Landscapes";
+            expansionContainers[expansion].appendChild(link);
+        }
+    }
+}
+function toggleTableOfContents()
+{
+    let table = document.getElementById("galleryTableOfContentsContainer");
+
+    if(table.hasAttribute("hidden"))
+    {
+        table.removeAttribute("hidden");
+    }
+    else
+    {
+        table.setAttribute("hidden", "hidden");
+    }
 }
 
 //*****************************************************************************************************
